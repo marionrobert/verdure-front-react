@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { loadOnePlant } from "../api/plant";
-import {config} from "../config"
+import {config} from "../config";
+import { FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import { faDroplet, faSun, faTemperatureLow, faTemperatureHigh } from "@fortawesome/free-solid-svg-icons"
+
 
 const Details = () => {
   const params = useParams()
@@ -25,10 +28,10 @@ const Details = () => {
         <p>{plant.description}</p>
         <p>{plant.price} €</p>
         <p>En stock: {plant.quantity}</p>
-        <p>Arrosage: {plant.watering}</p>
-        <p>Luminosité: {plant.brigthness}</p>
-        <p>Température minimum: {plant.minTemperature}°C</p>
-        <p>Température maximum: {plant.maxTemperature}°C</p>
+        <p><FontAwesomeIcon icon={faDroplet}/>Arrosage: {plant.watering}</p>
+        <p><FontAwesomeIcon icon={faSun}/>Luminosité: {plant.brigthness}</p>
+        <p><FontAwesomeIcon icon={faTemperatureLow}/>Température minimum: {plant.minTemperature}°C</p>
+        <p><FontAwesomeIcon icon={faTemperatureHigh}/>Température maximum: {plant.maxTemperature}°C</p>
       </div>}
     </>
   )

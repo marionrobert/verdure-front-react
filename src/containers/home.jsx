@@ -3,6 +3,7 @@ import { loadPlants } from "../api/plant";
 import { useEffect, useState } from "react";
 import {config} from "../config"
 
+
 const Home = () => {
   const [plants, setPlants] = useState([])
 
