@@ -1,42 +1,206 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+	line-height: 1;
   text-align: center;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+ol, ul {
+	list-style: none;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+blockquote, q {
+	quotes: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
 }
 
-.card {
-  padding: 2em;
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
-.read-the-docs {
-  color: #888;
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 2.8em;
+  line-height: 1.1;
+}
+
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+
+/* HEADER */
+header {
+  /* background-color: rgba(27, 75, 59, 0.897); */
+  background-color: rgba(2, 46, 35, 0.975);
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+}
+
+.brand p {
+  padding-left: 0.5rem;
+  color:white;
+  font-style: italic;
+  font-weight: bold;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#nav-menu{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.icon {
+  width: 40px;
+  background-color: white;
+  border-radius: 50px;
+}
+
+.nav-link {
+  padding: 0 1rem;
+  color: white;
+}
+
+
+/* HOME */
+.banner {
+  background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url("https://images.unsplash.com/photo-1530049478161-0780526964f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80");
+  background-size: cover;
+  /* background-position: center; */
+  text-align: end;
+  padding: 130px 60px 170px 0;
+  color: white;
+}
+
+.banner > * {
+  padding-top: 1rem;
+}
+
+/* .banner-btn {
+  width: 180px;
+  padding: 0.5rem;
+  color: black;
+  background-color: white;
+  border-radius: 2px;
+} */
+
+
+/* CARD PLANT */
+.all-plants {
+  margin: 3rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.all-plants h2 {
+  width: 100%;
+  text-decoration: underline;
+  margin-bottom: 1rem;
+}
+
+.plant-card{
+  margin: 1rem 0 ;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  width: 300px;
+  padding: 0.5rem;
+  border-radius: 1.5px;
+}
+
+.plant-card img {
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 1.5px;
+}
+
+.plant-card h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.plant-card p {
+  font-size: 14px;
+  opacity: .7;
+  margin: 0;
+}
+
+.plant-card-btn {
+  background-color: rgba(27, 75, 59, 1);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 2px;
+}
+
+
+/* FOOTER */
+footer {
+  /* background-color: rgba(27, 75, 59, 0.897); */
+  background-color: rgba(2, 46, 35, 0.975);
+  color: white;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-github, .fa-linkedin{
+  font-size: 20px;
+  padding: 0 0.5rem;
+  color: white;
+}
+
+footer a svg:hover {
+  color: rgb(153, 153, 153, 0.8)
 }
