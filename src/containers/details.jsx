@@ -29,7 +29,7 @@ const Details = () => {
         <p>{plant.price} €</p>
         <p>En stock: {plant.quantity}</p>
         <p><FontAwesomeIcon icon={faDroplet}/>Arrosage: {plant.watering}</p>
-        <p><FontAwesomeIcon icon={faSun}/>Luminosité: {plant.brigthness}</p>
+        <p><FontAwesomeIcon icon={faSun}/>Luminosité: {plant.brightness}</p>
         <p><FontAwesomeIcon icon={faTemperatureLow}/>Température minimum: {plant.minTemperature}°C</p>
         <p><FontAwesomeIcon icon={faTemperatureHigh}/>Température maximum: {plant.maxTemperature}°C</p>
       </div>}
