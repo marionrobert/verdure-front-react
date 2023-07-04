@@ -38,7 +38,7 @@ export function getAllOrders() {
 
 // chargement d'une commande avec détails du user et détails de la commande
 export function getOneOrder(id){
-  return axios.get(`${config.api_url}/api/v1/orders/${id}`)
+  return axios.get(`${config.api_url}/api/v1/order/${id}`)
   .then((res)=>{
     return res.data
   })
