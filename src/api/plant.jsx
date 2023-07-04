@@ -1,5 +1,6 @@
 import axios from "axios"
 import {config} from "../config"
+// const token = window.localStorage.getItem('b4y-token') ?????
 
 //chargement de toutes les plantes
 export function loadPlants(){
