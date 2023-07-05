@@ -26,7 +26,7 @@ const Home = () => {
 
       </div>
       { plants.length > 0 && <div className="all-plants">
-        <h2>Découvrez nos nouveautés</h2>
+        <h2>Les nouveautés</h2>
         {plants.map(plant => {
           return (
             <div key={plant.id} className="plant-card">

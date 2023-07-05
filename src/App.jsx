@@ -1,6 +1,3 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
 import './App.css'
 
 import Header from "./components/header"
@@ -12,6 +9,8 @@ import Details from "./containers/details"
 // import Admin from "./containers/admin"
 
 import { Routes, Route, Navigate } from 'react-router-dom'
+//composant supérieur va gérer le composant enfant
+import RequireDataAuth from "./helpers/require-data-auth"
 
 function App() {
 

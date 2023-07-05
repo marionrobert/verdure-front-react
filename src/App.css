@@ -83,9 +83,7 @@ header {
 .brand p {
   padding-left: 0.5rem;
   color:white;
-  font-style: italic;
   font-size: 1.7rem;
-  /* font-weight: bold; */
   font-family: 'Dancing Script', cursive;
 }
 
@@ -97,7 +95,7 @@ header {
   padding: 0.5rem;
 }
 
-.icon {
+#nav-menu .icon {
   width: 40px;
   background-color: white;
   border-radius: 50px;

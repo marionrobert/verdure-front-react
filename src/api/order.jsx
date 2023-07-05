@@ -1,6 +1,6 @@
 import axios from "axios"
 import {config} from "../config"
-// const token = window.localStorage.getItem('b4y-token') ?????
+// const token = window.localStorage.getItem('verdure-token') ?????
 
 //création d'une nouvelle commande??????
 export function saveOneOrder(data){
