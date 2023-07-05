@@ -20,9 +20,10 @@ const Home = () => {
   return (
     <>
       <div className="banner">
-        <h1>Bienvenue chez Verdure</h1>
+        <h1>Bienvenue chez <span className="brand-name">Verdure</span></h1>
         <p>Découvrez un large choix de plantes pour habiller votre intérieur.</p>
-        {/* <Link to="/plants" className="banner-btn">Je découvre les plantes</Link> */}
+        <button className="banner-btn"><Link to="/plants" >Découvrir</Link></button>
+
       </div>
       { plants.length > 0 && <div className="all-plants">
         <h2>Découvrez nos nouveautés</h2>
@@ -31,10 +32,8 @@ const Home = () => {
             <div key={plant.id} className="plant-card">
             <img src={`${config.pict_url}/${plant.photo}`}/>
               <h3>{plant.name}</h3>
-              <p>{plant.description.substring(0, 50)}...</p>
-              <Link to={`/plants/details/${plant.id}`} className="plant-card-btn">Je découvre</Link>
-              <p>{plant.description.substring(0, 50)}...</p>
-
+              <p>{plant.description.substring(0, 80)}...</p>
+              <button className="plant-card-btn"><Link to={`/plants/details/${plant.id}`} >Je découvre</Link></button>
             </div>
           )
         })}

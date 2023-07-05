@@ -27,6 +27,7 @@ footer, header, hgroup, menu, nav, section {
 html, body {
   height: 100%;
   margin: 0;
+  background-color: whitesmoke;
 }
 
 body {
@@ -54,10 +55,7 @@ table {
 	border-spacing: 0;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+
 
 h2 {
   font-size: 2.8em;
@@ -86,8 +84,9 @@ header {
   padding-left: 0.5rem;
   color:white;
   font-style: italic;
-  font-weight: bold;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 1.7rem;
+  /* font-weight: bold; */
+  font-family: 'Dancing Script', cursive;
 }
 
 #nav-menu{
@@ -116,21 +115,51 @@ header {
   background-size: cover;
   /* background-position: center; */
   text-align: end;
-  padding: 130px 60px 170px 0;
+  padding: 130px 10px 170px 10px;
   color: white;
+  text-align: center;
 }
 
 .banner > * {
   padding-top: 1rem;
 }
 
-/* .banner-btn {
-  width: 180px;
-  padding: 0.5rem;
-  color: black;
+.banner > h1 {
+  font-size: 2.8em;
+  line-height: 1.1;
+}
+
+.banner > p {
+  font-size: 1em;
+}
+
+.brand-name {
+  font-family: 'Dancing Script', cursive;
+  font-size: larger;
+}
+
+button.banner-btn {
+  /* width: 180px; */
+  padding: 0.7rem;
   background-color: white;
   border-radius: 2px;
-} */
+  border: 0.5px solid rgb(0, 0, 0, 0);
+  margin-top: 2rem;
+  background-color: rgba(2, 46, 35, 0.5);
+  box-shadow: 0 0 15px rgba(255,255,255,0.3);
+}
+
+button.banner-btn a {
+  color: white;
+  font-size: 1.1em;
+}
+
+button.banner-btn:hover{
+  background-color: rgba(2, 46, 35, 0.99);
+  /* border: 0.5px solid black; */
+}
+
+
 
 
 /* CARD PLANT */
@@ -151,11 +180,18 @@ header {
   margin: 1rem 0 ;
   overflow: hidden;
   background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
   width: 300px;
   padding: 0.5rem;
   border-radius: 1.5px;
+  transition: transform .1s;
 }
+
+.plant-card:hover{
+  -ms-transform: scale(1.05); /* IE 9 */
+  -webkit-transform: scale(1.05); /* Safari 3-8 */
+  transform: scale(1.05);
+  }
 
 .plant-card img {
   height: 250px;
@@ -167,22 +203,29 @@ header {
 .plant-card h3 {
   font-size: 16px;
   font-weight: bold;
-  margin: 0;
+  margin: 0.5rem 0 0 0;
 }
 
 .plant-card p {
   font-size: 14px;
   opacity: .7;
-  margin: 0;
+  margin: 0.5rem 0 0 0;
 }
 
-.plant-card-btn {
-  background-color: rgba(27, 75, 59, 1);
+button.plant-card-btn {
+  background-color: rgba(27, 75, 59, 0.8);
   color: white;
   padding: 0.5rem;
+  border: none;
   border-radius: 2px;
+  box-shadow: none;
+  margin: 0.5rem 0 0 0;
 }
 
+.plant-card-btn a {
+  color: white;
+  border: none;
+}
 
 /* FOOTER */
 footer {
