@@ -1,21 +1,26 @@
 import { Link } from "react-router-dom";
-import { loadPlants } from "../api/plant";
-import { useEffect, useState } from "react";
-import {config} from "../config"
+import ArticleProduct from "../components/article-product"
+import { useEffect } from "react";
+
+//on importer nos fonction pour lire ou modifier nos states globales présentes dans le store de redux
+import {useSelector, useDispatch} from "react-redux"
+//import des states globales product et basket et de leurs actions (ajout au panier, chargement des produits)
+import {selectBasket, updateBasket} from "../slices/basketSlice"
+import { selectPlants } from "../slices/plantSlice";
 
 
 const Home = () => {
-  const [plants, setPlants] = useState([])
+  //récupération des states pour lecture
+  const allPlants = useSelector(selectPlants)
+  const currentBasket = useSelector(selectBasket)
 
-  useEffect(()=>{
-    loadPlants()
-    .then((res)=>{
-      setPlants(res.results)
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-  }, [plants])
+  //on initialise notre fonction dispatcher pour modifier une state
+  const dispatch = useDispatch()
+
+  //lorsque le DOM est chargé
+  // useEffect(()=>{
+
+  // }, [])
 
   return (
     <>
@@ -25,19 +30,13 @@ const Home = () => {
         <button className="banner-btn"><Link to="/plants" >Découvrir</Link></button>
 
       </div>
-      { plants.length > 0 && <div className="all-plants">
-        <h2>Les nouveautés</h2>
-        {plants.map(plant => {
-          return (
-            <div key={plant.id} className="plant-card">
-            <img src={`${config.pict_url}/${plant.photo}`}/>
-              <h3>{plant.name}</h3>
-              <p>{plant.description.substring(0, 80)}...</p>
-              <button className="plant-card-btn"><Link to={`/plants/details/${plant.id}`} >Je découvre</Link></button>
-            </div>
-          )
+      { allPlants.plants.length > 0 && <section className="all-plants">
+        <h2 className="news-plants">Les nouveautés</h2>
+        {allPlants.plants.slice(0, 8).map(plant => {
+          return <ArticleProduct key={plant.id} product={plant}/>
         })}
-      </div>}
+      </section>}
+      <button className="btn-discover-all-plants"><Link to="/plants" >Je découvre toutes les plantes</Link></button>
     </>
   )
 }

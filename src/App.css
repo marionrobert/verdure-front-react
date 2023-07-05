@@ -56,13 +56,6 @@ table {
 }
 
 
-
-h2 {
-  font-size: 2.8em;
-  line-height: 1.1;
-}
-
-
 a {
   text-decoration: none;
   color: black;
@@ -104,6 +97,16 @@ header {
 .nav-link {
   padding: 0 1rem;
   color: white;
+}
+
+/* ALL FORMS */
+form {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 
@@ -157,6 +160,28 @@ button.banner-btn:hover{
   /* border: 0.5px solid black; */
 }
 
+button.btn-discover-all-plants{
+  padding: 0.7rem;
+  background-color: white;
+  border-radius: 2px;
+  border: 0.5px solid rgb(0, 0, 0, 0);
+  margin: 2rem auto;
+  background-color: rgba(2, 46, 35, 0.5);
+  box-shadow: 0 0 15px rgba(255,255,255,0.3);
+  display: block;
+}
+
+button.btn-discover-all-plants a {
+  color: white;
+  font-size: 1.1em;
+}
+
+button.btn-discover-all-plants:hover{
+  background-color: rgba(2, 46, 35, 0.99);
+  /* border: 0.5px solid black; */
+}
+
+
 
 
 
@@ -165,13 +190,15 @@ button.banner-btn:hover{
   margin: 3rem 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
-.all-plants h2 {
+.all-plants h2, .all-plants h1 {
   width: 100%;
   text-decoration: underline;
   margin-bottom: 1rem;
+  font-size: 2.8em;
+  line-height: 1.1;
 }
 
 .plant-card{
@@ -186,9 +213,9 @@ button.banner-btn:hover{
 }
 
 .plant-card:hover{
-  -ms-transform: scale(1.05); /* IE 9 */
-  -webkit-transform: scale(1.05); /* Safari 3-8 */
-  transform: scale(1.05);
+  -ms-transform: scale(1.03); /* IE 9 */
+  -webkit-transform: scale(1.03); /* Safari 3-8 */
+  transform: scale(1.03);
   }
 
 .plant-card img {

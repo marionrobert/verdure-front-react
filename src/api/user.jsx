@@ -1,9 +1,9 @@
 import axios from 'axios'
 import {config} from '../config'
-// const token = window.localStorage.getItem('verdure-token')?????
+const token = window.localStorage.getItem('verdure-token')
 
 export function addOneUser(data){
-  return axios.post(`${config.api_url}/user/register`, data)
+  return axios.post(`${config.api_url}/api/v1/user/register`, data)
   .then((res)=>{
     return res.data
   })
@@ -13,7 +13,7 @@ export function addOneUser(data){
 }
 
 export function loginUser(data){
-  return axios.post(`${config.api_url}/user/login`, data)
+  return axios.post(`${config.api_url}/api/v1/user/login`, data)
   .then((res)=>{
     return res.data
   })
@@ -23,7 +23,7 @@ export function loginUser(data){
 }
 
 export function updateProfil(data, id){
-  return axios.put(`${config.api_url}/user/update/${id}`, data)
+  return axios.put(`${config.api_url}/api/v1/user/update/${id}`, data, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data
   })
@@ -33,7 +33,7 @@ export function updateProfil(data, id){
 }
 
 export function checkMyToken(){
-  return axios.get(`${config.api_url}/user/checkToken`)
+  return axios.get(`${config.api_url}/api/v1/user/checkToken`, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data
   })
