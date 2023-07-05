@@ -1,10 +1,19 @@
+import {useState, useEffect} from 'react'
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import { faHome, faBasketShopping } from "@fortawesome/free-solid-svg-icons"
+import { faBasketShopping } from "@fortawesome/free-solid-svg-icons"
 import { config } from "../config"
-const token = window.localStorage.getItem('verdure-token')
+
 
 const Header = () => {
+  const [token, setToken] = useState("")
+  // après connexion, redirection vers home --> problème rechargement de la navbar --> "seconnecter" --> "mon compte"
+  //dans le store user isLogged = false 
+
+  useEffect(()=>{
+    setToken(window.localStorage.getItem('verdure-token'))
+  }, [token])
+
   return (
     <header>
       <nav id="nav-menu">

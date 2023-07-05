@@ -1,11 +1,18 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { loginUser } from "../../api/user"
-
-
+import { Navigate } from "react-router-dom"
 
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [redirect, setRedirect] = useState(false)
+
+  useEffect(()=>{
+    const token = window.localStorage.getItem('verdure-token')
+    if (token){
+      setRedirect(true)
+    }
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -16,8 +23,9 @@ const Login = () => {
     }
     loginUser(data)
     .then((res)=>{
-      console.log(res.token)
+      // console.log(res.token)
       window.localStorage.setItem("verdure-token", res.token)
+      setRedirect(true)
     })
     .catch((err)=>{
       console.log(err)
@@ -37,6 +45,7 @@ const Login = () => {
 
   return (
     <>
+    { redirect && <Navigate to="/" />}
     <h1>Se connecter</h1>
     <form onSubmit={(e)=>{
         handleSubmit(e)
