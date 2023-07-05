@@ -1,10 +1,10 @@
 import axios from "axios"
 import {config} from "../config"
-// const token = window.localStorage.getItem('b4y-token') ?????
+const token = window.localStorage.getItem('verdure-token')
 
 //création d'une nouvelle commande??????
 export function saveOneOrder(data){
-  return axios.get(`${config.api_url}/api/v1/order/save`, data)
+  return axios.get(`${config.api_url}/api/v1/order/save`, data, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data
   })
@@ -15,7 +15,7 @@ export function saveOneOrder(data){
 
 // validation du paiement ?????
 export function checkPayment(data){
-  return axios.put(`${config.api_url}/api/v1/order/payment`, data)
+  return axios.put(`${config.api_url}/api/v1/order/payment`, data, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data
   })
@@ -26,7 +26,7 @@ export function checkPayment(data){
 
 //chargement de toutes les commandes
 export function getAllOrders() {
-  return axios.get(`${config.api_url}/api/v1/orders`)
+  return axios.get(`${config.api_url}/api/v1/orders`, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data
   })
@@ -38,7 +38,7 @@ export function getAllOrders() {
 
 // chargement d'une commande avec détails du user et détails de la commande
 export function getOneOrder(id){
-  return axios.get(`${config.api_url}/api/v1/order/${id}`)
+  return axios.get(`${config.api_url}/api/v1/order/${id}`, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data
   })
@@ -50,7 +50,7 @@ export function getOneOrder(id){
 
 //changement du statut de la commande not payed --> payed
 export function updatePayedStatusOrder(id, data){
-  return axios.put(`${config.api_url}/api/v1/order/validate/${id}`, data)
+  return axios.put(`${config.api_url}/api/v1/order/validate/${id}`, data, {headers: {"x-access-token": token}})
   .then((res)=>{
     res.data
   })
@@ -61,7 +61,7 @@ export function updatePayedStatusOrder(id, data){
 
 // changement du statut de la commande par l'administrateur
 export function updateOrderStatusByAdmin(id, data){
-  return axios.put(`${config.api_url}/api/v1/order/admin-update-status/${id}`, data)
+  return axios.put(`${config.api_url}/api/v1/order/admin-update-status/${id}`, data, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data
   })
