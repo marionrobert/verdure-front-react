@@ -1,5 +1,6 @@
 import axios from "axios"
 import {config} from "../config"
+// const token = window.localStorage.getItem('b4y-token') ?????
 
 //chargement de toutes les plantes
 export function loadPlants(){
@@ -15,7 +16,7 @@ export function loadPlants(){
 
 // chargement d'une plante
 export function loadOnePlant(id){
-  return axios.get(`${config.api_url}/api/v1/plants/${id}`)
+  return axios.get(`${config.api_url}/api/v1/plant/${id}`)
   .then((res)=>{
     return res.data
   })
@@ -26,7 +27,7 @@ export function loadOnePlant(id){
 
 // ajout d'une plante
 export function addOnePlant(data){
-  return axios.post(`${config.api_url}/api/v1/plants/save`, data)
+  return axios.post(`${config.api_url}/api/v1/plant/save`, data)
   .then((res)=>{
     return res.data
   })
@@ -38,7 +39,7 @@ export function addOnePlant(data){
 
 // modification d'une plante
 export function updateOnePlant(data, id){
-  return axios.put(`${config.api_url}/api/v1/plants/update/${id}`, data)
+  return axios.put(`${config.api_url}/api/v1/plant/update/${id}`, data)
   .then((res)=>{
     return res.data
   })
@@ -50,7 +51,7 @@ export function updateOnePlant(data, id){
 
 // suppresion d'une plante
 export function deleteOnePlant(id){
-  return axios.delete(`${config.api_url}/api/v1/plants/delete/${id}`)
+  return axios.delete(`${config.api_url}/api/v1/plant/delete/${id}`)
   .then((res)=>{
     return res.data
   })
