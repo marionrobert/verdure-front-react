@@ -22,7 +22,7 @@ export function loginUser(data){
   })
 }
 
-export function updateProfil(data, id){
+export function updateOneUser(data, id){
   return axios.put(`${config.api_url}/api/v1/user/update/${id}`, data, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data

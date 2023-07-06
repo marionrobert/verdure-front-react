@@ -9,6 +9,7 @@ const Logout = () => {
 
   useEffect(()=>{
     dispatch(logoutUser())
+    window.localStorage.removeItem('verdure-token')
   }, [])
 
   return (
