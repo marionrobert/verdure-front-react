@@ -264,6 +264,30 @@ button.plant-card-btn {
   border: none;
 }
 
+
+/* ADMIN */
+.admin-dashboard h1 {
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.admin-dashboard h2 {
+  margin: 1rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.admin-dashboard table, tr, td {
+  border: 1px solid black;
+  padding: 0.5rem;
+}
+
+section.manage-all-plants{
+  text-align: left;
+  margin: 2rem;
+}
+
 /* FOOTER */
 footer {
   /* background-color: rgba(27, 75, 59, 0.897); */
