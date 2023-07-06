@@ -22,7 +22,8 @@ const Header = () => {
         <div className="nav-links">
           { user.isLogged === false && <Link to='/login'  className="nav-link">Se connecter</Link>}
           { user.isLogged === false && <Link to='/register'  className="nav-link">Créer un compte</Link>}
-          { user.isLogged === true && <Link to='/myaccount'  className="nav-link"> Mon compte</Link>}
+          { user.isLogged === true && user.infos.role === "user" && <Link to='/myaccount'  className="nav-link"> Mon compte</Link>}
+          { user.isLogged === true && user.infos.role === "admin" && <Link to='/admin'  className="nav-link">Admin</Link>}
           { user.isLogged === true && <Link to='/logout'  className="nav-link"> Se déconnecter</Link>}
           {/* <Link to="/" className="nav-link"><FontAwesomeIcon icon={faHome}/> Accueil</Link> */}
           <Link to="/plants" className="nav-link">Nos plantes</Link>

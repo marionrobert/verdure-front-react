@@ -9,7 +9,7 @@ import { Link } from "react-router-dom"
 
 const Admin = () => {
   const plants = useSelector(selectPlants)
-  const [orders, setOrders] = useState('')
+  const [orders, setOrders] = useState([])
 
   useEffect(()=> {
     getAllOrders()
@@ -19,7 +19,7 @@ const Admin = () => {
     .catch((err)=>{
       console.log(err)
     })
-  })
+  }, [plants, orders])
 
   return (
     <div className="admin-dashboard">

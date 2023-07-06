@@ -2,18 +2,20 @@ import './App.css'
 
 import Header from "./components/header"
 import Footer from "./components/footer"
+
 import Home from "./containers/home"
+import Products from "./containers/products"
+import Details from "./containers/details"
+
 import Login from "./containers/user/login"
 import Register from './containers/user/register'
 import Profil from "./containers/user/profil"
 import Logout from './containers/user/logout'
-import Products from "./containers/products"
-import Admin from './containers/admin/admin'
 
-// import Add from "./containers/add"
-// import Edit from "./containers/edit"
-import Details from "./containers/details"
-// import Admin from "./containers/admin"
+import Admin from './containers/admin/admin'
+import AddPlant from './containers/admin/plant/addPlant'
+
+
 
 import { Routes, Route, Navigate } from 'react-router-dom'
 //composant supérieur va gérer le composant enfant
@@ -40,6 +42,7 @@ function App() {
 
         {/* ADMIN */}
         <Route exact path="/admin" element={<RequireDataAuth child={Admin} auth={true} admin={true} />} />
+        <Route exact path="/plant/add" element={<RequireDataAuth child={AddPlant} auth={true} admin={true} />}/>
 
           <Route exact path="*" element={<Navigate to="/"/>} />
         </Routes>
