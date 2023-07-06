@@ -30,7 +30,7 @@ function App() {
           <Route exact path="/login" element={<RequireDataAuth child={Login} auth={false} admin={false} />} />
           <Route exact path="/register" element={<RequireDataAuth child={Register} auth={false} admin={false} />} />
           <Route exact path="/logout" element={<RequireDataAuth child={Logout} auth={true} admin={false} />} />
-          <Route exact path='/profil' element={<RequireDataAuth child={Profil} auth={true} admin={false} />} />
+          <Route exact path='/myaccount' element={<RequireDataAuth child={Profil} auth={true} admin={false} />} />
           <Route exact path="/plant/details/:id" element={<Details/>}/>
           <Route exact path="*" element={<Navigate to="/"/>} />
         </Routes>
