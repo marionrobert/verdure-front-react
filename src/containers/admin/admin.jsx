@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { getAllOrders } from "../../api/order"
 import moment from "moment"
 import { Link } from "react-router-dom"
+import { deleteOnePlant } from "../../api/plant"
 
 const Admin = () => {
   const plants = useSelector(selectPlants)
@@ -20,6 +21,16 @@ const Admin = () => {
       console.log(err)
     })
   }, [plants, orders])
+
+  const deletePlant = (id) => {
+    deleteOnePlant(id)
+    .then((res)=>{
+      console.log(res)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
 
   return (
     <div className="admin-dashboard">
@@ -43,7 +54,7 @@ const Admin = () => {
                     <td>{plant.name}</td>
                     <td>{plant.quantity}</td>
                     <td>{parseFloat(plant.price)} €</td>
-                    <td><FontAwesomeIcon icon={faTrashCan}/><FontAwesomeIcon icon={faSquarePen}/></td>
+                    <td><FontAwesomeIcon icon={faTrashCan} onClick={()=>{deletePlant(plant.id)}}/><Link to={`/plant/update/${plant.id}`}><FontAwesomeIcon icon={faSquarePen}/></Link></td>
                   </tr>
                 )
               })}

@@ -14,6 +14,7 @@ import Logout from './containers/user/logout'
 
 import Admin from './containers/admin/admin'
 import AddPlant from './containers/admin/plant/addPlant'
+import EditPlant from './containers/admin/plant/editPlant'
 
 
 
@@ -43,6 +44,7 @@ function App() {
         {/* ADMIN */}
         <Route exact path="/admin" element={<RequireDataAuth child={Admin} auth={true} admin={true} />} />
         <Route exact path="/plant/add" element={<RequireDataAuth child={AddPlant} auth={true} admin={true} />}/>
+        <Route exact path="/plant/update/:id" element={<RequireDataAuth child={EditPlant} auth={true} admin={true} />}/>
 
           <Route exact path="*" element={<Navigate to="/"/>} />
         </Routes>
