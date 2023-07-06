@@ -25,7 +25,7 @@ const RequireDataAuth = (props) =>{
     const [redirect, setRedirect] = useState(false)
     const [redirectAdmin, setRedirectAdmin] = useState(false)
 
-    //au chargement de chaque composant
+    //au chargement de chaque composant --> parce que [props]
     useEffect(()=>{
       //si les plantes ne sont pas chargées dans redux, on les charge (action du store)
       if (plants.plants.length === 0){
@@ -40,21 +40,21 @@ const RequireDataAuth = (props) =>{
       }
 
       //on va tester si on est connecté via les infos de redux
-      console.log("user", user.isLogged)
+      // console.log("user", user.isLogged)
 
       //si l'utilisateur n'est pas logged (store)
       if (user.isLogged === false){
-        console.log("aucun user n'est connecté")
+        // console.log("aucun user n'est connecté")
         //on récup le token dans le localStore ??????
         let token = window.localStorage.getItem('verdure-token')
 
         //si le storagee répond null (pas trouvé) et que la props auth est true (route protégée)
         if (token === null && props.auth) {
-          console.log("le token est null et la route a besoin d'une connexion user")
+          // console.log("le token est null et la route a besoin d'une connexion user")
           //on demande une redirection
           setRedirect(true)
         } else { //sinon
-            console.log("le token n'est pas null")
+            // console.log("le token n'est pas null")
             // si le token n'est pas null
             if (token !== null) {
               //on appel notre requète axios qui va vérifier le token dans le back checkToken
@@ -87,13 +87,13 @@ const RequireDataAuth = (props) =>{
       } else { //le user est connecté
         //si le role de l'user n'est pas admin & que props admin est true (route protégée d'admin)
         if (user.infos.role !== "admin" && props.admin === true) {
-          console.log("lutilisateur est connecté mais il n'est pas admin, donc redirection")
+          // console.log("lutilisateur est connecté mais il n'est pas admin, donc redirection")
           //on demande la redirection
           setRedirectAdmin(true)
         }
       }
 
-    }, [])
+    }, [user])
 
     if(redirect){
       return <Navigate to="/login"/>

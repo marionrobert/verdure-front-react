@@ -12,9 +12,7 @@ const Logout = () => {
     window.localStorage.removeItem('verdure-token')
   }, [])
 
-  return (
-    <Navigate to="/" />
-  )
+  return <Navigate to="http://localhost:5173/"/>
 }
 
 
