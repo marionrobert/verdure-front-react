@@ -26,7 +26,6 @@ const Login = () => {
     }
     loginUser(data)
     .then((res)=>{
-      // console.log(res.token)
       window.localStorage.setItem("verdure-token", res.token)
       let myUser = res.user
       myUser.token = res.token
