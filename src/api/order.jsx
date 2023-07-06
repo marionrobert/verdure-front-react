@@ -61,6 +61,7 @@ export function updatePayedStatusOrder(id, data){
 
 // changement du statut de la commande par l'administrateur
 export function updateOrderStatusByAdmin(id, data){
+  console.log("in order.jsx", data, id)
   return axios.put(`${config.api_url}/api/v1/order/admin-update-status/${id}`, data, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data

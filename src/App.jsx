@@ -15,6 +15,7 @@ import Logout from './containers/user/logout'
 import Admin from './containers/admin/admin'
 import AddPlant from './containers/admin/plant/addPlant'
 import EditPlant from './containers/admin/plant/editPlant'
+import OrderDetails from './containers/admin/order/orderDetail'
 
 
 
@@ -42,9 +43,10 @@ function App() {
           <Route exact path='/myaccount' element={<RequireDataAuth child={Profil} auth={true} admin={false} />} />
 
         {/* ADMIN */}
-        <Route exact path="/admin" element={<RequireDataAuth child={Admin} auth={true} admin={true} />} />
-        <Route exact path="/plant/add" element={<RequireDataAuth child={AddPlant} auth={true} admin={true} />}/>
-        <Route exact path="/plant/update/:id" element={<RequireDataAuth child={EditPlant} auth={true} admin={true} />}/>
+          <Route exact path="/admin" element={<RequireDataAuth child={Admin} auth={true} admin={true} />} />
+          <Route exact path="/plant/add" element={<RequireDataAuth child={AddPlant} auth={true} admin={true} />}/>
+          <Route exact path="/plant/update/:id" element={<RequireDataAuth child={EditPlant} auth={true} admin={true} />}/>
+          <Route exact path="/order/details/:id" element={<RequireDataAuth child={OrderDetails} auth={true} admin={true}/>}/>
 
           <Route exact path="*" element={<Navigate to="/"/>} />
         </Routes>

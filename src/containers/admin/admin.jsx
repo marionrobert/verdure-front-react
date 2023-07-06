@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from "react-redux"
 import { getAllPlants, selectPlants } from "../../slices/plantSlice"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons"
+import { faTrashCan, faSquarePen, faEye } from "@fortawesome/free-solid-svg-icons"
 import { useState, useEffect } from "react"
-import { getAllOrders } from "../../api/order"
+import { getAllOrders, updateOrderStatusByAdmin } from "../../api/order"
 import moment from "moment"
 import { Link } from "react-router-dom"
 import { deleteOnePlant } from "../../api/plant"
@@ -30,6 +30,18 @@ const Admin = () => {
     .catch((err)=>{
       console.log(err)
     })
+  }
+
+  const handleChange = (e, id) => {
+    console.log(e.currentTarget.value)
+    updateOrderStatusByAdmin(id, {"status": e.currentTarget.value})
+    .then((res)=>{
+      console.log(res)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+
   }
 
   return (
@@ -72,7 +84,8 @@ const Admin = () => {
                 <td>Montant total</td>
                 <td>Date</td>
                 <td>Statut</td>
-                <td>Gérer</td>
+                <td>Modifier le statut</td>
+                <td>Consulter</td>
               </tr>
             </thead>
             <tbody>
@@ -83,7 +96,15 @@ const Admin = () => {
                     <td>{order.totalAmount} €</td>
                     <td>{moment(order.creationTimestamp).locale("fr").format("DD/MM/YYYY")}</td>
                     <td>{order.status}</td>
-                    <td><FontAwesomeIcon icon={faSquarePen}/></td>
+                    <td>
+                      <select name="status" onChange={(e)=>{handleChange(e, order.id)}}>
+                          <option value="shipped" >Expédiée</option>
+                          <option value="in delivery">En livraison</option>
+                          <option value="delivered">Livrée</option>
+                          <option value="finished">Terminée</option>
+                      </select>
+                    </td>
+                    <td><Link to={`/order/details/${order.id}`}><FontAwesomeIcon icon={faEye}/></Link></td>
                   </tr>
                 )
               })}
