@@ -1,10 +1,16 @@
+import {useState, useEffect} from 'react'
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import { faHome, faBasketShopping } from "@fortawesome/free-solid-svg-icons"
+import { faBasketShopping } from "@fortawesome/free-solid-svg-icons"
 import { config } from "../config"
-const token = window.localStorage.getItem('verdure-token')
+import { selectUser } from '../slices/userSlice';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+  const user = useSelector(selectUser)
+
+
+
   return (
     <header>
       <nav id="nav-menu">
@@ -14,11 +20,13 @@ const Header = () => {
         </div>
 
         <div className="nav-links">
-          { token === null && <Link to='/login'  className="nav-link"> Se connecter</Link>}
-          { token !== null && <Link to='/profil'  className="nav-link"> Mon compte</Link>}
+          { user.isLogged === false && <Link to='/login'  className="nav-link">Se connecter</Link>}
+          { user.isLogged === false && <Link to='/register'  className="nav-link">Créer un compte</Link>}
+          { user.isLogged === true && <Link to='/profil'  className="nav-link"> Mon compte</Link>}
+          { user.isLogged === true && <Link to='/logout'  className="nav-link"> Se déconnecter</Link>}
           {/* <Link to="/" className="nav-link"><FontAwesomeIcon icon={faHome}/> Accueil</Link> */}
           <Link to="/plants" className="nav-link">Nos plantes</Link>
-          <Link to="#" className="nav-link"><FontAwesomeIcon icon={faBasketShopping}/></Link>
+          <Link to="#"><FontAwesomeIcon icon={faBasketShopping}/></Link>
         </div>
       </nav>
     </header>

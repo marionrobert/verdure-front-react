@@ -1,11 +1,21 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { loginUser } from "../../api/user"
-
-
+import { Navigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { connectUser } from "../../slices/userSlice"
 
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [redirect, setRedirect] = useState(false)
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    const token = window.localStorage.getItem('verdure-token')
+    if (token){
+      setRedirect(true)
+    }
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -16,8 +26,12 @@ const Login = () => {
     }
     loginUser(data)
     .then((res)=>{
-      console.log(res.token)
+      // console.log(res.token)
       window.localStorage.setItem("verdure-token", res.token)
+      let myUser = res.user
+      myUser.token = res.token
+      dispatch(connectUser(myUser))
+      setRedirect(true)
     })
     .catch((err)=>{
       console.log(err)
@@ -33,6 +47,10 @@ const Login = () => {
         setPassword(e.currentTarget.value)
         break;
     }
+  }
+
+  if(redirect){
+    return <Navigate to="/"/>
   }
 
   return (

@@ -32,6 +32,7 @@ const RequireDataAuth = (props) =>{
       if (plants.plants.length === 0){
         loadPlants()
         .then((res)=>{
+          // console.log("res inside require-auth-data", res)
           dispatch(getAllPlants(res.results))
         })
         .catch((err)=>{

@@ -5,8 +5,9 @@ import Footer from "./components/footer"
 import Home from "./containers/home"
 import Login from "./containers/user/login"
 import Register from './containers/user/register'
-import Products from "./containers/products"
 import Profil from "./containers/user/profil"
+import Logout from './containers/user/logout'
+import Products from "./containers/products"
 
 // import Add from "./containers/add"
 // import Edit from "./containers/edit"
@@ -17,6 +18,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 //composant supérieur va gérer le composant enfant
 import RequireDataAuth from "./helpers/require-data-auth"
 
+
 function App() {
 
   return (
@@ -24,9 +26,10 @@ function App() {
       <Header />
         <Routes>
           <Route exact path="/" element={<RequireDataAuth child={Home} auth={false} admin={false} />} />
-          <Route exact path="/plants" element={<RequireDataAuth child={Products} auth={true} admin={true}/>}/>
+          <Route exact path="/plants" element={<RequireDataAuth child={Products} auth={false} admin={false}/>}/>
           <Route exact path="/login" element={<RequireDataAuth child={Login} auth={false} admin={false} />} />
           <Route exact path="/register" element={<RequireDataAuth child={Register} auth={false} admin={false} />} />
+          <Route exact path="/logout" element={<RequireDataAuth child={Logout} auth={true} admin={false} />} />
           <Route exact path='/profil' element={<RequireDataAuth child={Profil} auth={true} admin={false} />} />
           <Route exact path="/plant/details/:id" element={<Details/>}/>
           <Route exact path="*" element={<Navigate to="/"/>} />

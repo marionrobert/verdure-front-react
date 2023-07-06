@@ -94,9 +94,20 @@ header {
   border-radius: 50px;
 }
 
+.nav-links{
+  display: flex;
+  align-items: center;
+}
+
 .nav-link {
   padding: 0 1rem;
   color: white;
+}
+
+.fa-basket-shopping{
+  color: white;
+  width: 25px;
+  height: 25px;
 }
 
 /* ALL FORMS */
@@ -108,6 +119,7 @@ form {
   justify-content: space-around;
   flex-wrap: wrap;
 }
+
 
 
 /* HOME */
@@ -209,7 +221,7 @@ button.btn-discover-all-plants:hover{
   width: 300px;
   padding: 0.5rem;
   border-radius: 1.5px;
-  transition: transform .1s;
+  transition: transform .2s;
 }
 
 .plant-card:hover{
