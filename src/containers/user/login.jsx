@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react"
 import { loginUser } from "../../api/user"
 import { Navigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { connectUser } from "../../slices/userSlice"
 
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [redirect, setRedirect] = useState(false)
+  const dispatch = useDispatch()
 
   useEffect(()=>{
     const token = window.localStorage.getItem('verdure-token')
@@ -25,6 +28,9 @@ const Login = () => {
     .then((res)=>{
       // console.log(res.token)
       window.localStorage.setItem("verdure-token", res.token)
+      let myUser = res.user
+      myUser.token = res.token
+      dispatch(connectUser(myUser))
       setRedirect(true)
     })
     .catch((err)=>{
@@ -43,9 +49,12 @@ const Login = () => {
     }
   }
 
+  if(redirect){
+    return <Navigate to="/"/>
+  }
+
   return (
     <>
-    { redirect && <Navigate to="/" />}
     <h1>Se connecter</h1>
     <form onSubmit={(e)=>{
         handleSubmit(e)

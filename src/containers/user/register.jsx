@@ -1,5 +1,6 @@
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import { addOneUser } from "../../api/user"
+import { Navigate } from "react-router-dom"
 
 const Register = () => {
   const [firstName, setFirstName] = useState("")
@@ -10,6 +11,14 @@ const Register = () => {
   const [zip, setZip] =useState("")
   const [city, setCity] =useState("")
   const [phone, setPhone] =useState("")
+  const [redirect, setRedirect] = useState(false)
+
+  useEffect(()=>{
+    const token = window.localStorage.getItem('verdure-token')
+    if (token){
+      setRedirect(true)
+    }
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -61,6 +70,10 @@ const Register = () => {
         setPhone(e.currentTarget.value)
         break;
     }
+  }
+
+  if(redirect){
+    return <Navigate to="/"/>
   }
 
   return (
