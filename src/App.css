@@ -113,11 +113,33 @@ header {
   color: white;
 }
 
+.nav-link.our-plants {
+  display: none;
+}
+
 .fa-basket-shopping{
   color: white;
   width: 25px;
   height: 25px;
 }
+
+.menu-user, .menu-admin {
+  background-color: rgba(2, 46, 35, 0.975);
+  z-index: 99;
+  height: 60px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
+  right: 40px;
+}
+
+.menu-user a , .menu-admin a{
+  color: white;
+  margin: 0.3rem 0;
+}
+
 
 /* ALL FORMS */
 form {

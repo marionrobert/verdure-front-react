@@ -22,17 +22,31 @@ const Header = () => {
         { user.isLogged === false ? <div className="nav-links">
           <Link to='/login'  className="nav-link">Se connecter</Link>
           <Link to='/register'  className="nav-link">Créer un compte</Link>
-          <Link to="/plants" className="nav-link">Nos plantes</Link>
+          <Link to="/plants" className="nav-link our-plants">Nos plantes</Link>
           <Link to="/basket"><FontAwesomeIcon icon={faBasketShopping}/></Link>
         </div>
         :
         <div className="nav-links">
-          {user.infos.role === "user" ? <Link to='/myaccount'  className="nav-link"><FontAwesomeIcon icon={faUser}/></Link> : <Link to='/admin'  className="nav-link"><FontAwesomeIcon icon={faUserGear}/></Link> }
-          <Link to='/logout'  className="nav-link"> Se déconnecter</Link>
-          <Link to="/plants" className="nav-link">Nos plantes</Link>
+          <Link to="/plants" className="nav-link our-plants">Nos plantes</Link>
+          {user.infos.role === "user" ? <a href="/" className="nav-link"><FontAwesomeIcon icon={faUser}/></a> : <a  href="/" className="nav-link"><FontAwesomeIcon icon={faUserGear}/></a> }
           <Link to="/basket"><FontAwesomeIcon icon={faBasketShopping}/></Link>
         </div> }
+
       </nav>
+
+        {user.isLogged & user.infos.role === "user" &&
+
+        <>
+          <Link to='/myaccount'>Mon compte</Link>
+          <Link to='/logout'> Déconnexion</Link>
+        </>
+        }
+
+        {user.isLogged & user.infos.role === "admin" && (
+        <div className='menu-admin'>
+          <Link to='/admin'>Admin</Link>
+          <Link to='/logout'> Déconnexion</Link>
+        </div>  )}
     </header>
   )
 }
