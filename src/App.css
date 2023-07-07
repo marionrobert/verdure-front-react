@@ -74,6 +74,7 @@ header {
   top: 0;
   left: 0;
   height: 60px;
+  z-index: 3;
 }
 
 .brand{
@@ -270,6 +271,27 @@ button.plant-card-btn {
 .plant-card-btn a {
   color: white;
   border: none;
+}
+
+
+/* DETAILS PLANT */
+
+section.details-plant{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1rem;
+}
+
+section.details-plant img{
+ width: 90%;
+ margin-top: 1rem;
+}
+
+section.details-plant .details-plant-infos h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 1rem 0 0.5rem 0;
 }
 
 

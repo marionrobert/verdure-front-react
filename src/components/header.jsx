@@ -23,12 +23,14 @@ const Header = () => {
           <Link to='/login'  className="nav-link">Se connecter</Link>
           <Link to='/register'  className="nav-link">Créer un compte</Link>
           <Link to="/plants" className="nav-link">Nos plantes</Link>
-          <Link to="#"><FontAwesomeIcon icon={faBasketShopping}/></Link>
-        </div> : <div className="nav-links">
+          <Link to="/basket"><FontAwesomeIcon icon={faBasketShopping}/></Link>
+        </div>
+        :
+        <div className="nav-links">
           {user.infos.role === "user" ? <Link to='/myaccount'  className="nav-link"><FontAwesomeIcon icon={faUser}/></Link> : <Link to='/admin'  className="nav-link"><FontAwesomeIcon icon={faUserGear}/></Link> }
           <Link to='/logout'  className="nav-link"> Se déconnecter</Link>
           <Link to="/plants" className="nav-link">Nos plantes</Link>
-          <Link to="#"><FontAwesomeIcon icon={faBasketShopping}/></Link>
+          <Link to="/basket"><FontAwesomeIcon icon={faBasketShopping}/></Link>
         </div> }
       </nav>
     </header>

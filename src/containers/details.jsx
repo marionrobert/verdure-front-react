@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 const Details = () => {
   const params = useParams()
   const [plant, setPlant] = useState(null)
-  const [chosenQuantity, setChosenQuantity] = useState(null)
+  const [chosenQuantity, setChosenQuantity] = useState(1)
   const currentBasket = useSelector(selectBasket)
   const dispatch = useDispatch()
 
@@ -29,7 +29,9 @@ const Details = () => {
   }, [params.id])
 
   const handleChange= (e) => {
-    setChosenQuantity(parseInt(e.currentTarget.value))
+    if (e.currentTarget.value !== ""){
+      setChosenQuantity(parseInt(e.currentTarget.value))
+    }
   }
 
   const addToBasket = (e, oldBasket, newProduct) => {
@@ -66,19 +68,22 @@ const Details = () => {
     <>
       { plant !== null && <div className="details-plant">
         <img src={`${config.pict_url}/${plant.photo}`}/>
-        <h2>{plant.name}</h2>
-        <p>{plant.description}</p>
-        <p>{plant.price} €</p>
-        <p>En stock: {plant.quantity}</p>
-        <p><FontAwesomeIcon icon={faDroplet}/>Arrosage: {plant.watering}</p>
-        <p><FontAwesomeIcon icon={faSun}/>Luminosité: {plant.brightness}</p>
-        <p><FontAwesomeIcon icon={faTemperatureLow}/>Température minimum: {plant.minTemperature}°C</p>
-        <p><FontAwesomeIcon icon={faTemperatureHigh}/>Température maximum: {plant.maxTemperature}°C</p>
+        <div className="details-plant-infos">
+          <h2>{plant.name}</h2>
+          <p>{plant.description}</p>
+          <p>{plant.price} €</p>
+          <p>En stock: {plant.quantity}</p>
+          <p><FontAwesomeIcon icon={faDroplet}/>Arrosage: {plant.watering}</p>
+          <p><FontAwesomeIcon icon={faSun}/>Luminosité: {plant.brightness}</p>
+          <p><FontAwesomeIcon icon={faTemperatureLow}/>Température minimum: {plant.minTemperature}°C</p>
+          <p><FontAwesomeIcon icon={faTemperatureHigh}/>Température maximum: {plant.maxTemperature}°C</p>
+        </div>
         <form onSubmit={(e)=>{addToBasket(e, currentBasket.basket, plant)}}>
-          <input name="quantity" placeholder="1" onChange={(e)=>{handleChange(e)}}/>
+          <input name="quantity" placeholder="1" defaultValue={chosenQuantity} onChange={(e)=>{handleChange(e)}}/>
           <button>Ajouter au panier <FontAwesomeIcon icon={faCartPlus}/></button>
         </form>
-      </div>}
+      </div>
+      }
     </>
   )
 }

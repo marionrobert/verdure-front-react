@@ -6,11 +6,15 @@ import { useState, useEffect } from "react"
 import { getAllOrders, updateOrderStatusByAdmin } from "../../api/order"
 import moment from "moment"
 import { Link } from "react-router-dom"
-import { deleteOnePlant } from "../../api/plant"
+import { deleteOnePlant, loadPlants } from "../../api/plant"
 
 const Admin = () => {
   const plants = useSelector(selectPlants)
   const [orders, setOrders] = useState([])
+  const dispatch = useDispatch()
+  const [successPlant, setSuccessPlant] = useState(null)
+  const [errorPlant, setErrorPlant] = useState(null)
+  const [orderPlant, setOrderPlant] = useState(null)
 
   useEffect(()=> {
     getAllOrders()
@@ -23,11 +27,29 @@ const Admin = () => {
   }, [plants, orders])
 
   const deletePlant = (id) => {
+    setSuccessPlant(null)
     deleteOnePlant(id)
     .then((res)=>{
-      console.log(res)
+      // console.log(res)
+      if (res.status === 200){
+        setSuccessPlant("La plante a bien été supprimée")
+        loadPlants()
+        .then((response)=>{
+          if(response.status === 200){
+            dispatch(getAllPlants(response.results))
+          } else {
+            console.log("erreur chargement des plantes")
+          }
+        })
+        .catch((error)=>{
+          console.log(error)
+        })
+      } else {
+        setErrorPlant("La plante n'a pas pu être supprimée")
+      }
     })
     .catch((err)=>{
+      setErrorPlant("La plante n'a pas pu être supprimée")
       console.log(err)
     })
   }
@@ -50,6 +72,7 @@ const Admin = () => {
       <Link to="/plant/add">Ajouter une nouvelle plante à votre magasin</Link>
         {plants.plants.length > 0 && <section className="manage-all-plants">
           <h2>Gérer toutes vos plantes</h2>
+          {successPlant !== null && <p style={{color: "green"}}>{successPlant}</p>}
           <table>
             <thead>
               <tr>
@@ -98,10 +121,11 @@ const Admin = () => {
                     <td>{order.status}</td>
                     <td>
                       <select name="status" onChange={(e)=>{handleChange(e, order.id)}}>
-                          <option value="shipped" >Expédiée</option>
-                          <option value="in delivery">En livraison</option>
-                          <option value="delivered">Livrée</option>
-                          <option value="finished">Terminée</option>
+                          <option>Choisir un statut</option>
+                          <option value="expédiée" >Expédiée</option>
+                          <option value="en livraison">En livraison</option>
+                          <option value="livrée">Livrée</option>
+                          <option value="terminée">Terminée</option>
                       </select>
                     </td>
                     <td><Link to={`/order/details/${order.id}`}><FontAwesomeIcon icon={faEye}/></Link></td>
