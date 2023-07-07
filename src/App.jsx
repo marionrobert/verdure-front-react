@@ -29,6 +29,7 @@ function App() {
   return (
     <div>
       <Header />
+      <main>
         <Routes>
 
         {/* HOME, ALL PLANTS, DETAILS PLANT */}
@@ -50,6 +51,7 @@ function App() {
 
           <Route exact path="*" element={<Navigate to="/"/>} />
         </Routes>
+      </main>
       <Footer />
     </div>
   )

@@ -55,7 +55,7 @@ const Admin = () => {
               <tr>
                 <td>Nom</td>
                 <td>Quantité</td>
-                <td>Prix unitaire</td>
+                <td>Prix</td>
                 <td>Gérer</td>
               </tr>
             </thead>

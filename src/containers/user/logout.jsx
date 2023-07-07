@@ -8,8 +8,8 @@ const Logout = () => {
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    dispatch(logoutUser())
     window.localStorage.removeItem('verdure-token')
+    dispatch(logoutUser())
   }, [])
 
   return <Navigate to="http://localhost:5173/"/>

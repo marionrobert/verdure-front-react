@@ -39,7 +39,7 @@ const Register = () => {
     .then((res)=>{
       if (res.status === 200) {
         setSuccess("Félicitations, votre compte a bien été créé.")
-        // e.currentTarget.reset()
+        document.querySelector("#form-register").reset()
       } else {
         console.log("je suis dans le else")
         setErrorForm(res.msg)
@@ -89,7 +89,7 @@ const Register = () => {
       </div>
       }
 
-      <form onSubmit={(e)=>{handleSubmit(e)}}>
+      <form onSubmit={(e)=>{handleSubmit(e)}} id="form-register">
         <label htmlFor="firstName">Votre prénom</label>
         <input type="text" name="firstName" onChange={handleChange} required/>
         <label htmlFor="lastName">Votre nom</label>
