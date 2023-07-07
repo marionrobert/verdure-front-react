@@ -96,7 +96,7 @@ const RequireDataAuth = (props) =>{
     }, [user])
 
     if(redirect){
-      return <Navigate to="/login"/>
+      return <Navigate to="http://localhost:5173/login"/>
     }
 
     if(redirectAdmin){

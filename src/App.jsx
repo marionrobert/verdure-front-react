@@ -6,6 +6,8 @@ import Footer from "./components/footer"
 import Home from "./containers/home"
 import Products from "./containers/products"
 import Details from "./containers/details"
+import Basket from './containers/basket'
+import Payment from './containers/payment'
 
 import Login from "./containers/user/login"
 import Register from './containers/user/register'
@@ -15,7 +17,7 @@ import Logout from './containers/user/logout'
 import Admin from './containers/admin/admin'
 import AddPlant from './containers/admin/plant/addPlant'
 import EditPlant from './containers/admin/plant/editPlant'
-
+import OrderDetails from './containers/admin/order/orderDetail'
 
 
 import { Routes, Route, Navigate } from 'react-router-dom'
@@ -28,12 +30,17 @@ function App() {
   return (
     <div>
       <Header />
+      <main>
         <Routes>
 
         {/* HOME, ALL PLANTS, DETAILS PLANT */}
           <Route exact path="/" element={<RequireDataAuth child={Home} auth={false} admin={false} />} />
           <Route exact path="/plants" element={<RequireDataAuth child={Products} auth={false} admin={false}/>}/>
           <Route exact path="/plant/details/:id" element={<RequireDataAuth child={Details} auth={false} admin={false} />} />
+
+        {/* DETAILS BASKET, PAYEMENT */}
+          <Route exact path="/basket" element={<RequireDataAuth child={Basket} auth={false} admin={false}/>}/>
+          <Route exact path="/payement/:id" element={<RequireDataAuth child={Payment} auth={true} admin={false} />}/>
 
         {/* LOGIN, LOGOUT, REGISTER, PROFILE */}
           <Route exact path="/login" element={<RequireDataAuth child={Login} auth={false} admin={false} />} />
@@ -42,12 +49,14 @@ function App() {
           <Route exact path='/myaccount' element={<RequireDataAuth child={Profil} auth={true} admin={false} />} />
 
         {/* ADMIN */}
-        <Route exact path="/admin" element={<RequireDataAuth child={Admin} auth={true} admin={true} />} />
-        <Route exact path="/plant/add" element={<RequireDataAuth child={AddPlant} auth={true} admin={true} />}/>
-        <Route exact path="/plant/update/:id" element={<RequireDataAuth child={EditPlant} auth={true} admin={true} />}/>
+          <Route exact path="/admin" element={<RequireDataAuth child={Admin} auth={true} admin={true} />} />
+          <Route exact path="/plant/add" element={<RequireDataAuth child={AddPlant} auth={true} admin={true} />}/>
+          <Route exact path="/plant/update/:id" element={<RequireDataAuth child={EditPlant} auth={true} admin={true} />}/>
+          <Route exact path="/order/details/:id" element={<RequireDataAuth child={OrderDetails} auth={true} admin={true}/>}/>
 
           <Route exact path="*" element={<Navigate to="/"/>} />
         </Routes>
+      </main>
       <Footer />
     </div>
   )

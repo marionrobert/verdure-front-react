@@ -28,6 +28,7 @@ html, body {
   height: 100%;
   margin: 0;
   background-color: whitesmoke;
+  width: 100vw;
 }
 
 body {
@@ -61,11 +62,19 @@ a {
   color: black;
 }
 
+main {
+  padding: 60px 0 0 0;
+}
 
 /* HEADER */
 header {
-  /* background-color: rgba(27, 75, 59, 0.897); */
   background-color: rgba(2, 46, 35, 0.975);
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  z-index: 3;
 }
 
 .brand{
@@ -73,7 +82,7 @@ header {
   align-items: center;
 }
 
-.brand p {
+.brand span {
   padding-left: 0.5rem;
   color:white;
   font-size: 1.7rem;
@@ -82,10 +91,10 @@ header {
 
 #nav-menu{
   display:flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
+  max-width: 100%;
 }
 
 #nav-menu .icon {
@@ -262,6 +271,27 @@ button.plant-card-btn {
 .plant-card-btn a {
   color: white;
   border: none;
+}
+
+
+/* DETAILS PLANT */
+
+section.details-plant{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1rem;
+}
+
+section.details-plant img{
+ width: 90%;
+ margin-top: 1rem;
+}
+
+section.details-plant .details-plant-infos h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 1rem 0 0.5rem 0;
 }
 
 

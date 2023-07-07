@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import { faBasketShopping } from "@fortawesome/free-solid-svg-icons"
+import { faBasketShopping, faUser, faUserGear } from "@fortawesome/free-solid-svg-icons"
 import { config } from "../config"
 import { selectUser } from '../slices/userSlice';
 import { useSelector } from 'react-redux';
@@ -16,19 +16,22 @@ const Header = () => {
       <nav id="nav-menu">
         <div className="brand">
           <Link to="/"><img src={`${config.pict_url}/icons/plant_flowerpot.svg`} className="icon"/></Link>
-          <p>Verdure</p>
+          <span>Verdure</span>
         </div>
 
-        <div className="nav-links">
-          { user.isLogged === false && <Link to='/login'  className="nav-link">Se connecter</Link>}
-          { user.isLogged === false && <Link to='/register'  className="nav-link">Créer un compte</Link>}
-          { user.isLogged === true && user.infos.role === "user" && <Link to='/myaccount'  className="nav-link"> Mon compte</Link>}
-          { user.isLogged === true && user.infos.role === "admin" && <Link to='/admin'  className="nav-link">Admin</Link>}
-          { user.isLogged === true && <Link to='/logout'  className="nav-link"> Se déconnecter</Link>}
-          {/* <Link to="/" className="nav-link"><FontAwesomeIcon icon={faHome}/> Accueil</Link> */}
+        { user.isLogged === false ? <div className="nav-links">
+          <Link to='/login'  className="nav-link">Se connecter</Link>
+          <Link to='/register'  className="nav-link">Créer un compte</Link>
           <Link to="/plants" className="nav-link">Nos plantes</Link>
-          <Link to="#"><FontAwesomeIcon icon={faBasketShopping}/></Link>
+          <Link to="/basket"><FontAwesomeIcon icon={faBasketShopping}/></Link>
         </div>
+        :
+        <div className="nav-links">
+          {user.infos.role === "user" ? <Link to='/myaccount'  className="nav-link"><FontAwesomeIcon icon={faUser}/></Link> : <Link to='/admin'  className="nav-link"><FontAwesomeIcon icon={faUserGear}/></Link> }
+          <Link to='/logout'  className="nav-link"> Se déconnecter</Link>
+          <Link to="/plants" className="nav-link">Nos plantes</Link>
+          <Link to="/basket"><FontAwesomeIcon icon={faBasketShopping}/></Link>
+        </div> }
       </nav>
     </header>
   )
