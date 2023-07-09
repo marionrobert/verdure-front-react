@@ -17,11 +17,6 @@ const Home = () => {
   //on initialise notre fonction dispatcher pour modifier une state
   const dispatch = useDispatch()
 
-  //lorsque le DOM est chargé
-  // useEffect(()=>{
-
-  // }, [])
-
   return (
     <>
       <div className="banner">
