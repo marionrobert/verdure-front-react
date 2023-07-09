@@ -567,5 +567,18 @@ footer a svg:hover {
     margin: 1rem 0.8rem ;
   }
 
+  section.details-plant {
+    padding: 0 4rem;
+  }
+
+  section.details-plant img{
+    width: 25%;
+    height: auto;
+    margin: 2rem 0 1rem;
+  }
+
+  .advices {
+    width: 50%;
+  }
 
 }
