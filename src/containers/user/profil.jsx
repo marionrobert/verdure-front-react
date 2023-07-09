@@ -75,6 +75,7 @@ const Profil = () => {
   return (
     <>
       <h1>Mon compte</h1>
+      <button><Link to="/logout">Me déconnecter</Link></button>
       <h2>Mes informations</h2>
       <form onSubmit={(e)=>{handleSubmit(e)}}>
       <label htmlFor="firstName">Votre prénom</label>
@@ -90,7 +91,7 @@ const Profil = () => {
       <label htmlFor="phone">Votre numéro de téléphone</label>
       <input type="text" name="phone" onChange={handleChange} defaultValue={phone} placeholder="Numéro de téléphone" required/>
       <button type="submit">Modifier mes informations</button>
-      <button><Link to="/logout">Me déconnecter</Link></button>
+
     </form>
     </>
   )

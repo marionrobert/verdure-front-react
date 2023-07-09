@@ -94,7 +94,6 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
-  padding-right: 1rem;
   max-width: 100%;
 }
 
@@ -114,18 +113,20 @@ header {
 }
 
 .nav-link {
-  padding: 0 1rem;
+  padding: 0 0.8rem;
   color: white;
-}
-
-.nav-link.our-plants {
-  display: none;
+  cursor: pointer;
 }
 
 .fa-bag-shopping, .fa-user, .fa-user-gear {
   color: white;
   width: 25px;
   height: 25px;
+}
+
+.fa-user-regular {
+  width: 20px;
+  height: 20px;
 }
 
 .connexion-menu {
@@ -161,23 +162,25 @@ header {
   height: 20px;
   top: 65px;
   right: 10px;
+  cursor: pointer;
 }
 
 .menu-user {
   background-color: rgba(2, 46, 35, 0.975);
   z-index: 99;
-  height: 62px;
+  height: 65px;
   width: 110px;
-  display: flex;
+  display: none;
   flex-direction: column;
   position: absolute;
-  top: 60px;
-  right: 60px;
+  top: 59px;
+  right: 5%;
 }
 
-.display-none {
-  display: none;
+.menu-user a:hover {
+  background-color: rgba(2, 46, 35, 0.5);
 }
+
 
 .menu-user a{
   color: white;
@@ -403,4 +406,55 @@ footer {
 
 footer a svg:hover {
   color: rgb(153, 153, 153, 0.8)
+}
+
+
+
+/*  CHANGEMENT POUR TABLETTES */
+@media screen and (min-width: 721px) {
+
+  .nav-links-mobile {
+    display: none;
+  }
+
+  .nav-links-tablet {
+    display:flex;
+    align-items: center;
+  }
+
+  .connexion-menu {
+    position: absolute;
+    right: 0px;
+    top: 60px;
+    display: none;
+    width: 300px;
+    padding-top: 1.5rem;
+  }
+
+  .connexion-menu button {
+    width: 190px;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-size: 0.8rem;
+  }
+
+  .connexion-menu .fa-xmark {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    right: 10px;
+  }
+
+  .fa-user-regular{
+    width: 10px;
+    height: 10px;
+    margin-bottom: 10px;
+  }
+
+  .nav-link {
+    font-size: 1.1rem;
+    padding-left: 1.3rem;
+  }
+
 }

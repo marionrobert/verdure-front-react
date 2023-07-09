@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import { Link, Navigate } from "react-router-dom";
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import { faBagShopping, faUser, faUserGear, faXmark } from "@fortawesome/free-solid-svg-icons"
+import { faBagShopping, faUser, faUserGear, faXmark} from "@fortawesome/free-solid-svg-icons"
 import { faUser as faUserRegular } from '@fortawesome/free-regular-svg-icons';
 import { config } from "../config"
 import { selectUser } from '../slices/userSlice';
@@ -12,11 +12,8 @@ const Header = () => {
 
 
   // const displayUserMenu = () => {
-  //   console.log("j'ai été survolée")
   //   let userMenu = document.querySelector("div.menu-user")
-  //   console.log(userMenu)
-  //   userMenu.classList.toggle("display-none")
-
+  //   userMenu.style.display="flex"
   // }
 
   const displayConnexionMenu = () => {
@@ -35,12 +32,12 @@ const Header = () => {
       <nav id="nav-menu">
         <div className="brand">
           <Link to="/"><img src={`${config.pict_url}/icons/plant_flowerpot.svg`} className="icon"/></Link>
-          <span>Verdure</span>
+          <Link to="/"><span>Verdure</span></Link>
         </div>
 
         { user.isLogged === false ?
           <div className="nav-links-mobile">
-            <p className="nav-link" onClick={displayConnexionMenu}><FontAwesomeIcon icon={faUserRegular}/></p>
+            <Link className="nav-link fa-user-regular" onClick={displayConnexionMenu}><FontAwesomeIcon icon={faUserRegular}/></Link>
             <Link to="/basket" className="nav-link"><FontAwesomeIcon icon={faBagShopping}/></Link>
           </div> :
           <div className="nav-links-mobile">
@@ -53,22 +50,23 @@ const Header = () => {
           </div>
         }
 
-        {/* { user.isLogged === false ? <div className="nav-links-tablet">
-          <Link to='/login'  className="nav-link">Se connecter</Link>
-          <Link to='/register'  className="nav-link">Créer un compte</Link>
-          <Link to="/plants" className="nav-link our-plants">Nos plantes</Link>
-          <Link to="/basket"><FontAwesomeIcon icon={faBasketShopping}/></Link>
+        { user.isLogged === false ?
+
+        <div className="nav-links-tablet">
+          <Link to="/plants" className="nav-link">Nos plantes</Link>
+          <Link className="nav-link fa-user-regular" onClick={displayConnexionMenu}><FontAwesomeIcon icon={faUserRegular}/></Link>
+          <Link to="/basket" className="nav-link"><FontAwesomeIcon icon={faBagShopping}/></Link>
         </div>
         :
         <div className="nav-links-tablet">
           <Link to="/plants" className="nav-link our-plants">Nos plantes</Link>
           {user.infos.role === "user" ?
-            <div  className="nav-link"><FontAwesomeIcon icon={faUser}/></div>
+            <Link to="/myaccount" className="nav-link"><FontAwesomeIcon icon={faUser}/></Link>
             :
-            <div   className="nav-link"><FontAwesomeIcon icon={faUserGear}/></div>
+            <Link to="/admin"  className="nav-link"><FontAwesomeIcon icon={faUserGear}/></Link>
           }
-          <Link to="/basket"><FontAwesomeIcon icon={faBasketShopping}/></Link>
-        </div> } */}
+          <Link to="/basket"><FontAwesomeIcon icon={faBagShopping}/></Link>
+        </div> }
 
       </nav>
 
@@ -79,7 +77,7 @@ const Header = () => {
       </div>
 
 
-      <div className='menu-user display-none'>
+      <div className='menu-user'>
         {user.isLogged && user.infos.role === "user" && <Link to='/myaccount'>Mon compte</Link>}
         {user.isLogged && user.infos.role === "admin" && <Link to='/admin'>Admin</Link>}
         <Link to='/logout'> Déconnexion</Link>
