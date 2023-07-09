@@ -26,7 +26,7 @@ const Home = () => {
 
       </div>
       { allPlants.plants.length > 0 && <section className="all-plants">
-        <h2 className="news-plants">Les nouveautés</h2>
+        <h2 className="new-plants">Les nouveautés</h2>
         {allPlants.plants.slice(0, 8).map(plant => {
           return <ArticleProduct key={plant.id} product={plant}/>
         })}
