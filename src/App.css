@@ -108,7 +108,7 @@ header {
   align-items: center;
 }
 
-.nav-links-tablet {
+.nav-links-tablet, .nav-links-desktop {
   display: none;
 }
 
@@ -118,15 +118,10 @@ header {
   cursor: pointer;
 }
 
-.fa-bag-shopping, .fa-user, .fa-user-gear {
+.fa-bag-shopping, .fa-user, .fa-user-gear, .fa-user-check {
   color: white;
   width: 25px;
   height: 25px;
-}
-
-.fa-user-regular {
-  width: 20px;
-  height: 20px;
 }
 
 .connexion-menu {
@@ -164,30 +159,6 @@ header {
   right: 10px;
   cursor: pointer;
 }
-
-.menu-user {
-  background-color: rgba(2, 46, 35, 0.975);
-  z-index: 99;
-  height: 65px;
-  width: 110px;
-  display: none;
-  flex-direction: column;
-  position: absolute;
-  top: 59px;
-  right: 5%;
-}
-
-.menu-user a:hover {
-  background-color: rgba(2, 46, 35, 0.5);
-}
-
-
-.menu-user a{
-  color: white;
-  padding: 0.5rem;
-  text-align: right;
-}
-
 
 /* ALL FORMS */
 form {
@@ -455,6 +426,57 @@ footer a svg:hover {
   .nav-link {
     font-size: 1.1rem;
     padding-left: 1.3rem;
+  }
+
+}
+
+
+
+@media screen and (min-width: 1024px){
+  .nav-links-mobile {
+    display: none;
+  }
+
+  .nav-links-tablet {
+    display:none;
+  }
+
+  .nav-links-desktop {
+    display: flex;
+    align-items: center;
+  }
+
+  .menu-user {
+    background-color: rgba(2, 46, 35, 0.975);
+    z-index: 99;
+    height: 65px;
+    width: 130px;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 59px;
+    right: 3%;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+  }
+
+  .menu-user a:hover {
+    background-color: rgba(2, 46, 35, 0.5);
+  }
+
+  .menu-user a{
+    color: white;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .nav-link {
+    padding: 0 1rem;
+  }
+
+  .fa-bag-shopping, .fa-user, .fa-user-check, .fa-user-gear {
+    width: 25px;
+    height: 25px;
   }
 
 }
