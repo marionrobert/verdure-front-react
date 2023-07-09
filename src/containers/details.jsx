@@ -4,7 +4,7 @@ import { loadOnePlant } from "../api/plant";
 import {config} from "../config";
 
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import { faDroplet, faSun, faTemperatureLow, faTemperatureHigh, faCartPlus } from "@fortawesome/free-solid-svg-icons"
+import { faDroplet, faSun, faTemperatureHigh, faCartPlus, faSquarePlus, faSquareMinus } from "@fortawesome/free-solid-svg-icons"
 
 //import des states globales product et basket et de leurs actions (ajout au panier, chargement des produits)
 import { selectBasket, updateBasket  } from '../slices/basketSlice';
@@ -66,23 +66,47 @@ const Details = () => {
 
   return (
     <>
-      { plant !== null && <div className="details-plant">
+      { plant !== null &&
+      <section className="details-plant">
         <img src={`${config.pict_url}/${plant.photo}`}/>
         <div className="details-plant-infos">
-          <h2>{plant.name}</h2>
+          <h1>{plant.name}</h1>
           <p>{plant.description}</p>
-          <p>{plant.price} €</p>
-          <p>En stock: {plant.quantity}</p>
-          <p><FontAwesomeIcon icon={faDroplet}/>Arrosage: {plant.watering}</p>
-          <p><FontAwesomeIcon icon={faSun}/>Luminosité: {plant.brightness}</p>
-          <p><FontAwesomeIcon icon={faTemperatureLow}/>Température minimum: {plant.minTemperature}°C</p>
-          <p><FontAwesomeIcon icon={faTemperatureHigh}/>Température maximum: {plant.maxTemperature}°C</p>
+          <h3>Prix: {plant.price} €</h3>
+          <h3>En stock: {plant.quantity}</h3>
+        </div>
+        <div className="advices">
+          <h3>Nos conseils d'entretien</h3>
+          <ul>
+            <li>
+              <h4>Arrosage :
+                {Array.from({ length: plant.watering }, (_, index) => (
+                  <span key={index}>
+                    <FontAwesomeIcon icon={faDroplet} />
+                  </span>
+                ))}
+              </h4>
+            </li>
+            <li>
+              <h4>Luminosité :
+                {Array.from({length: plant.brightness}, (_, index) => (
+                    <span key={index}>
+                       <FontAwesomeIcon icon={faSun} />
+                    </span>
+                ))}
+              </h4>
+            </li>
+            <li>
+              <h4>Température : entre {plant.minTemperature} et {plant.maxTemperature}°C <FontAwesomeIcon icon={faTemperatureHigh}/></h4>
+            </li>
+
+          </ul>
         </div>
         <form onSubmit={(e)=>{addToBasket(e, currentBasket.basket, plant)}}>
-          <input name="quantity" placeholder="1" defaultValue={chosenQuantity} onChange={(e)=>{handleChange(e)}}/>
+          <input name="quantity" id="quantity" placeholder="1" defaultValue={chosenQuantity} onChange={(e)=>{handleChange(e)}}/>
           <button>Ajouter au panier <FontAwesomeIcon icon={faCartPlus}/></button>
         </form>
-      </div>
+      </section>
       }
     </>
   )
