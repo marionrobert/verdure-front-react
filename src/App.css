@@ -108,7 +108,7 @@ header {
   align-items: center;
 }
 
-.nav-links-tablet, .nav-links-desktop {
+.nav-links-tablet, .nav-links-desktop, .menu-user {
   display: none;
 }
 
@@ -245,7 +245,6 @@ button.btn-discover-all-plants:hover{
 
 
 
-
 /* CARD PLANT */
 .all-plants {
   margin: 3rem 0;
@@ -256,10 +255,11 @@ button.btn-discover-all-plants:hover{
 
 .all-plants h2, .all-plants h1 {
   width: 100%;
-  text-decoration: underline;
+  /* text-decoration: underline; */
   margin-bottom: 1rem;
-  font-size: 2.8em;
+  font-size: 3em;
   line-height: 1.1;
+  font-family: 'Dancing Script', cursive;
 }
 
 .plant-card{
@@ -384,7 +384,7 @@ footer a svg:hover {
 /*  CHANGEMENT POUR TABLETTES */
 @media screen and (min-width: 721px) {
 
-  .nav-links-mobile {
+  .nav-links-mobile, .nav-links-desktop, .menu-user {
     display: none;
   }
 
@@ -474,9 +474,9 @@ footer a svg:hover {
     padding: 0 1rem;
   }
 
-  .fa-bag-shopping, .fa-user, .fa-user-check, .fa-user-gear {
-    width: 25px;
-    height: 25px;
+  .plant-card{
+    margin: 1rem 0.8rem ;
   }
+
 
 }
