@@ -104,9 +104,8 @@ const EditPlant = () => {
 
           updateOnePlant(newData, params.id)
           .then((res)=>{
-            console.log("retour update method quand photo n'est pas nulle", res)
+            // console.log("retour update method quand photo n'est pas nulle", res)
             if (res.status === 200){
-              setIdNewPlant(res.plant.insertId)
               setRedirect(true)
             } else {
               setErrorForm(res.msg)
