@@ -45,9 +45,9 @@ const Header = () => {
           </div> :
           <div className="nav-links-mobile">
             {user.infos.role === "user" ?
-              <div  className="nav-link"><FontAwesomeIcon icon={faUser}/></div>
+              <Link className="nav-link" to="/myaccount"><FontAwesomeIcon icon={faUser}/></Link>
               :
-              <div   className="nav-link"><FontAwesomeIcon icon={faUserGear}/></div>
+              <Link className="nav-link" to="/admin"><FontAwesomeIcon icon={faUserGear}/></Link>
             }
             <Link to="/basket" className="nav-link"><FontAwesomeIcon icon={faBagShopping}/></Link>
           </div>

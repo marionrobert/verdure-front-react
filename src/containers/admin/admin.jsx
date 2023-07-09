@@ -69,8 +69,9 @@ const Admin = () => {
   return (
     <div className="admin-dashboard">
       <h1>Bienvenue dans le dashboard de Verdure</h1>
+      <button><Link to="/logout">Me déconnecter</Link></button>
       <Link to="/plant/add">Ajouter une nouvelle plante à votre magasin</Link>
-        {plants.plants.length > 0 && <section className="manage-all-plants">
+        {plants.plants && plants.plants.length > 0 && <section className="manage-all-plants">
           <h2>Gérer toutes vos plantes</h2>
           {successPlant !== null && <p style={{color: "green"}}>{successPlant}</p>}
           <table>
@@ -98,7 +99,7 @@ const Admin = () => {
         </section>
         }
 
-        {orders.length > 0 && <section className="manage-all-plants">
+        {orders && orders.length > 0 && <section className="manage-all-plants">
           <h2>Gérer toutes les commandes</h2>
           <table>
             <thead>

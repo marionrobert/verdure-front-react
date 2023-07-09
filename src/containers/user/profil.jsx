@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux'
 import { updateOneUser, checkMyToken } from '../../api/user'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const Profil = () => {
   const user = useSelector(selectUser)
@@ -89,6 +90,7 @@ const Profil = () => {
       <label htmlFor="phone">Votre numéro de téléphone</label>
       <input type="text" name="phone" onChange={handleChange} defaultValue={phone} placeholder="Numéro de téléphone" required/>
       <button type="submit">Modifier mes informations</button>
+      <button><Link to="/logout">Me déconnecter</Link></button>
     </form>
     </>
   )
