@@ -1,3 +1,6 @@
+import {loadStripe} from "@stripe/stripe-js"
+import {Elements} from "@stripe/react-stripe-js"
+
 import { useSelector, useDispatch } from "react-redux";
 import { selectBasket } from "../slices/basketSlice";
 import { selectUser } from "../slices/userSlice";
@@ -12,6 +15,7 @@ import { faCreditCard } from '@fortawesome/free-solid-svg-icons'
 import { faCcVisa, faCcMastercard } from '@fortawesome/free-brands-svg-icons';
 
 const Payment = () => {
+  const stripePromise = loadStripe("sk_test_51IzetcLJHwOB3xS8Scys4aqt0tTpGSnpiRxPXgZye7zDrOYabfTBw2tJGHfC7BcEZoy8VitDlpjlfG69RICNzKMV00z6pK7PXN")
   const params = useParams()
   const [order, setOrder] = useState(null)
   const [error, setError] = useState(null)
@@ -51,7 +55,7 @@ const Payment = () => {
         <input name="expiration-date-month" placeholder="MM" required/>/<input name="expiration-date-year" placeholder="AA" required/>
         <label>Code de sécurité</label>
         <input name="cvc" placeholder="CVC" required/>
-        <button>Valider la paiement</button>
+        <button>Valider le paiement</button>
       </form>
       </div>
      </div>}

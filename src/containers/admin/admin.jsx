@@ -24,7 +24,7 @@ const Admin = () => {
     .catch((err)=>{
       console.log(err)
     })
-  }, [plants, orders])
+  }, [orders])
 
   const deletePlant = (id) => {
     setSuccessPlant(null)
