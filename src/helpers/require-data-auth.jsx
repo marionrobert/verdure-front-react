@@ -31,7 +31,6 @@ const RequireDataAuth = (props) =>{
       if (plants.plants.length === 0){
         loadPlants()
         .then((res)=>{
-          // console.log("res inside require-auth-data", res)
           dispatch(getAllPlants(res.results))
         })
         .catch((err)=>{
@@ -45,7 +44,7 @@ const RequireDataAuth = (props) =>{
       //si l'utilisateur n'est pas logged (store)
       if (user.isLogged === false){
         // console.log("aucun user n'est connecté")
-        //on récup le token dans le localStore ??????
+        //on récup le token dans le localStore
         let token = window.localStorage.getItem('verdure-token')
 
         //si le storagee répond null (pas trouvé) et que la props auth est true (route protégée)
@@ -60,7 +59,7 @@ const RequireDataAuth = (props) =>{
               //on appel notre requète axios qui va vérifier le token dans le back checkToken
               checkMyToken(token)
               .then((res)=>{
-                //si le status de la réponse n'est pas 200
+                //si le status de la réponse n'est pas 200 --> erreur
                 if (res.status !== 200){
                   // le token n'est pas bon, aucun utilisateur n'a été retourné
                   //si la route est protégée

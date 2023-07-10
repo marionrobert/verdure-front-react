@@ -97,7 +97,7 @@ const Details = () => {
               </h4>
             </li>
             <li>
-              <h4>Température : entre {plant.minTemperature} et {plant.maxTemperature}°C <FontAwesomeIcon icon={faTemperatureHigh}/></h4>
+              <h4>Temp. : entre {plant.minTemperature} et {plant.maxTemperature}°C <FontAwesomeIcon icon={faTemperatureHigh}/></h4>
             </li>
 
           </ul>

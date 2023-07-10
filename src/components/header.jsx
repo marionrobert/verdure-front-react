@@ -1,13 +1,24 @@
 import {useState, useEffect} from 'react'
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import { faBagShopping, faUser, faUserGear, faXmark, faUserCheck} from "@fortawesome/free-solid-svg-icons"
 import { config } from "../config"
 import { selectUser } from '../slices/userSlice';
 import { useSelector } from 'react-redux';
+import { selectBasket } from '../slices/basketSlice';
 
 const Header = () => {
   const user = useSelector(selectUser)
+  const currentBasket = useSelector(selectBasket)
+  const [nbItems, setNbItems] = useState(0)
+
+  useEffect(()=>{
+    let number = 0
+    currentBasket.basket.forEach(item => {
+      number += item.quantityInCart
+    });
+    setNbItems(number)
+  }, [currentBasket.basket])
 
 
   const displayUserMenu = () => {
@@ -30,6 +41,8 @@ const Header = () => {
     connexionMenu.style.display = "none"
   }
 
+  // {console.log(nbItems)}
+
 
   return (
     <header>
@@ -42,7 +55,10 @@ const Header = () => {
         { user.isLogged === false ?
           <div className="nav-links-mobile">
             <Link className="nav-link" onClick={displayConnexionMenu}><FontAwesomeIcon icon={faUser}/></Link>
-            <Link to="/basket" className="nav-link"><FontAwesomeIcon icon={faBagShopping}/></Link>
+            <Link to="/basket" className="nav-link" className="link-to-basket">
+              <FontAwesomeIcon icon={faBagShopping}/>
+              { nbItems > 0 && <span className='nbItems'>{nbItems}</span> }
+            </Link>
           </div> :
           <div className="nav-links-mobile">
             {user.infos.role === "user" ?
@@ -50,7 +66,7 @@ const Header = () => {
               :
               <Link className="nav-link" to="/admin"><FontAwesomeIcon icon={faUserGear}/></Link>
             }
-            <Link to="/basket" className="nav-link"><FontAwesomeIcon icon={faBagShopping}/></Link>
+            <Link to="/basket" className="nav-link" className="link-to-basket"><FontAwesomeIcon icon={faBagShopping}/>{ nbItems > 0 && <span className='nbItems'>{nbItems}</span>}</Link>
           </div>
         }
 
@@ -59,7 +75,7 @@ const Header = () => {
         <div className="nav-links-tablet">
           <Link to="/plants" className="nav-link">Nos plantes</Link>
           <Link className="nav-link" onClick={displayConnexionMenu}><FontAwesomeIcon icon={faUser}/></Link>
-          <Link to="/basket" className="nav-link"><FontAwesomeIcon icon={faBagShopping}/></Link>
+          <Link to="/basket" className="nav-link" className="link-to-basket"><FontAwesomeIcon icon={faBagShopping}/>{ nbItems > 0 && <span className='nbItems'>{nbItems}</span>}</Link>
         </div>
         :
         <div className="nav-links-tablet">
@@ -69,7 +85,7 @@ const Header = () => {
             :
             <Link to="/admin"  className="nav-link"><FontAwesomeIcon icon={faUserGear}/></Link>
           }
-          <Link to="/basket" className="nav-link"><FontAwesomeIcon icon={faBagShopping}/></Link>
+          <Link to="/basket" className="nav-link" className="link-to-basket"><FontAwesomeIcon icon={faBagShopping}/>{ nbItems > 0 && <span className='nbItems'>{nbItems}</span>}</Link>
         </div> }
 
         { user.isLogged === false ?
@@ -77,7 +93,7 @@ const Header = () => {
         <div className="nav-links-desktop">
           <Link to="/plants" className="nav-link">Nos plantes</Link>
           <Link className="nav-link" onMouseEnter={displayConnexionMenu}><FontAwesomeIcon icon={faUser}/></Link>
-          <Link to="/basket" className="nav-link"><FontAwesomeIcon icon={faBagShopping}/></Link>
+          <Link to="/basket" className="nav-link" className="link-to-basket"><FontAwesomeIcon icon={faBagShopping}/>{ nbItems > 0 && <span className='nbItems'>{nbItems}</span>}</Link>
         </div>
         :
         <div className="nav-links-desktop">
@@ -87,7 +103,7 @@ const Header = () => {
             :
             <Link to="/admin"  className="nav-link" onMouseEnter={displayUserMenu}><FontAwesomeIcon icon={faUserGear}/></Link>
           }
-          <Link to="/basket" className="nav-link"><FontAwesomeIcon icon={faBagShopping}/></Link>
+          <Link to="/basket" className="nav-link" className="link-to-basket"><FontAwesomeIcon icon={faBagShopping}/>{ nbItems > 0 && <span className='nbItems'>{nbItems}</span>}</Link>
         </div> }
 
       </nav>

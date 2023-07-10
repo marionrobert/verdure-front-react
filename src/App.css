@@ -124,6 +124,23 @@ header {
   height: 25px;
 }
 
+.link-to-basket {
+  position: relative;
+}
+
+.nbItems {
+  background-color: white;
+  /* padding: 1px; */
+  color: rgba(2, 46, 35, 0.6);
+  font-weight: bold;
+  position: absolute;
+  right: 38%;
+  top: 35%;
+  width:45%;
+  text-align: right;
+  text-shadow: 0.5px black;
+}
+
 .connexion-menu {
   display: none;
   flex-direction: column;
@@ -396,6 +413,108 @@ input#quantity {
   border-radius: 2px;
 }
 
+
+/* BASKET */
+.details-basket {
+  margin: 2rem 1rem;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.details-basket h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.details-basket button {
+  background-color: rgba(27, 75, 59, 0.8);
+  padding: 0.5rem;
+  border: none;
+  border-radius: 2px;
+  box-shadow: none;
+  margin-top: 1rem;
+  width: 100%;
+  font-size: 1rem;
+  color:white;
+}
+
+.details-basket button a {
+  color: white;
+}
+
+.basket-item {
+  background-color: rgba(180, 179, 179, 0.1);
+  display: flex;
+  margin: 0.7rem 0 ;
+  position: relative;
+}
+
+.basket-item img {
+  width: 30%;
+  height: auto;
+}
+
+.basket-item-infos {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1.5rem;
+  text-align: start;
+  width: 70%;
+}
+
+.basket-item-infos h3 {
+  font-size: 1rem;
+  width: 100%;
+  font-weight: bolder;
+}
+
+.basket-item-infos .fa-xmark {
+  position: absolute;
+  font-size: 20px;
+  top: 10px;
+  right: 10px;
+}
+
+.basket-item-infos .fa-square-plus, .basket-item-infos .fa-square-minus {
+  font-size: 25px;
+  border: none;
+}
+
+.change-quantity-zone {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 1rem;
+  width: 70%;
+}
+
+.change-quantity-zone p {
+  width: 100%;
+  padding-bottom: 0.3rem;
+}
+
+.change-quantity-zone input {
+  width: 25px;
+  text-align: center;
+  border: none;
+  height: 21px;
+}
+
+.basket-item-infos p#price {
+  width: 30%;
+  padding-top: 1.5rem;
+  text-align: right ;
+  font-weight: bold;
+}
+
+.summary p {
+  font-weight: bold;;
+}
+
 /* ADMIN */
 .admin-dashboard h1 {
   margin-top: 2rem;
@@ -445,6 +564,8 @@ footer a svg:hover {
 /*  CHANGEMENT POUR TABLETTES */
 @media screen and (min-width: 721px) {
 
+  /* NAVBAR - HEADER */
+
   .nav-links-mobile, .nav-links-desktop, .menu-user {
     display: none;
   }
@@ -489,6 +610,9 @@ footer a svg:hover {
     padding-left: 1.3rem;
   }
 
+
+  /* DETAILS PLANT */
+
   .details-plant {
     align-items: center;
     justify-content: space-evenly;
@@ -517,11 +641,23 @@ footer a svg:hover {
   .fa-droplet, .fa-sun, .fa-temperature-low, .fa-temperature-high {
     padding: 0 0.2rem;
   }
+
+  /* BASKET */
+  .basket-item {
+    height: 150px;
+    width: 90vw;
+  }
+
+  .basket-item img {
+    width: 20%;
+  }
 }
 
 
 
 @media screen and (min-width: 1024px){
+
+  /* NAV HEADER */
   .nav-links-mobile {
     display: none;
   }
@@ -563,9 +699,12 @@ footer a svg:hover {
     padding: 0 1rem;
   }
 
+  /* PLANT-CARD */
   .plant-card{
     margin: 1rem 0.8rem ;
   }
+
+  /* DETAILS PLANT */
 
   section.details-plant {
     padding: 0 4rem;
@@ -578,7 +717,24 @@ footer a svg:hover {
   }
 
   .advices {
-    width: 50%;
+    width: 70%;
+  }
+
+  /* BASKET */
+
+  .details-basket {
+    width: 100vw;
+  }
+
+  .first-validation{
+    display: none;
+  }
+  ul.basket-all-items {
+    width: 80%;
+  }
+
+  li.basket-item {
+    width: 100%;
   }
 
 }

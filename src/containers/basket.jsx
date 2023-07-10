@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { saveOneOrder } from "../api/order";
 import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //on importe la state de basket de redux + son/ses actions
 import { selectBasket, updateBasket, cleanBasket } from "../slices/basketSlice"
@@ -8,7 +9,10 @@ import { useSelector, useDispatch } from "react-redux"
 import { selectUser } from "../slices/userSlice";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashCan, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
+import { faTrashCan, faPlus, faMinus, faXmark, faSquarePlus, faSquareMinus} from '@fortawesome/free-solid-svg-icons'
+
+import { config } from "../config";
+import { current } from "@reduxjs/toolkit";
 
 const Basket = () => {
   //on récup la state basket
@@ -17,9 +21,18 @@ const Basket = () => {
   const [error, setError] = useState(null)
   const [redirect, setRedirect] = useState(null)
   const [orderId, setOrderId] = useState(null)
+  const [nbItems, setNbItems] = useState(0)
 
   //on récup la fonction useDispatch
   const dispatch = useDispatch()
+
+  useEffect(()=>{
+    let number = 0
+    currentBasket.basket.forEach(item => {
+      number += item.quantityInCart
+    });
+    setNbItems(number)
+  }, [currentBasket.basket])
 
   const removeProductFromBasket = (oldBasket, product) => {
     //la state lorsqu'on la récup de redux est en mode read only (lecture seule)
@@ -90,29 +103,40 @@ const Basket = () => {
       <h1>Panier</h1>
     { currentBasket.basket.length === 0 ?
       <div>
-        <p>Vous n'avez pas encore ajouté d'articles à votre panier</p>
+        <p>Vous n'avez pas encore ajouté d'articles à votre panier ... n'attendez plus!</p>
+        <button><Link to="/plants">Découvrez les plantes</Link></button>
       </div> :
       <div>
         { error !== null && <p style={{color:"red"}}>{error}</p>}
-        {currentBasket.basket.map((item=>{
-          return (
-            <li  key={item.id} className='basket-item' >
-              {/* <img src={item.photo} /> */}
-              <div className='info'>
-                <h3>{item.name}</h3>
-                <FontAwesomeIcon icon={faPlus} onClick={ ()=>{addOneQuantity(currentBasket.basket, item)}}/>
-                <span>Quantité: {item.quantityInCart}</span>
-                <FontAwesomeIcon icon={faMinus} onClick={ () => { removeOneQuantity(currentBasket.basket, item)}} />
-                <p><FontAwesomeIcon icon={faTrashCan} className='deletItem' onClick={()=>{removeProductFromBasket(currentBasket.basket, item)}}/></p>
-              </div>
-            </li>
+        <button className="first-validation" onClick={()=>{handleValidation()}}>Valider ma commande</button>
+        <ul className="basket-all-items">
+          {currentBasket.basket.map((item=>{
+            return (
+              <li  key={item.id} className='basket-item' >
+                <img src={`${config.pict_url}/${item.photo}`}/>
+                <div className="basket-item-infos">
+                  <h3>{item.name}</h3>
+                  <div className="change-quantity-zone">
+                    <p>Quantité :</p>
+                    <FontAwesomeIcon icon={faSquareMinus} onClick={ () => { removeOneQuantity(currentBasket.basket, item)}} />
+                    <input placeholder={item.quantityInCart} />
+                    <FontAwesomeIcon icon={faSquarePlus} onClick={ ()=>{addOneQuantity(currentBasket.basket, item)}}/>
+                  </div>
+                  <p><FontAwesomeIcon icon={ faXmark} className='deletItem' onClick={()=>{removeProductFromBasket(currentBasket.basket, item)}}/></p>
+                  <p id="price">{item.quantityInCart * item.price} €</p>
+                </div>
+              </li>
 
-          )
-        }))
-        }
-        <p>Montant total du panier: {currentBasket.totalAmount} €</p>
+            )
+          }))
+          }
+        </ul>
+        <div className="summary">
+          <p>Montant total du panier: {currentBasket.totalAmount} €</p>
+          <p>Nombre d'articles dans le panier: {nbItems}</p>
+        </div>
         <button onClick={deleteBasket}>Supprimer mon panier</button>
-        <button onClick={()=>{handleValidation()}}>Passer la commande</button>
+        <button onClick={()=>{handleValidation()}}>Valider ma commande</button>
       </div>
       }
     </section>
