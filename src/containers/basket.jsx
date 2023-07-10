@@ -108,8 +108,8 @@ const Basket = () => {
       </div> :
       <div>
         { error !== null && <p style={{color:"red"}}>{error}</p>}
-        <button onClick={()=>{handleValidation()}}>Valider ma commande</button>
-        <ul>
+        <button className="first-validation" onClick={()=>{handleValidation()}}>Valider ma commande</button>
+        <ul className="basket-all-items">
           {currentBasket.basket.map((item=>{
             return (
               <li  key={item.id} className='basket-item' >

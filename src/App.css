@@ -656,6 +656,8 @@ footer a svg:hover {
 
 
 @media screen and (min-width: 1024px){
+
+  /* NAV HEADER */
   .nav-links-mobile {
     display: none;
   }
@@ -697,9 +699,12 @@ footer a svg:hover {
     padding: 0 1rem;
   }
 
+  /* PLANT-CARD */
   .plant-card{
     margin: 1rem 0.8rem ;
   }
+
+  /* DETAILS PLANT */
 
   section.details-plant {
     padding: 0 4rem;
@@ -712,7 +717,24 @@ footer a svg:hover {
   }
 
   .advices {
-    width: 50%;
+    width: 70%;
+  }
+
+  /* BASKET */
+
+  .details-basket {
+    width: 100vw;
+  }
+
+  .first-validation{
+    display: none;
+  }
+  ul.basket-all-items {
+    width: 80%;
+  }
+
+  li.basket-item {
+    width: 100%;
   }
 
 }
