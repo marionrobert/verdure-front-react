@@ -516,37 +516,84 @@ input#quantity {
 }
 
 /* ADMIN */
+.admin-dashboard {
+  text-align: right;
+}
+
 .admin-dashboard h1 {
   margin-top: 2rem;
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 3rem;
+  font-family: 'Dancing Script', cursive;
+  text-align: center;
+}
+
+section.manage-all-plants{
+  text-align: left;
 }
 
 .admin-dashboard h2 {
-  margin: 1rem 0;
+  margin: 2.5rem 0.5rem 1.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.admin-dashboard button {
+  border-radius: 2px;
+  margin: 1rem 0 0;
+  width: 160px;
+  padding: 0.6rem 0.3rem;
+  background-color: rgba(27, 75, 59, 0.8);
+  border: none;
   font-size: 1rem;
+}
+
+.admin-dashboard button a {
+  color: white;
+}
+
+.admin-dashboard button.logout {
+  margin-right: 10px;
+}
+
+.admin-dashboard button.create-product {
+  width: 100%;
+}
+
+.admin-dashboard table {
+  width: 100%;
+  margin: 1rem 0.5rem;
+}
+
+.admin-dashboard table thead {
   font-weight: bold;
 }
 
 .admin-dashboard table, tr, td {
   border: 1px solid black;
   padding: 0.5rem;
+  text-align: center;
 }
 
-section.manage-all-plants{
-  text-align: left;
-  margin: 2rem;
+.admin-dashboard table .svg-inline--fa {
+  padding: 0 0.2rem;
 }
+
+
 
 /* FOOTER */
 footer {
   /* background-color: rgba(27, 75, 59, 0.897); */
   background-color: rgba(2, 46, 35, 0.975);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
   color: white;
-  height: 100px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .fa-github, .fa-linkedin{
@@ -651,6 +698,25 @@ footer a svg:hover {
   .basket-item img {
     width: 20%;
   }
+
+  /* ADMIN */
+  section.manage-all-plants{
+    margin: 1rem;
+    text-align: center;
+  }
+
+  section.manage-all-plants h2 {
+    text-align: left;
+  }
+
+  .admin-dashboard button.create-product {
+    width: 200px;
+  }
+
+  .admin-dashboard table .svg-inline--fa {
+    padding: 0 1rem;
+  }
+
 }
 
 

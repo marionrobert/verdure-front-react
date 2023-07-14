@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux"
 import { getAllPlants, selectPlants } from "../../slices/plantSlice"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTrashCan, faSquarePen, faEye } from "@fortawesome/free-solid-svg-icons"
+import { faTrashCan, faSquarePen, faEye, faRightFromBracket } from "@fortawesome/free-solid-svg-icons"
 import { useState, useEffect } from "react"
 import { getAllOrders, updateOrderStatusByAdmin } from "../../api/order"
 import moment from "moment"
@@ -68,61 +68,58 @@ const Admin = () => {
 
   return (
     <div className="admin-dashboard">
-      <h1>Bienvenue dans le dashboard de Verdure</h1>
-      <button><Link to="/logout">Me déconnecter</Link></button>
-      <Link to="/plant/add">Ajouter une nouvelle plante à votre magasin</Link>
-        {plants.plants && plants.plants.length > 0 && <section className="manage-all-plants">
-          <h2>Gérer toutes vos plantes</h2>
+      <button className="logout"><Link to="/logout"><FontAwesomeIcon icon={faRightFromBracket}/> Déconnexion</Link></button>
+      <h1>Administration</h1>
+        <section className="manage-all-plants">
+          <h2>Gérer les produits</h2>
           {successPlant !== null && <p style={{color: "green"}}>{successPlant}</p>}
-          <table>
-            <thead>
-              <tr>
-                <td>Nom</td>
-                <td>Quantité</td>
-                <td>Prix</td>
-                <td>Gérer</td>
-              </tr>
-            </thead>
-            <tbody>
-              {plants.plants.map((plant) => {
-                return (
-                  <tr key={plant.id}>
-                    <td>{plant.name}</td>
-                    <td>{plant.quantity}</td>
-                    <td>{parseFloat(plant.price)} €</td>
-                    <td><FontAwesomeIcon icon={faTrashCan} onClick={()=>{deletePlant(plant.id)}}/><Link to={`/plant/update/${plant.id}`}><FontAwesomeIcon icon={faSquarePen}/></Link></td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
+          {plants.plants && plants.plants.length > 0 &&
+            <table>
+              <thead>
+                <tr>
+                  <td>Nom</td>
+                  <td>Quantité</td>
+                  <td>Prix</td>
+                  <td>Gérer</td>
+                </tr>
+              </thead>
+              <tbody>
+                {plants.plants.map((plant) => {
+                  return (
+                    <tr key={plant.id}>
+                      <td>{plant.name}</td>
+                      <td>{plant.quantity}</td>
+                      <td>{parseFloat(plant.price)} €</td>
+                      <td><FontAwesomeIcon icon={faTrashCan} onClick={()=>{deletePlant(plant.id)}}/><Link to={`/plant/update/${plant.id}`}><FontAwesomeIcon icon={faSquarePen}/></Link></td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          }
+          <button className="create-product"><Link to="/plant/add">Créer un nouveau produit</Link></button>
         </section>
-        }
 
         {orders && orders.length > 0 && <section className="manage-all-plants">
-          <h2>Gérer toutes les commandes</h2>
+          <h2>Gérer les commandes</h2>
           <table>
             <thead>
               <tr>
-                <td>Id du client</td>
-                <td>Montant total</td>
+                <td>Montant</td>
                 <td>Date</td>
-                <td>Statut</td>
-                <td>Modifier le statut</td>
-                <td>Consulter</td>
+                <td>Mette à jour le statut</td>
+                <td>Voir</td>
               </tr>
             </thead>
             <tbody>
               {orders.map((order) => {
                 return (
                   <tr key={order.id}>
-                    <td>{order.user_id}</td>
                     <td>{order.totalAmount} €</td>
                     <td>{moment(order.creationTimestamp).locale("fr").format("DD/MM/YYYY")}</td>
-                    <td>{order.status}</td>
                     <td>
                       <select name="status" onChange={(e)=>{handleChange(e, order.id)}}>
-                          <option>Choisir un statut</option>
+                          <option>{order.status}</option>
                           <option value="expédiée" >Expédiée</option>
                           <option value="en livraison">En livraison</option>
                           <option value="livrée">Livrée</option>
