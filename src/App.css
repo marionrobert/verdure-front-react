@@ -28,7 +28,6 @@ html, body {
   height: 100%;
   margin: 0;
   background-color: whitesmoke;
-  width: 100vw;
 }
 
 body {
@@ -63,13 +62,14 @@ a {
 }
 
 main {
-  padding: 60px 0 0 0;
+  margin: 60px 0 0 0;
+  height: 100vh;
 }
 
 /* HEADER */
 header {
   background-color: rgba(2, 46, 35, 0.975);
-  width: 100vw;
+  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -94,7 +94,6 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
-  max-width: 100%;
 }
 
 #nav-menu .icon {
@@ -272,7 +271,6 @@ button.btn-discover-all-plants:hover{
 
 .all-plants h2, .all-plants h1 {
   width: 100%;
-  /* text-decoration: underline; */
   margin-bottom: 1rem;
   font-size: 3em;
   line-height: 1.1;
@@ -578,22 +576,92 @@ section.manage-all-plants{
   padding: 0 0.2rem;
 }
 
+/* PROFILE */
+section.profile {
+  text-align: right;
+}
+
+section.profile h1 {
+  width: 100%;
+  margin: 1.5rem 0;
+  font-size: 3em;
+  font-family: 'Dancing Script', cursive;
+  text-align: center;
+}
+
+section.profile .user-data {
+  margin: 1.5rem;
+  text-align: center;
+}
+
+section.profile .user-data h2 {
+  text-align: left;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 2rem 0 1rem;
+}
+
+section.profile .user-data form {
+  border: 1px solid rgba(27, 75, 59, 0.8);
+  padding: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+section.profile .user-data form > label {
+  margin: 0.3rem 0;
+  text-align: left;
+  font-weight: bold;
+}
+
+section.profile .user-data form > input {
+  margin: 0.3rem auto;
+  width: 100%;
+}
+
+
+.profile button {
+  border-radius: 2px;
+  margin: 1rem 0 0;
+  width: 160px;
+  padding: 0.6rem 0.3rem;
+  background-color: rgba(27, 75, 59, 0.8);
+  border: none;
+  font-size: 1rem;
+  color: white;
+}
+
+.profile button a {
+  color: white;
+}
+
+.profile button.logout {
+  margin-right: 10px;
+}
+
+.profile button.update-data {
+  width: 100%;
+}
+
+
 
 
 /* FOOTER */
 footer {
   /* background-color: rgba(27, 75, 59, 0.897); */
   background-color: rgba(2, 46, 35, 0.975);
-  position: fixed;
+  /* position: fixed;
   bottom: 0;
-  left: 0;
+  left: 0; */
   z-index: 3;
   color: white;
   height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
 }
 
 .fa-github, .fa-linkedin{
