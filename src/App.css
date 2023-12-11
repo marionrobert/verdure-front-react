@@ -785,6 +785,13 @@ footer a svg:hover {
     padding: 0 1rem;
   }
 
+  /* PROFILE */
+  .profile button.update-data {
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
 }
 
 
@@ -871,4 +878,8 @@ footer a svg:hover {
     width: 100%;
   }
 
+  /* PROFILE */
+  .profile button.update-data {
+    width: 30%;
+  }
 }

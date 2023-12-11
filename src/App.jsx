@@ -36,10 +36,10 @@ function App() {
         {/* HOME, ALL PLANTS, DETAILS PLANT */}
           <Route exact path="/" element={<RequireDataAuth child={Home} auth={false} admin={false} />} />
           <Route exact path="/plants" element={<RequireDataAuth child={Products} auth={false} admin={false}/>}/>
-          <Route exact path="/plant/details/:id" element={<RequireDataAuth child={Details} auth={false} admin={false} />} />
+          <Route exact path="/plant/details/:id" element={<RequireDataAuth child={Details} auth={true} admin={false} />} />
 
         {/* DETAILS BASKET, PAYEMENT */}
-          <Route exact path="/basket" element={<RequireDataAuth child={Basket} auth={false} admin={false}/>}/>
+          <Route path="/basket" element={<RequireDataAuth child={Basket} auth={true} admin={false}/>}/>
           <Route exact path="/payement/:id" element={<RequireDataAuth child={Payment} auth={true} admin={false} />}/>
 
         {/* LOGIN, LOGOUT, REGISTER, PROFILE */}
@@ -54,7 +54,8 @@ function App() {
           <Route exact path="/plant/update/:id" element={<RequireDataAuth child={EditPlant} auth={true} admin={true} />}/>
           <Route exact path="/order/details/:id" element={<RequireDataAuth child={OrderDetails} auth={true} admin={true}/>}/>
 
-          <Route exact path="*" element={<Navigate to="/"/>} />
+          <Route exact path="/home" element={<Navigate to="/"/>} />
+          <Route exact path="*" element={<Navigate to="/home"/>} />
         </Routes>
       </main>
       <Footer />

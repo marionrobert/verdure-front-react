@@ -96,9 +96,10 @@ const Profil = () => {
           <button className='update-data' type="submit">Modifier mes informations</button>
         </form>
       </article>
-      {/* <article className='user-orders'>
+      <article className='user-orders'>
+        <h2>Mes commandes</h2>
 
-      </article> */}
+      </article>
 
     </section>
   )

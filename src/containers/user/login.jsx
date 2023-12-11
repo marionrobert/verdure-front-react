@@ -7,6 +7,7 @@ import { connectUser } from "../../slices/userSlice"
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState(null);
   const [redirect, setRedirect] = useState(false)
   const dispatch = useDispatch()
 
@@ -24,16 +25,25 @@ const Login = () => {
       "email": email,
       "password": password
     }
+    console.log("data for login -->", data)
     loginUser(data)
     .then((res)=>{
-      window.localStorage.setItem("verdure-token", res.token)
-      let myUser = res.user
-      myUser.token = res.token
-      dispatch(connectUser(myUser))
-      setRedirect(true)
+      console.log("res de loginUser -->", res)
+      if (res.status === 200) {
+        console.log("connexion réussie")
+        window.localStorage.setItem("verdure-token", res.token)
+        let myUser = res.user
+        myUser.token = res.token
+        dispatch(connectUser(myUser))
+        setRedirect(true)
+      } else {
+        setError(`${res.msg}`)
+      }
+
     })
     .catch((err)=>{
       console.log(err)
+      setError("Une erreur est survenue")
     })
   }
 
@@ -55,6 +65,7 @@ const Login = () => {
   return (
     <>
     <h1>Se connecter</h1>
+    {error !== null && <p className="error">{error}</p>}
     <form onSubmit={(e)=>{
         handleSubmit(e)
         }}>

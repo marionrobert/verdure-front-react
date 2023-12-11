@@ -39,17 +39,21 @@ const RequireDataAuth = (props) =>{
       }
 
       //on va tester si on est connecté via les infos de redux
-      // console.log("user", user.isLogged)
+      console.log("hello from require-data-auth")
+      console.log("user", user.isLogged)
+      console.log(typeof user.isLogged)
 
       //si l'utilisateur n'est pas logged (store)
       if (user.isLogged === false){
         // console.log("aucun user n'est connecté")
         //on récup le token dans le localStore
         let token = window.localStorage.getItem('verdure-token')
+        console.log("token -->", token)
+        console.log("props.auth -->", props.auth)
 
         //si le storagee répond null (pas trouvé) et que la props auth est true (route protégée)
         if (token === null && props.auth) {
-          // console.log("le token est null et la route a besoin d'une connexion user")
+          console.log("le token est null et la route a besoin d'une connexion user")
           //on demande une redirection
           setRedirect(true)
         } else { //sinon
@@ -92,7 +96,7 @@ const RequireDataAuth = (props) =>{
         }
       }
 
-    }, [user])
+    }, [user, props, dispatch, plants])
 
     if(redirect){
       return <Navigate to="http://localhost:5173/login"/>

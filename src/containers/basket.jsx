@@ -75,23 +75,24 @@ const Basket = () => {
       user_id: user.infos.id,
       basket: currentBasket.basket
     }
+    console.log(data)
 
-    saveOneOrder(data)
-    .then((res)=>{
-      console.log(res)
-      if (res.status === 200 ){
-        // je redirige vers une page de payement/:order_id
-        console.log("je vais rediriger vers page de payement")
-        setOrderId(res.order_id)
-        setRedirect(true)
-      } else {
-        //problème dans la création de commande
-        setError(res.msg)
-      }
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
+    // saveOneOrder(data)
+    // .then((res)=>{
+    //   console.log(res)
+    //   if (res.status === 200 ){
+    //     // je redirige vers une page de payement/:order_id
+    //     console.log("je vais rediriger vers page de payement")
+    //     setOrderId(res.order_id)
+    //     setRedirect(true)
+    //   } else {
+    //     //problème dans la création de commande
+    //     setError(res.msg)
+    //   }
+    // })
+    // .catch((err)=>{
+    //   console.log(err)
+    // })
   }
 
   if (redirect && orderId !== null) {
