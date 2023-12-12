@@ -4,7 +4,8 @@ const token = window.localStorage.getItem('verdure-token')
 
 //création d'une nouvelle commande??????
 export function saveOneOrder(data){
-  console.log("data",data, token)
+  const token = window.localStorage.getItem('verdure-token')
+  console.log("data & token", data, token)
   return axios.post(`${config.api_url}/api/v1/order/save`, data, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data

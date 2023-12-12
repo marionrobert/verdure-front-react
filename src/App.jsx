@@ -28,7 +28,7 @@ import RequireDataAuth from "./helpers/require-data-auth"
 function App() {
 
   return (
-    <div>
+    <>
       <Header />
       <main>
         <Routes>
@@ -59,7 +59,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
-    </div>
+    </>
   )
 }
 

@@ -24,16 +24,17 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
-html, body {
+/* html, body {
   height: 100%;
   margin: 0;
   background-color: whitesmoke;
-}
+} */
 
 body {
 	line-height: 1;
   text-align: center;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: whitesmoke;
 }
 
 ol, ul {
@@ -62,8 +63,8 @@ a {
 }
 
 main {
-  margin: 60px 0 0 0;
-  height: 100vh;
+  margin-top: 60px;
+  min-height: calc(100vh - 120px);
 }
 
 /* HEADER */
@@ -177,6 +178,9 @@ header {
 }
 
 /* ALL FORMS */
+section.forms {
+  padding-top: 2rem;
+}
 form {
   margin: 0;
   padding: 0;
@@ -651,14 +655,11 @@ section.profile .user-data form > input {
 
 /* FOOTER */
 footer {
-  /* background-color: rgba(27, 75, 59, 0.897); */
   background-color: rgba(2, 46, 35, 0.975);
-  /* position: fixed;
-  bottom: 0;
-  left: 0; */
   z-index: 3;
   color: white;
   height: 60px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

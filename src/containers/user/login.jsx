@@ -63,9 +63,9 @@ const Login = () => {
   }
 
   return (
-    <>
+    <section className="forms">
     <h1>Se connecter</h1>
-    {error !== null && <p className="error">{error}</p>}
+    { error !== null && <p style={{color:"red"}}>{error}</p>}
     <form onSubmit={(e)=>{
         handleSubmit(e)
         }}>
@@ -75,7 +75,7 @@ const Login = () => {
       <input type="password" name="password" onChange={handleChange} required/>
       <button type="submit">Se connecter</button>
     </form>
-    </>
+    </section>
   )
 }
 

@@ -19,7 +19,8 @@ const Basket = () => {
   const currentBasket = useSelector(selectBasket)
   const user = useSelector(selectUser)
   const [error, setError] = useState(null)
-  const [redirect, setRedirect] = useState(null)
+  const [redirectToPayment, setRedirectToPayment] = useState(null)
+  const [redirectToLogin, setRedirectToLogin] = useState(null)
   const [orderId, setOrderId] = useState(null)
   const [nbItems, setNbItems] = useState(0)
 
@@ -70,34 +71,44 @@ const Basket = () => {
 
   const handleValidation = () => {
     console.log("in handle validation")
-    // je crée l'objet data à envoyer à saveOneOrder
-    let data = {
-      user_id: user.infos.id,
-      basket: currentBasket.basket
-    }
-    console.log(data)
 
-    // saveOneOrder(data)
-    // .then((res)=>{
-    //   console.log(res)
-    //   if (res.status === 200 ){
-    //     // je redirige vers une page de payement/:order_id
-    //     console.log("je vais rediriger vers page de payement")
-    //     setOrderId(res.order_id)
-    //     setRedirect(true)
-    //   } else {
-    //     //problème dans la création de commande
-    //     setError(res.msg)
-    //   }
-    // })
-    // .catch((err)=>{
-    //   console.log(err)
-    // })
+    if (user.isLogged) {
+      // je crée l'objet data à envoyer à saveOneOrder
+      let data = {
+        user_id: user.infos.id,
+        basket: currentBasket.basket
+      }
+      console.log("data to send to saveOneOrder", data)
+
+      saveOneOrder(data)
+      .then((res)=>{
+        console.log("res de saveOneOrder", res)
+        if (res.status === 200 ){
+          // je redirige vers une page de payement/:order_id
+          console.log("je vais rediriger vers page de payement")
+          setOrderId(res.order_id)
+          setRedirectToPayment(true)
+        } else {
+          //problème dans la création de commande
+          setError(res.msg)
+        }
+      })
+      .catch((err)=>{
+        console.log(err)
+        setError("Une erreur est survenue.")
+      })
+    } else {
+      setRedirectToLogin(true)
+    }
   }
 
-  if (redirect && orderId !== null) {
+  if (redirectToPayment && orderId !== null) {
     return <Navigate to={`/payement/${orderId}`}/>
   }
+
+  if(redirectToLogin){
+    return <Navigate to={`/login`} />
+}
 
   return (
     <section className="details-basket">
