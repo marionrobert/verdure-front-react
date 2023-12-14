@@ -58,11 +58,12 @@ export function getOneOrder(id){
 
 //changement du statut de la commande not payed --> payed
 export function updatePayedStatusOrder(id, data){
-  console.log("id, data -->", id, data)
+  // console.log("in updatePayedStatusOrder --> id, data -->", id, data)
   const token = window.localStorage.getItem('verdure-token')
   return axios.put(`${config.api_url}/api/v1/order/validate/${id}`, data, {headers: {"x-access-token": token}})
   .then((res)=>{
-    res.data
+    // console.log("res dans updatePayedStatusOrder -->", res)
+    return res.data
   })
   .catch((err)=>{
     console.log(err)

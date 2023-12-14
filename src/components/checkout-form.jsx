@@ -21,7 +21,7 @@ const CheckoutForm = (props) => {
     //fonction de paiement lors de la validation de la CB
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("coucou CB")
+
         //si les fonctionnalitées de paiement de stripe ou du terminal de paiement ne sont pas bien connectés
         if(!stripe || !elements){
             setError("Oups un problème est survenue avec le terminal de paiement!")
@@ -33,7 +33,7 @@ const CheckoutForm = (props) => {
             email: user.infos.email,
             orderId: props.orderId
         }
-        console.log("ESSAI")
+
         //gestion de paiement via stripe
         //on va checker via stripe dans le back-end si le paiement est réalisable
         const paymentAuth = await checkPayment(data)
@@ -42,10 +42,7 @@ const CheckoutForm = (props) => {
             setError("Echec du paiement")
         } else { //on stock la réponse de la tentative de paiement vers stripe dans une variable qui va retourner une clé sécurisée
           const secret = paymentAuth.client_secret
-          console.log("client secret", secret)
-
           const cardElement = elements.getElement(CardElement)
-          console.log("cardElement -->", cardElement)
 
           //on envoi la demande de paiement
           const payment = await stripe.confirmCardPayment(secret, {
@@ -58,15 +55,14 @@ const CheckoutForm = (props) => {
           })
 
           //payment va renvoyer une réponse (succés ou echec de paiement)
-          console.log("payment", payment)
+          // console.log("payment", payment)
           //gestion des erreurs
           if(payment.error){
               setError(payment.error.message)
           }else{
               //si le paiement est réussi
               if(payment.paymentIntent.status === "succeeded"){
-                  console.log("Money is in the bank bro!")
-
+                  console.log("paiement effectué avec stripe")
                   let data = {
                       status: "payed"
                   }
@@ -74,10 +70,16 @@ const CheckoutForm = (props) => {
                   updatePayedStatusOrder(props.orderId, data)
                   .then((res)=>{
                       if(res.status === 200){
-                          setRedirectSuccess(true)
+                        dispatch(cleanBasket())
+                        setRedirectSuccess(true)
                       }
                   })
-                  .catch(err=>console.log(err))
+                  .catch((err)=>{
+                    console.log(err)
+                    setError("Une erreur est survenue.")
+                  })
+              } else {
+                setError("Une erreur est survenue. Le paiement n'a pas pu aboutir.")
               }
           }
 
@@ -86,7 +88,7 @@ const CheckoutForm = (props) => {
     }
 
     if(redirectSuccess){
-        return <Navigate to="/success" />
+        return <Navigate to={`/success/${props.orderId}`} />
     }
     return (
         <article className="checkoutForm">

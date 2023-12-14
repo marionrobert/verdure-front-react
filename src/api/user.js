@@ -23,6 +23,7 @@ export function loginUser(data){
 }
 
 export function updateOneUser(data, id){
+  const token = window.localStorage.getItem('verdure-token')
   return axios.put(`${config.api_url}/api/v1/user/update/${id}`, data, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data
@@ -33,6 +34,7 @@ export function updateOneUser(data, id){
 }
 
 export function checkMyToken(){
+  const token = window.localStorage.getItem('verdure-token')
   return axios.get(`${config.api_url}/api/v1/user/checkToken`, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data
