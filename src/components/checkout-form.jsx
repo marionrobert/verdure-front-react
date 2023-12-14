@@ -40,59 +40,65 @@ const CheckoutForm = (props) => {
 
         if(paymentAuth.status === 500){
             setError("Echec du paiement")
+        } else { //on stock la réponse de la tentative de paiement vers stripe dans une variable qui va retourner une clé sécurisée
+          const secret = paymentAuth.client_secret
+          console.log("client secret", secret)
+
+          const cardElement = elements.getElement(CardElement)
+          console.log("cardElement -->", cardElement)
+
+          //on envoi la demande de paiement
+          const payment = await stripe.confirmCardPayment(secret, {
+              payment_method: {
+                  card : cardElement,
+                  billing_details: {
+                      email: user.infos.email
+                  }
+              }
+          })
+
+          //payment va renvoyer une réponse (succés ou echec de paiement)
+          console.log("payment", payment)
+          //gestion des erreurs
+          if(payment.error){
+              setError(payment.error.message)
+          }else{
+              //si le paiement est réussi
+              if(payment.paymentIntent.status === "succeeded"){
+                  console.log("Money is in the bank bro!")
+
+                  let data = {
+                      status: "payed"
+                  }
+                  //on enregistre dans la bdd que la status de sa commande est payée
+                  updatePayedStatusOrder(props.orderId, data)
+                  .then((res)=>{
+                      if(res.status === 200){
+                          setRedirectSuccess(true)
+                      }
+                  })
+                  .catch(err=>console.log(err))
+              }
+          }
+
         }
-        //on stock la réponse de la tentative de paiement vers stripe dans une variable qui va retourner une clé sécurisée
-        const secret = paymentAuth.client_secret
-        console.log("client secret", secret)
 
-        //on envoi la demande de paiement
-        const payment = await stripe.confirmCardPayment(secret, {
-            payment_method: {
-                card: elements.getElement(CardElement),
-                billing_details: {
-                    email: user.infos.email
-                }
-            }
-        })
-
-        //payment va renvoyer une réponse (succés ou echec de paiement)
-        console.log(payment)
-        //gestion des erreurs
-        if(payment.error){
-            setError(payment.error.message)
-        }else{
-            //si le paiement est réussi
-            if(payment.paymentIntent.status === "succeeded"){
-                console.log("Money is in the bank bro!")
-
-                let data = {
-                    orderId: props.orderId,
-                    status: "payed"
-                }
-                //on enregistre dans la bdd que la status de sa commande est payée
-                updatePayedStatusOrder(data)
-                .then((res)=>{
-                    if(res.status === 200){
-                        setRedirectSuccess(true)
-                    }
-                })
-                .catch(err=>console.log(err))
-            }
-        }
     }
 
     if(redirectSuccess){
         return <Navigate to="/success" />
     }
     return (
-        <section>
-            {error !== null && <p>{error}</p>}
+        <article className="checkoutForm">
+            {error !== null && <p className="error">{error}</p>}
             <form onSubmit={handleSubmit}>
-                <CardElement
+                <CardElement id="cardElement"
                     option={{
                         style: {
                             base: {
                                 color: "#32325d",
+                                width: '100%',
+                                height: '40px',
                                 fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                                 fontSmoothing: "antialiased",
                                 fontSize: "16px",
@@ -109,7 +115,7 @@ const CheckoutForm = (props) => {
                 />
                 <button disabled={props.stripe}>Payer</button>
             </form>
-        </section>
+        </article>
     )
 }
 

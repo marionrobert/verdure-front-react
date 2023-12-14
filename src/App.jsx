@@ -40,7 +40,7 @@ function App() {
 
         {/* DETAILS BASKET, PAYEMENT */}
           <Route path="/basket" element={<RequireDataAuth child={Basket} auth={true} admin={false}/>}/>
-          <Route exact path="/payement/:id" element={<RequireDataAuth child={Payment} auth={true} admin={false} />}/>
+          <Route exact path="/payement/:orderId" element={<RequireDataAuth child={Payment} auth={true} admin={false} />}/>
 
         {/* LOGIN, LOGOUT, REGISTER, PROFILE */}
           <Route exact path="/login" element={<RequireDataAuth child={Login} auth={false} admin={false} />} />

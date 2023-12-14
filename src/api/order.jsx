@@ -17,7 +17,11 @@ export function saveOneOrder(data){
 
 // validation du paiement ?????
 export function checkPayment(data){
-  return axios.put(`${config.api_url}/api/v1/order/payment`, data, {headers: {"x-access-token": token}})
+  console.log("checkPayment has been triggered")
+  console.log("data received -->", data)
+  const token = window.localStorage.getItem('verdure-token')
+  console.log("token -->", token)
+  return axios.post(`${config.api_url}/api/v1/order/payment`, data, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data
   })
@@ -28,6 +32,7 @@ export function checkPayment(data){
 
 //chargement de toutes les commandes
 export function getAllOrders() {
+  const token = window.localStorage.getItem('verdure-token')
   return axios.get(`${config.api_url}/api/v1/orders`, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data
@@ -40,6 +45,7 @@ export function getAllOrders() {
 
 // chargement d'une commande avec détails du user et détails de la commande
 export function getOneOrder(id){
+  const token = window.localStorage.getItem('verdure-token')
   return axios.get(`${config.api_url}/api/v1/order/${id}`, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data
@@ -52,6 +58,8 @@ export function getOneOrder(id){
 
 //changement du statut de la commande not payed --> payed
 export function updatePayedStatusOrder(id, data){
+  console.log("id, data -->", id, data)
+  const token = window.localStorage.getItem('verdure-token')
   return axios.put(`${config.api_url}/api/v1/order/validate/${id}`, data, {headers: {"x-access-token": token}})
   .then((res)=>{
     res.data
@@ -63,6 +71,7 @@ export function updatePayedStatusOrder(id, data){
 
 // changement du statut de la commande par l'administrateur
 export function updateOrderStatusByAdmin(id, data){
+  const token = window.localStorage.getItem('verdure-token')
   console.log("in order.jsx", data, id)
   return axios.put(`${config.api_url}/api/v1/order/admin-update-status/${id}`, data, {headers: {"x-access-token": token}})
   .then((res)=>{

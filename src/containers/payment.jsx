@@ -5,9 +5,10 @@ import {Elements} from "@stripe/react-stripe-js"
 const stripePromise = loadStripe("pk_test_51LrM4tJWWAfWqjZRMDYQ412PPW9HoddKygyLpVu5CUc9PSMhyjXG4nsUtL24lJsasWcE2e5ea3x4gD7CFmflnvsi00UDZcL591")
 
 const Payment = (props) => {
-    return (<section>
+    // console.log(stripePromise)
+    return (<section className="payement">
         <h2>Paiement</h2>
-        <p>Id de la commande: {props.params.orderId}</p>
+        <p>Numéro associé à votre commande: {props.params.orderId}</p>
         {/*On va brancher l'environnement des fonctionnalitées de react-stripe
             qui va permettre d'effectuer les échanges avec l'api stripe de manière sécurisée
         */}
