@@ -13,7 +13,7 @@ import OrderDetails from './containers/orderDetails'
 
 import Login from "./containers/user/login"
 import Register from './containers/user/register'
-import Profil from "./containers/user/profil"
+import Profile from "./containers/user/profile"
 import Logout from './containers/user/logout'
 
 import Admin from './containers/admin/admin'
@@ -50,7 +50,7 @@ function App() {
           <Route exact path="/login" element={<RequireDataAuth child={Login} auth={false} admin={false} />} />
           <Route exact path="/register" element={<RequireDataAuth child={Register} auth={false} admin={false} />} />
           <Route exact path="/logout" element={<RequireDataAuth child={Logout} auth={true} admin={false} />} />
-          <Route exact path='/myaccount' element={<RequireDataAuth child={Profil} auth={true} admin={false} />} />
+          <Route exact path='/myaccount' element={<RequireDataAuth child={Profile} auth={true} admin={false} />} />
 
         {/* ADMIN */}
           <Route exact path="/admin" element={<RequireDataAuth child={Admin} auth={true} admin={true} />} />

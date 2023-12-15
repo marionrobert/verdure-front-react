@@ -1,13 +1,15 @@
 import {selectUser, connectUser} from '../../slices/userSlice'
 import {useSelector} from 'react-redux'
-import { updateOneUser, checkMyToken } from '../../api/user'
+import { updateOneUser} from '../../api/user'
+import { getAllOrdersByUser } from '../../api/order'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons"
+import { faRightFromBracket, faEye } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import moment from "moment"
 
-const Profil = () => {
+const Profile = () => {
   const user = useSelector(selectUser)
   const dispatch = useDispatch()
 
@@ -17,15 +19,33 @@ const Profil = () => {
   const [zip, setZip] =useState("")
   const [city, setCity] =useState("")
   const [phone, setPhone] =useState("")
+  const [orders, setOrders] = useState([])
+  const [errorLoadingOrders, setErrorLoadingOrders] = useState(null)
 
   useEffect(()=>{
+    setErrorLoadingOrders(null)
     setFirstName(user.infos.firstName)
     setLastName(user.infos.lastName)
     setAddress(user.infos.address)
     setZip(user.infos.zip)
     setCity(user.infos.city)
     setPhone(user.infos.phone)
-  }, [])
+
+    getAllOrdersByUser(parseInt(user.infos.id))
+    .then((res) => {
+      console.log("res -->", res)
+      if (res.status === 200){
+        setOrders(res.orders)
+      } else {
+        setErrorLoadingOrders("Une erreur est survenue lors du chargement de vos commandes.")
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+      setErrorLoadingOrders("Une erreur est survenue lors du chargement de vos commandes.")
+    })
+
+  }, [user])
 
 
   const handleSubmit = (e) => {
@@ -76,7 +96,9 @@ const Profil = () => {
 
   return (
     <section className='profile'>
-      <button className='logout'><Link to="/logout"><FontAwesomeIcon icon={faRightFromBracket}/> Déconnexion</Link></button>
+    <div>
+      <Link className='logout' to="/logout"><FontAwesomeIcon icon={faRightFromBracket}/> Déconnexion</Link>
+    </div>
       <h1>Mon compte</h1>
       <article className='user-data'>
         <h2>Mes informations</h2>
@@ -98,11 +120,44 @@ const Profil = () => {
       </article>
       <article className='user-orders'>
         <h2>Mes commandes</h2>
-
+        { errorLoadingOrders !== null && <p className="error">{errorLoadingOrders}</p>}
+        { orders.length > 0 ?
+          <table>
+            <thead>
+              <tr>
+                <td>Date</td>
+                <td>Montant</td>
+                <td>Statut</td>
+                <td>Voir</td>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order) => {
+                return (
+                  <tr key={order.id}>
+                    <td>{moment(order.creationTimestamp).locale("fr").format("DD/MM/YYYY")}</td>
+                    <td>{order.totalAmount} €</td>
+                    <td>
+                      {
+                        order.status === "payed" ? "Payée" :
+                        order.status === "delivered" ? "Livrée" :
+                        order.status === "in_delivery" ? "En cours de livraison" :
+                        order.status === "delivered" ? "Livrée" :
+                        order.status === "finished" ? "Terminée" :
+                        "Pas d'information"
+                      }
+                    </td>
+                    <td><Link to={`/order/details/${order.id}`}><FontAwesomeIcon icon={faEye}/></Link></td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table> :
+          <p>Vous n'avez pas encore encore commandé chez nous, n'attendez plus! </p>}
       </article>
 
     </section>
   )
 }
 
-export default Profil
+export default Profile

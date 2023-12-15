@@ -120,10 +120,10 @@ const Admin = () => {
                     <td>
                       <select name="status" onChange={(e)=>{handleChange(e, order.id)}}>
                           <option>{order.status}</option>
-                          <option value="expédiée" >Expédiée</option>
-                          <option value="en livraison">En livraison</option>
-                          <option value="livrée">Livrée</option>
-                          <option value="terminée">Terminée</option>
+                          <option value="shipped" >Expédiée</option>
+                          <option value="in_delivery">En livraison</option>
+                          <option value="delivered">Livrée</option>
+                          <option value="finished">Terminée</option>
                       </select>
                     </td>
                     <td><Link to={`/order/details/${order.id}`}><FontAwesomeIcon icon={faEye}/></Link></td>

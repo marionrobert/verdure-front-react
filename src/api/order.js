@@ -15,7 +15,7 @@ export function saveOneOrder(data){
   })
 }
 
-// validation du paiement ?????
+// validation du paiement
 export function checkPayment(data){
   console.log("checkPayment has been triggered")
   console.log("data received -->", data)
@@ -75,6 +75,20 @@ export function updateOrderStatusByAdmin(id, data){
   const token = window.localStorage.getItem('verdure-token')
   console.log("in order.jsx", data, id)
   return axios.put(`${config.api_url}/api/v1/order/admin-update-status/${id}`, data, {headers: {"x-access-token": token}})
+  .then((res)=>{
+    return res.data
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
+}
+
+
+// chargement des commandes pour un utilisateur
+export function getAllOrdersByUser(userId){
+  console.log("userId in getAllOrdersByUser -->", userId)
+  const token = window.localStorage.getItem('verdure-token')
+  return axios.get(`${config.api_url}/api/v1/orders/user/${userId}`, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data
   })

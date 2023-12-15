@@ -618,7 +618,15 @@ section.manage-all-plants{
 
 /* PROFILE */
 section.profile {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+}
+
+section.profile div {
+  width: 100%;
   text-align: right;
+  padding-right: 15px;;
 }
 
 section.profile h1 {
@@ -629,64 +637,74 @@ section.profile h1 {
   text-align: center;
 }
 
-section.profile .user-data {
-  margin: 1.5rem;
+section.profile .user-data, section.profile .user-orders {
+  margin: 1rem;
   text-align: center;
+  width: 100%;
 }
 
-section.profile .user-data h2 {
+section.profile .user-data h2, section.profile .user-orders h2 {
   text-align: left;
   font-size: 1.3rem;
   font-weight: bold;
   margin: 2rem 0 1rem;
 }
 
+section.profile .user-data, section.profile .user-orders {
+  width: 90%;
+}
+
 section.profile .user-data form {
-  border: 1px solid rgba(27, 75, 59, 0.8);
-  padding: 1rem;
+  border: 1px solid rgba(27, 75, 59, 0.9);
+  padding: 1rem 0;
   margin-left: auto;
   margin-right: auto;
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 section.profile .user-data form > label {
-  margin: 0.3rem 0;
+  margin: 0.3rem;
+  width: 90%;
   text-align: left;
   font-weight: bold;
 }
 
 section.profile .user-data form > input {
   margin: 0.3rem auto;
-  width: 100%;
+  width: 90%;
 }
 
+/* les boutons */
 
-.profile button {
+.profile a.logout, button.update-data {
   border-radius: 2px;
   margin: 1rem 0 0;
-  width: 160px;
-  padding: 0.6rem 0.3rem;
+  width: 180px;
+  padding: 0.7rem;
   background-color: rgba(27, 75, 59, 0.8);
   border: none;
   font-size: 1rem;
   color: white;
 }
 
-.profile button a {
-  color: white;
-}
-
-.profile button.logout {
-  margin-right: 10px;
-}
-
 .profile button.update-data {
-  width: 100%;
+  width: 80%;
 }
 
+article.user-orders {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
+section.profile .user-orders table {
+  border: 1px solid rgba(27, 75, 59, 0.8);
+}
 
 
 /* FOOTER */
@@ -916,7 +934,18 @@ footer a svg:hover {
   }
 
   /* PROFILE */
+  section.profile {
+    align-items: start;
+ }
   .profile button.update-data {
     width: 30%;
+  }
+
+  section.profile .user-data, section.profile .user-orders {
+    width: 45%;
+  }
+
+  section.profile h1 {
+    margin: 1.5rem 0 0;
   }
 }
