@@ -707,6 +707,27 @@ section.profile .user-orders table {
 }
 
 
+/* DETAILS ORDER */
+section.details-order {
+  padding: 2rem 0;
+}
+
+section.details-order h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.1rem;
+  font-weight: bold;;
+}
+
+section.details-order h2 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 1.5rem 0 0;
+}
+
+section.details-order p {
+  font-size: 1.2rem;
+}
+
 /* FOOTER */
 footer {
   background-color: rgba(2, 46, 35, 0.975);

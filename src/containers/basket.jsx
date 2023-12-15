@@ -4,8 +4,8 @@ import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 //on importe la state de basket de redux + son/ses actions
-import { selectBasket, updateBasket, cleanBasket } from "../slices/basketSlice"
 import { useSelector, useDispatch } from "react-redux"
+import { selectBasket, updateBasket, cleanBasket } from "../slices/basketSlice"
 import { selectUser } from "../slices/userSlice";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
