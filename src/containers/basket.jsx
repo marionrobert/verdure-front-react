@@ -118,7 +118,7 @@ const Basket = () => {
         <p>Vous n'avez pas encore ajouté d'articles à votre panier ... n'attendez plus!</p>
         <button><Link to="/plants">Découvrez les plantes</Link></button>
       </div> :
-      <div>
+      <article>
         { error !== null && <p style={{color:"red"}}>{error}</p>}
         <button className="first-validation" onClick={()=>{handleValidation()}}>Valider ma commande</button>
         <ul className="basket-all-items">
@@ -150,7 +150,7 @@ const Basket = () => {
         </div>
         <button onClick={deleteBasket}>Supprimer mon panier</button>
         <button onClick={()=>{handleValidation()}}>Valider ma commande</button>
-      </div>
+      </article>
       }
     </section>
 
