@@ -28,9 +28,9 @@ const Payment = (props) => {
 
   return (
     <section className="payement">
-        <h2>Paiement</h2>
+        <h1>Paiement</h1>
         { error !== null && <p className="error">{error}</p>}
-        <p>Numéro associé à votre commande: {props.params.id}</p>
+        <p>Numéro de votre commande : {props.params.id}</p>
         { order !== null && <p>Total de votre commande : {order.totalAmount} €</p> }
         {/*On va brancher l'environnement des fonctionnalitées de react-stripe
             qui va permettre d'effectuer les échanges avec l'api stripe de manière sécurisée

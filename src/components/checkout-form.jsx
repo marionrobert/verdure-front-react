@@ -115,7 +115,7 @@ const CheckoutForm = (props) => {
                         }
                     }}
                 />
-                <button disabled={props.stripe}>Payer</button>
+                <button disabled={props.stripe}>Procéder au paiement</button>
             </form>
         </article>
     )

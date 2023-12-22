@@ -77,6 +77,7 @@ main {
   color: forestgreen;
 }
 
+
 /* HEADER */
 header {
   background-color: rgba(2, 46, 35, 0.975);
@@ -605,27 +606,51 @@ input#quantity {
 /* PAYEMENT - CHECKOUT FORM*/
 section.payement {
   padding-top: 2rem;
-  border: 2px solid green;
   text-align: center;
+  width: 100vw;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 section.payement > * {
   width: 100%;
+  margin-top: 1rem;
 }
 
-
-article.checkoutForm{
-  border: 2px solid red;
-  width: 400px;
+section.payement h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;;
 }
 
+article.checkoutForm {
+  border: 1px solid rgba(182, 179, 179, 0.5);
+  border-radius: 1%;
+  padding: 1rem;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+
+section.payement form {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
 .StripeElement {
-  height: 5em;
   width: 100%;
 }
 
+section.payement form button {
+  border-radius: 2px;
+  margin: 1.5rem 0 0;
+  width: 160px;
+  padding: 0.6rem 0.3rem;
+  background-color: rgba(27, 75, 59, 0.8);
+  border: none;
+  font-size: 0.9rem;
+  color: white;
+}
 
 
 
@@ -928,6 +953,12 @@ footer a svg:hover {
     width: 15%;
   }
 
+
+  /* payement - checkout form*/
+  article.checkoutForm {
+    width: 70%;
+  }
+
 }
 
 
@@ -1036,6 +1067,12 @@ footer a svg:hover {
   .details-basket button {
     width: 20%;
   }
+
+
+    /* payement - checkout form*/
+    article.checkoutForm {
+      width: 45%;
+    }
 
 
 }
