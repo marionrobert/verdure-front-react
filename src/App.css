@@ -426,7 +426,7 @@ input#quantity {
 }
 
 
-/* BASKET */
+/* BASKET AND ORDER DETAILS */
 .details-basket {
   margin: 2rem 1rem;
   text-align: center;
@@ -437,8 +437,8 @@ input#quantity {
 
 .details-basket h1 {
   font-family: 'Dancing Script', cursive;
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  margin: 1rem 0;
   width: 100%;
 }
 
@@ -458,7 +458,7 @@ input#quantity {
   color: white;
 }
 
-.basket-item {
+.basket-item, .order-item {
   background-color: rgba(180, 179, 179, 0.1);
   display: flex;
   margin: 0.7rem 0 ;
@@ -466,7 +466,7 @@ input#quantity {
 }
 
 .basket-item img {
-  width: 30%;
+  width: 20%;
   height: auto;
 }
 
@@ -476,6 +476,12 @@ input#quantity {
   padding: 1.5rem;
   text-align: start;
   width: 70%;
+}
+
+.order-item-infos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .basket-item-infos h3 {
@@ -528,6 +534,68 @@ input#quantity {
 }
 
 
+
+/* ORDER DETAILS */
+.details-order {
+  margin: 2rem 1rem;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+.details-order h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.3rem;
+  margin: 1.5rem 0 0.5rem;
+  width: 100%;
+}
+
+.details-order .general-infos {
+  width: 100%;
+  margin-top: 1rem
+}
+
+.details-order h2 {
+  font-weight: bold;
+  padding: 0.4rem 0
+}
+
+.order-all-items{
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.order-item {
+  background-color: rgba(180, 179, 179, 0.1);
+  display: flex;
+  margin: 0.7rem 0;
+  position: relative;
+}
+
+.order-item img {
+  width: 20%;
+  height: auto;
+}
+
+.order-item-infos {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.8rem;
+  text-align: start;
+  width: 70%;
+  justify-content: space-between;
+  font-size: 0.9rem;;
+}
+
+.order-item-infos h3 {
+  font-weight: bold;
+  font-size: 1rem;;
+}
+
+
+
 /* PAYEMENT - CHECKOUT FORM*/
 section.payement {
   padding-top: 2rem;
@@ -551,6 +619,11 @@ article.checkoutForm{
   height: 5em;
   width: 100%;
 }
+
+
+
+
+
 
 
 /* ADMIN */
@@ -707,26 +780,7 @@ section.profile .user-orders table {
 }
 
 
-/* DETAILS ORDER */
-section.details-order {
-  padding: 2rem 0;
-}
 
-section.details-order h1 {
-  font-family: 'Dancing Script', cursive;
-  font-size: 2.1rem;
-  font-weight: bold;;
-}
-
-section.details-order h2 {
-  font-size: 1.3rem;
-  font-weight: bold;
-  padding: 1.5rem 0 0;
-}
-
-section.details-order p {
-  font-size: 1.2rem;
-}
 
 /* FOOTER */
 footer {
@@ -968,5 +1022,18 @@ footer a svg:hover {
 
   section.profile h1 {
     margin: 1.5rem 0 0;
+  }
+
+  /* DETALS ORDER*/
+  .details-order {
+    justify-content: space-around;
+  }
+
+  .details-order .general-infos {
+    width: 40%;
+  }
+
+  .details-order .order-all-items {
+    width: 40%;
   }
 }

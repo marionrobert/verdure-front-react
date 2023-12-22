@@ -25,31 +25,7 @@ const OrderDetails = () => {
         setOrderDetails(res.orderDetails)
         setUserData(res.dataUser)
 
-        switch (order.status){
-          case "payed":
-            setStatus("payée")
-          break;
-          case "not_payed":
-            setStatus("en attente de paiement")
-          break;
-          case "shipped":
-            setStatus("expédiée")
-          break;
-          case "in_delivery":
-            setStatus("en cours de livraison")
-          break;
-          case "delivered":
-            setStatus("livrée")
-          break;
-          case "finished":
-            setStatus("terminée")
-          break;
-          default:
-            setStatus("statut inconnu");
-          break;
-        }
       }
-
     })
     .catch((err)=>{
       console.log(err)
@@ -86,37 +62,37 @@ const OrderDetails = () => {
 
 
   if (order !== null){
+    console.log("orderDetails -->", orderDetails)
     return (
       <section className="details-order">
         <h1>Commande n° {order.id}</h1>
 
-        { user.infos.role === "admin" && <article>
-          <h2>Identité du client: </h2>
-          <p>{userData.firstName} {userData.lastName}</p>
-        </article>
-        }
+        <div className="general-infos">
+          { user.infos.role === "admin" && <article>
+            <h2>Identité du client : </h2>
+            <p>{userData.firstName} {userData.lastName}</p>
+          </article>
+          }
 
-        <h2><FontAwesomeIcon icon={faLocationDot}/> Adresse de livraison :</h2>
-        <p> {userData.address} {userData.zip} {userData.city}</p>
+          <h2><span><FontAwesomeIcon icon={faLocationDot}/> Adresse de livraison : </span>{userData.address} {userData.zip} {userData.city}</h2>
 
-        <h2>Détails de la commande</h2>
-        <p>Passée le {moment(order.creationTimestamp).local("fr").format("DD/MM/YYYY")}</p>
-        <p>Statut: {status}</p>
+          <h2>Passée le {moment(order.creationTimestamp).local("fr").format("DD/MM/YYYY")}</h2>
+          <h2>Statut : {status}</h2>
 
-        <h2>Montant total de la commande: {order.totalAmount} €</h2>
+          <h2>Montant total de la commande : {order.totalAmount} €</h2>
+        </div>
+
 
         <ul className="order-all-items">
-          {orderDetails.map((item=>{
+          {orderDetails.map((orderItem=>{
             return (
-              <li  key={item.id} className='order-item' >
-                { item.photo !== "" ? <img src={`${config.pict_url}/${item.photo}`}/> : <img src={`${config.pict_url}/no-pict.jpg`}/>}
+              <li  key={orderItem.id} className='order-item' >
+                { orderItem.photo !== "" ? <img src={`${config.pict_url}/${orderItem.photo}`}/> : <img src={`${config.pict_url}/no-pict.jpg`}/>}
 
                 <div className="order-item-infos">
-                  <h3>{item.name}</h3>
-                  <div className="change-quantity-zone">
-                    <p>Quantité : {item.quantity}</p>
-                  </div>
-                  <p id="price">{item.total} €</p>
+                  <h3>{orderItem.name}</h3>
+                  <p>Quantité : {orderItem.quantity}</p>
+                  <p id="price">Prix : {orderItem.total} €</p>
                 </div>
               </li>
 

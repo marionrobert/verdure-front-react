@@ -125,7 +125,8 @@ const Basket = () => {
           {currentBasket.basket.map((item=>{
             return (
               <li  key={item.id} className='basket-item' >
-                <img src={`${config.pict_url}/${item.photo}`}/>
+                {/* <img src={`${config.pict_url}/${item.photo}`}/> */}
+                { item.photo !== "" ? <img src={`${config.pict_url}/${item.photo}`}/> : <img src={`${config.pict_url}/no-pict.jpg`}/>}
                 <div className="basket-item-infos">
                   <h3>{item.name}</h3>
                   <div className="change-quantity-zone">
