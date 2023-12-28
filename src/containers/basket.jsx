@@ -4,8 +4,8 @@ import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 //on importe la state de basket de redux + son/ses actions
-import { selectBasket, updateBasket, cleanBasket } from "../slices/basketSlice"
 import { useSelector, useDispatch } from "react-redux"
+import { selectBasket, updateBasket, cleanBasket } from "../slices/basketSlice"
 import { selectUser } from "../slices/userSlice";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -19,7 +19,8 @@ const Basket = () => {
   const currentBasket = useSelector(selectBasket)
   const user = useSelector(selectUser)
   const [error, setError] = useState(null)
-  const [redirect, setRedirect] = useState(null)
+  const [redirectToPayment, setRedirectToPayment] = useState(null)
+  const [redirectToLogin, setRedirectToLogin] = useState(null)
   const [orderId, setOrderId] = useState(null)
   const [nbItems, setNbItems] = useState(0)
 
@@ -70,33 +71,44 @@ const Basket = () => {
 
   const handleValidation = () => {
     console.log("in handle validation")
-    // je crée l'objet data à envoyer à saveOneOrder
-    let data = {
-      user_id: user.infos.id,
-      basket: currentBasket.basket
-    }
 
-    saveOneOrder(data)
-    .then((res)=>{
-      console.log(res)
-      if (res.status === 200 ){
-        // je redirige vers une page de payement/:order_id
-        console.log("je vais rediriger vers page de payement")
-        setOrderId(res.order_id)
-        setRedirect(true)
-      } else {
-        //problème dans la création de commande
-        setError(res.msg)
+    if (user.isLogged) {
+      // je crée l'objet data à envoyer à saveOneOrder
+      let data = {
+        user_id: user.infos.id,
+        basket: currentBasket.basket
       }
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
+      console.log("data to send to saveOneOrder", data)
+
+      saveOneOrder(data)
+      .then((res)=>{
+        console.log("res de saveOneOrder", res)
+        if (res.status === 200 ){
+          // je redirige vers une page de payement/:order_id
+          console.log("je vais rediriger vers page de payement")
+          setOrderId(res.order_id)
+          setRedirectToPayment(true)
+        } else {
+          //problème dans la création de commande
+          setError(res.msg)
+        }
+      })
+      .catch((err)=>{
+        console.log(err)
+        setError("Une erreur est survenue.")
+      })
+    } else {
+      setRedirectToLogin(true)
+    }
   }
 
-  if (redirect && orderId !== null) {
+  if (redirectToPayment && orderId !== null) {
     return <Navigate to={`/payement/${orderId}`}/>
   }
+
+  if(redirectToLogin){
+    return <Navigate to={`/login`} />
+}
 
   return (
     <section className="details-basket">
@@ -106,14 +118,15 @@ const Basket = () => {
         <p>Vous n'avez pas encore ajouté d'articles à votre panier ... n'attendez plus!</p>
         <button><Link to="/plants">Découvrez les plantes</Link></button>
       </div> :
-      <div>
+      <article>
         { error !== null && <p style={{color:"red"}}>{error}</p>}
         <button className="first-validation" onClick={()=>{handleValidation()}}>Valider ma commande</button>
         <ul className="basket-all-items">
           {currentBasket.basket.map((item=>{
             return (
               <li  key={item.id} className='basket-item' >
-                <img src={`${config.pict_url}/${item.photo}`}/>
+                {/* <img src={`${config.pict_url}/${item.photo}`}/> */}
+                { item.photo !== "" ? <img src={`${config.pict_url}/${item.photo}`}/> : <img src={`${config.pict_url}/no-pict.jpg`}/>}
                 <div className="basket-item-infos">
                   <h3>{item.name}</h3>
                   <div className="change-quantity-zone">
@@ -137,7 +150,7 @@ const Basket = () => {
         </div>
         <button onClick={deleteBasket}>Supprimer mon panier</button>
         <button onClick={()=>{handleValidation()}}>Valider ma commande</button>
-      </div>
+      </article>
       }
     </section>
 

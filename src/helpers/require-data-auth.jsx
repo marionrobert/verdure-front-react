@@ -21,12 +21,15 @@ const RequireDataAuth = (props) =>{
     const dispatch = useDispatch()
     //on récupère le composant à afficher qui a été passé en tant que props via App.js
     const Child = props.child
-    //gestion de la redirection
-    const [redirect, setRedirect] = useState(false)
-    const [redirectAdmin, setRedirectAdmin] = useState(false)
+  //gestion de la redirection
+  const [redirectToLogin, setRedirectToLogin] = useState(false)
+  const [redirectToHome, setRedirectToHome] = useState(false)
 
     //au chargement de chaque composant --> parce que [props]
     useEffect(()=>{
+      setRedirectToHome(false)
+      setRedirectToLogin(false)
+
       //si les plantes ne sont pas chargées dans redux, on les charge (action du store)
       if (plants.plants.length === 0){
         loadPlants()
@@ -39,19 +42,23 @@ const RequireDataAuth = (props) =>{
       }
 
       //on va tester si on est connecté via les infos de redux
+      // console.log("hello from require-data-auth")
       // console.log("user", user.isLogged)
+      // console.log(typeof user.isLogged)
 
       //si l'utilisateur n'est pas logged (store)
       if (user.isLogged === false){
         // console.log("aucun user n'est connecté")
         //on récup le token dans le localStore
         let token = window.localStorage.getItem('verdure-token')
+        // console.log("token -->", token)
+        // console.log("props.auth -->", props.auth)
 
         //si le storagee répond null (pas trouvé) et que la props auth est true (route protégée)
         if (token === null && props.auth) {
-          // console.log("le token est null et la route a besoin d'une connexion user")
+          console.log("le token est null et la route a besoin d'une connexion user")
           //on demande une redirection
-          setRedirect(true)
+          setRedirectToLogin(true)
         } else { //sinon
             // console.log("le token n'est pas null")
             // si le token n'est pas null
@@ -65,7 +72,7 @@ const RequireDataAuth = (props) =>{
                   //si la route est protégée
                   if (props.auth){
                     //on demande la redirection
-                    setRedirect(true)
+                    setRedirectToLogin(true)
                   }
                 } else {//sinon, le token est bon
                     //on stock la réponse de la requète axios dans une variable user (retourne un objet)
@@ -88,17 +95,17 @@ const RequireDataAuth = (props) =>{
         if (user.infos.role !== "admin" && props.admin === true) {
           // console.log("lutilisateur est connecté mais il n'est pas admin, donc redirection")
           //on demande la redirection
-          setRedirectAdmin(true)
+          setRedirectToHome(true)
         }
       }
 
-    }, [user])
+    }, [user, props, dispatch, plants])
 
-    if(redirect){
+    if(redirectToLogin){
       return <Navigate to="http://localhost:5173/login"/>
     }
 
-    if(redirectAdmin){
+    if(redirectToHome){
       return <Navigate to="http://localhost:5173/"/>
     }
 

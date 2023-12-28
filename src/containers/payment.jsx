@@ -1,62 +1,45 @@
-import { useSelector, useDispatch } from "react-redux";
-import { selectBasket } from "../slices/basketSlice";
-import { selectUser } from "../slices/userSlice";
+import {loadStripe} from "@stripe/stripe-js"
+import CheckoutForm from "../components/checkout-form"
+import {Elements} from "@stripe/react-stripe-js"
+import { useEffect, useState } from "react"
+import { getOneOrder } from "../api/order"
+//la clé publique de stripe me permet de brancher l'environnement de l'api stripe à mon compte stripe API
+const stripePromise = loadStripe("pk_test_51LrM4tJWWAfWqjZRMDYQ412PPW9HoddKygyLpVu5CUc9PSMhyjXG4nsUtL24lJsasWcE2e5ea3x4gD7CFmflnvsi00UDZcL591")
 
-import { checkPayment, updatePayedStatusOrder } from "../api/order";
-import { useState, useEffect } from "react";
-import {useParams} from "react-router-dom"
-import { getOneOrder } from "../api/order";
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCreditCard } from '@fortawesome/free-solid-svg-icons'
-import { faCcVisa, faCcMastercard } from '@fortawesome/free-brands-svg-icons';
-
-const Payment = () => {
-  const params = useParams()
+const Payment = (props) => {
   const [order, setOrder] = useState(null)
   const [error, setError] = useState(null)
-  const user = useSelector(selectUser)
 
-  useEffect(()=>{
-    getOneOrder(params.id)
+  useEffect(()=> {
+    setError(null)
+    getOneOrder(props.params.id)
     .then((res)=>{
-      if(res.status === 200){
-        // console.log(res)
+      if (res.status === 200){
         setOrder(res.order)
-      } else {
-        setError(res.msg)
+      }
+      else {
+        setError("Une erreur est survenue. Vous ne pouvez pas procéder au paiement.")
       }
     })
-    .catch((err)=>{ console.log(err)})
-  }, [params.id])
-
-  const validatePayment = (e) => {
-    e.preventDefault()
-    console.log("validation du paiement")
-  }
+    .catch(()=>{
+      setError("Une erreur est survenue. Vous ne pouvez pas procéder au paiement.")
+    })
+  }, [props])
 
   return (
-    <section className="payment-page">
-     <h1>Page de paiement</h1>
-     { error !== null && <p style={{color: "red"}}>{error}</p>}
-     { order !== null && <div>
-      <p>Commande n°{order.id}</p>
-      <p>Montant total de la commande: {order.totalAmount} €</p>
-      <div className="payment-interface">
-      <p>Votre carte <FontAwesomeIcon icon={faCreditCard}/><FontAwesomeIcon icon={faCcMastercard}/><FontAwesomeIcon icon={faCcVisa}/></p>
-      <form onSubmit={(e)=>{validatePayment(e)}}>
-        <label htmlFor="cardNumber">Numéro de votre carte bancaire</label>
-        <input name="cardNumber" required/>
-        <label>Date d'expiration de votre carte</label>
-        <input name="expiration-date-month" placeholder="MM" required/>/<input name="expiration-date-year" placeholder="AA" required/>
-        <label>Code de sécurité</label>
-        <input name="cvc" placeholder="CVC" required/>
-        <button>Valider la paiement</button>
-      </form>
-      </div>
-     </div>}
+    <section className="payement">
+        <h1>Paiement</h1>
+        { error !== null && <p className="error">{error}</p>}
+        <p>Numéro de votre commande : {props.params.id}</p>
+        { order !== null && <p>Total de votre commande : {order.totalAmount} €</p> }
+        {/*On va brancher l'environnement des fonctionnalitées de react-stripe
+            qui va permettre d'effectuer les échanges avec l'api stripe de manière sécurisée
+        */}
+        <Elements stripe={stripePromise}>
+            <CheckoutForm orderId={props.params.id} />
+        </Elements>
     </section>
   )
 }
 
-export default Payment;
+export default Payment
