@@ -80,7 +80,7 @@ const Register = () => {
   }
 
   return (
-    <>
+    <section className="forms">
       <h1>Créer un compte</h1>
       { errorForm !== null && <p style={{color: "red"}}>{errorForm}</p>}
       { success !== null && <div>
@@ -108,7 +108,7 @@ const Register = () => {
         <input type="text" name="phone" onChange={handleChange} required/>
         <button type="submit">Valider</button>
       </form>
-    </>
+    </section>
   )
 }
 
