@@ -81,6 +81,21 @@ main {
   color: forestgreen;
 }
 
+.button {
+  background-color: rgba(27, 75, 59, 0.8);
+  padding: 0.5rem;
+  border: none;
+  border-radius: 2px;
+  box-shadow: none;
+  margin: 1rem 0.5rem;
+  font-size: 0.9rem;
+  color:white;
+}
+
+.button:hover {
+  background-color: rgba(2, 46, 35, 0.99);
+}
+
 
 /* HEADER */
 header {
@@ -429,8 +444,15 @@ button.plant-card-btn:hover {
 .details-plant{
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  margin: 1rem;
+  /* justify-content: center; */
+  margin: 0.5rem;
+  padding: 2rem 0;
+}
+
+.details-plant div#link-to-plants {
+  width: 100%;
+  text-align: right;
+  margin-bottom: 1.5rem;
 }
 
 .details-plant img{
@@ -438,6 +460,8 @@ button.plant-card-btn:hover {
   height: auto;
   object-fit: contain;
   margin-top: 1rem;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .details-plant-infos {
@@ -497,7 +521,13 @@ input#quantity {
   display: none;
 }
 
+.details-plant form {
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .details-plant button {
+  display:block;
   border: none;
   background-color: rgba(27, 75, 59, 0.8);
   padding: 0.8rem;
@@ -819,7 +849,7 @@ section.profile {
 section.profile div {
   width: 100%;
   text-align: right;
-  padding-right: 15px;;
+  padding-right: 15px;
 }
 
 section.profile h1 {
@@ -833,7 +863,7 @@ section.profile h1 {
 section.profile .user-data, section.profile .user-orders {
   margin: 1rem;
   text-align: center;
-  width: 100%;
+  width: 90%;
 }
 
 section.profile .user-data h2, section.profile .user-orders h2 {
@@ -843,9 +873,6 @@ section.profile .user-data h2, section.profile .user-orders h2 {
   margin: 2rem 0 1rem;
 }
 
-section.profile .user-data, section.profile .user-orders {
-  width: 90%;
-}
 
 section.profile .user-data form {
   border: 1px solid rgba(27, 75, 59, 0.9);
@@ -988,13 +1015,14 @@ footer a svg:hover {
   }
 
   section.details-plant img{
-    width: 40%;
+    width: 42%;
     height: auto;
     margin: 2rem 0 1rem;
   }
 
   .details-plant-infos {
-    width: 50%
+    width: 55%;
+    margin: 0;
   }
 
   .advices h3 {
@@ -1116,7 +1144,7 @@ footer a svg:hover {
   }
 
   section.details-plant img{
-    width: 25%;
+    width: 38%;
     height: auto;
     margin: 2rem 0 1rem;
   }

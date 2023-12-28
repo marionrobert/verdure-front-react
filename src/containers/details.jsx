@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { loadOnePlant } from "../api/plant";
 import {config} from "../config";
+import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import { faDroplet, faSun, faTemperatureHigh, faCartPlus, faSquarePlus, faSquareMinus } from "@fortawesome/free-solid-svg-icons"
+import { faDroplet, faSun, faTemperatureHigh, faCartPlus, faSquarePlus, faSquareMinus, faArrowRotateLeft } from "@fortawesome/free-solid-svg-icons"
 
 //import des states globales product et basket et de leurs actions (ajout au panier, chargement des produits)
 import { selectBasket, updateBasket  } from '../slices/basketSlice';
@@ -68,6 +69,12 @@ const Details = () => {
     <>
       { plant !== null &&
       <section className="details-plant">
+        <div id="link-to-plants">
+          <Link to="/plants" className="button"><FontAwesomeIcon icon={faArrowRotateLeft}/> Retour vers toutes les plantes</Link>
+        </div>
+        {/* <div id="link-to-plants">
+          <Link to="/plants" className="button"><FontAwesomeIcon icon={faArrowRotateLeft}/> Retour vers toutes les plantes</Link>
+        </div> */}
         <img src={`${config.pict_url}/${plant.photo}`}/>
         <div className="details-plant-infos">
           <h1>{plant.name}</h1>
