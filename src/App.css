@@ -811,6 +811,10 @@ section.profile .user-orders table {
 }
 
 
+section.success-order h1 {
+  padding-top: 2rem;
+  font-family: 'Dancing Script', cursive;;
+}
 
 
 /* FOOTER */
@@ -962,7 +966,6 @@ footer a svg:hover {
 }
 
 
-
 @media screen and (min-width: 1024px){
 
   /* NAV HEADER */
@@ -1068,11 +1071,12 @@ footer a svg:hover {
     width: 20%;
   }
 
+  /* payement - checkout form*/
+  article.checkoutForm {
+    width: 45%;
+  }
 
-    /* payement - checkout form*/
-    article.checkoutForm {
-      width: 45%;
-    }
+
 
 
 }

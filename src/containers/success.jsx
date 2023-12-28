@@ -13,11 +13,11 @@ const Success = (props) =>{
     }, [])
 
     return (
-        <section>
-            <h2>Verdure vous remercie</h2>
-            <p>Votre commande a été effectuée avec succès</p>
-            <Link to={`/order/details/${params.id}`}>Voir votre commande</Link>
-        </section>
+      <section className='success-order'>
+          <h1>Verdure vous remercie</h1>
+          <p>Votre commande a été effectuée avec succès</p>
+          <Link to={`/order/details/${params.id}`}>Voir votre commande</Link>
+      </section>
     )
 }
 export default Success
