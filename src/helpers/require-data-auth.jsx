@@ -6,13 +6,19 @@ import {selectPlants, getAllPlants} from '../slices/plantSlice'
 import {selectBasket, updateBasket, cleanBasket } from '../slices/basketSlice'
 
 import {Navigate, useParams, useLocation} from 'react-router-dom'
-import {checkMyToken} from '../api/user'
+// import {checkMyToken} from '../api/user'
 import {loadPlants} from '../api/plant'
+
+import { config } from "../config";
+import axios from "axios";
+import { checkMyToken } from '../api/user'
+
 
 //HOC de controle des datas et de la sécurité
 const RequireDataAuth = (props) =>{
     //on récup les params de la route
     const params = useParams()
+
     //on récupère la state user dans le store en mode lecture
     const plants = useSelector(selectPlants)
     const user = useSelector(selectUser)
@@ -21,14 +27,17 @@ const RequireDataAuth = (props) =>{
     const dispatch = useDispatch()
     //on récupère le composant à afficher qui a été passé en tant que props via App.js
     const Child = props.child
-  //gestion de la redirection
-  const [redirectToLogin, setRedirectToLogin] = useState(false)
-  const [redirectToHome, setRedirectToHome] = useState(false)
+
+    //gestion de la redirection
+    const [redirectToLogin, setRedirectToLogin] = useState(false)
+    const [redirectToHome, setRedirectToHome] = useState(false)
 
     //au chargement de chaque composant --> parce que [props]
     useEffect(()=>{
       setRedirectToHome(false)
       setRedirectToLogin(false)
+      // console.log("redirect to home -->", redirectToHome)
+      // console.log("redirect to login -->", redirectToLogin)
 
       //si les plantes ne sont pas chargées dans redux, on les charge (action du store)
       if (plants.plants.length === 0){
@@ -41,75 +50,62 @@ const RequireDataAuth = (props) =>{
         })
       }
 
-      //on va tester si on est connecté via les infos de redux
-      // console.log("hello from require-data-auth")
-      // console.log("user", user.isLogged)
-      // console.log(typeof user.isLogged)
+      if (props.auth === true) { // si la route est protégée
+        // console.log("route protégée")
+        // récupération du token dans le localStorage
+        let token = window.localStorage.getItem("verdure-token")
+        // console.log("recup token from require auth-->", token)
 
-      //si l'utilisateur n'est pas logged (store)
-      if (user.isLogged === false){
-        // console.log("aucun user n'est connecté")
-        //on récup le token dans le localStore
-        let token = window.localStorage.getItem('verdure-token')
-        // console.log("token -->", token)
-        // console.log("props.auth -->", props.auth)
-
-        //si le storagee répond null (pas trouvé) et que la props auth est true (route protégée)
-        if (token === null && props.auth) {
-          console.log("le token est null et la route a besoin d'une connexion user")
-          //on demande une redirection
+        if (token === null) { // l'utilisateur n'est pas connecté
+          // console.log("l'utilisateur n'est pas connecté, on redirige vers le login")
           setRedirectToLogin(true)
-        } else { //sinon
-            // console.log("le token n'est pas null")
-            // si le token n'est pas null
-            if (token !== null) {
-              //on appel notre requète axios qui va vérifier le token dans le back checkToken
-              checkMyToken(token)
-              .then((res)=>{
-                //si le status de la réponse n'est pas 200 --> erreur
-                if (res.status !== 200){
-                  // le token n'est pas bon, aucun utilisateur n'a été retourné
-                  //si la route est protégée
-                  if (props.auth){
-                    //on demande la redirection
-                    setRedirectToLogin(true)
-                  }
-                } else {//sinon, le token est bon
-                    //on stock la réponse de la requète axios dans une variable user (retourne un objet)
-                    let newUser = res.user
+        } else { // l'utilisateur est connecté
+          // vérification du format du token
+          // axios.get(`${config.api_url}/api/v1/user/checkToken`, {headers: {"x-access-token": token}})
+          checkMyToken()
+          .then((res) => {
+            if (res.status !== 200){ // format invalide
+              // redirection + suppression token
+              console.log("format invalide --> redirection + suppression token")
+              setRedirectToLogin(true)
+              window.localStorage.removeItem("verdure-token")
+            } else { // l'utilisateur est connecté
+              // console.log("le token est au bon format --> j'enregistre le user dans la state user")
+              // récupération des infos de l'utilisateur
+              let currentUser = res.user
+              // console.log("currentUser -->", currentUser)
 
-                    //on peut rajouter une propriété token à user avec le token dedans
-                    newUser.token = token
+              // ajout du token à l'objet currentUser
+              currentUser.token = token
 
-                    //appel l'action de connexion de l'utilisateur (store)
-                    dispatch(connectUser(newUser))
-                }
-              })
-              .catch((err)=>{
-                console.log(err)
-              })
+              // mise à jour de la state user dans le store
+              dispatch(connectUser(currentUser))
+
+              if (props.admin === true && res.user.role !== "admin"){ // l'utilisateur connecté n'est pas admin
+                // console.log("utilisateur connecté, mais pas admin alors que route admin --> redirection vers la home")
+                setRedirectToHome(true)
+              }
             }
-        }
-      } else { //le user est connecté
-        //si le role de l'user n'est pas admin & que props admin est true (route protégée d'admin)
-        if (user.infos.role !== "admin" && props.admin === true) {
-          // console.log("lutilisateur est connecté mais il n'est pas admin, donc redirection")
-          //on demande la redirection
-          setRedirectToHome(true)
+          })
+          .catch((err) => {
+            console.log("err checkmytoken -->", err)
+            setRedirectToLogin(true)
+            window.localStorage.removeItem("verdure-token")
+          })
         }
       }
 
-    }, [user, props, dispatch, plants])
+    }, [props])
 
     if(redirectToLogin){
-      return <Navigate to="http://localhost:5173/login"/>
+      // console.log("je vais rediriger vers login")
+      return <Navigate to="/login"/>
+    } else if (redirectToHome) {
+      // console.log("je vais rediriger vers home car route admin")
+      return <Navigate to="/home"/>
+    } else {
+      return (<Child {...props} params={params}/>)
     }
-
-    if(redirectToHome){
-      return <Navigate to="http://localhost:5173/"/>
-    }
-
-    return (<Child {...props} params={params}/>)
 }
 
 export default RequireDataAuth

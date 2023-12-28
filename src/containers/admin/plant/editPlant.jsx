@@ -5,15 +5,17 @@ import axios from 'axios'
 import { config } from "../../../config";
 import { Navigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import { getAllPlants } from "../../../slices/plantSlice";
 import { loadPlants } from "../../../api/plant";
+import { selectUser } from "../../../slices/userSlice"
 
 
 
 const EditPlant = () => {
   const params = useParams()
   const dispatch = useDispatch()
+  const user = useSelector(selectUser)
 
   const [plant, setPlant] = useState(null)
   const [name, setName] = useState("")
@@ -183,36 +185,39 @@ const EditPlant = () => {
     return <Navigate to={`/plant/details/${params.id}`} />
   }
 
-  return (
-    <section className="forms">
-      <h1>Modifier les informations d'une plante</h1>
-      {errorForm !== null && <p style={{color:"red"}}>{errorForm}</p>}
+  if (user.infos.role === "admin") {
+    return (
+      <section className="forms">
+        <h1>Modifier les informations d'une plante</h1>
+        {errorForm !== null && <p style={{color:"red"}}>{errorForm}</p>}
 
-      { plant !== null &&
-      <form onSubmit={(e)=>{handleSubmit(e)}}>
-          <label htmlFor="name">Nom</label>
-          <input type="text" name="name" onChange={handleChange} defaultValue={name} required/>
-          <label htmlFor="description">Description</label>
-          <textarea name="description" rows="5" cols="50" onChange={handleChange} defaultValue={description} required/>
-          <label htmlFor="price">Prix</label>
-          <input type="text" name="price" onChange={handleChange} defaultValue={price} required/>
-          <label htmlFor="photo">Photo</label>
-          <input type="file" ref={fileInput} onChange={handleChange} name="newPhoto"/>
-          <label htmlFor="quantity">Quantité en stock</label>
-          <input type="text" name="quantity" onChange={handleChange} defaultValue={quantity} required/>
-          <label htmlFor="watering">Besoin en eau (de 0 à 5)</label>
-          <input type="text" name="watering" onChange={handleChange} defaultValue={watering} required/>
-          <label htmlFor="brightness">Besoin en luminosité (de 0 à 5)</label>
-          <input type="text" name="brightness" onChange={handleChange} defaultValue={brightness} required/>
-          <label htmlFor="minTemperature">Température minimale</label>
-          <input type="text" name="minTemperature" onChange={handleChange} defaultValue={minTemperature} required/>
-          <label htmlFor="maxTemperature">Température maximale</label>
-          <input type="text" name="maxTemperature" onChange={handleChange} defaultValue={maxTemperature} required/>
-          <button type="submit">Valider</button>
-      </form>
-      }
-    </section>
-  )
+        { plant !== null &&
+        <form onSubmit={(e)=>{handleSubmit(e)}}>
+            <label htmlFor="name">Nom</label>
+            <input type="text" name="name" onChange={handleChange} defaultValue={name} required/>
+            <label htmlFor="description">Description</label>
+            <textarea name="description" rows="5" cols="50" onChange={handleChange} defaultValue={description} required/>
+            <label htmlFor="price">Prix</label>
+            <input type="text" name="price" onChange={handleChange} defaultValue={price} required/>
+            <label htmlFor="photo">Photo</label>
+            <input type="file" ref={fileInput} onChange={handleChange} name="newPhoto"/>
+            <label htmlFor="quantity">Quantité en stock</label>
+            <input type="text" name="quantity" onChange={handleChange} defaultValue={quantity} required/>
+            <label htmlFor="watering">Besoin en eau (de 0 à 5)</label>
+            <input type="text" name="watering" onChange={handleChange} defaultValue={watering} required/>
+            <label htmlFor="brightness">Besoin en luminosité (de 0 à 5)</label>
+            <input type="text" name="brightness" onChange={handleChange} defaultValue={brightness} required/>
+            <label htmlFor="minTemperature">Température minimale</label>
+            <input type="text" name="minTemperature" onChange={handleChange} defaultValue={minTemperature} required/>
+            <label htmlFor="maxTemperature">Température maximale</label>
+            <input type="text" name="maxTemperature" onChange={handleChange} defaultValue={maxTemperature} required/>
+            <button type="submit">Valider</button>
+        </form>
+        }
+      </section>
+    )
+  }
+
 }
 
 export default EditPlant

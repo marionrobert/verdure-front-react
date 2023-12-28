@@ -4,12 +4,14 @@ import { addOnePlant } from "../../../api/plant";
 import axios from 'axios'
 import { config } from "../../../config";
 import { Navigate } from "react-router-dom";
-import {useDispatch} from "react-redux"
+import {useSelector, useDispatch} from "react-redux"
 import { getAllPlants } from "../../../slices/plantSlice";
 import { loadPlants } from "../../../api/plant";
+import { selectUser } from "../../../slices/userSlice"
 
 const AddPlant = () => {
   const dispatch = useDispatch()
+  const user = useSelector(selectUser)
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [price, setPrice] = useState("")
@@ -151,36 +153,38 @@ const AddPlant = () => {
     return <Navigate to={`/plant/details/${idNewPlant}`} />
   }
 
-  return (
-    <section className="forms">
-      <h1>Ajouter une nouvelle plante</h1>
+  if (user.infos.role === "admin") {
+    return (
+      <section className="forms">
+        <h1>Ajouter une nouvelle plante</h1>
 
-      {errorForm !== null && <p style={{color:"red"}}>{errorForm}</p>}
+        {errorForm !== null && <p style={{color:"red"}}>{errorForm}</p>}
 
-      <form onSubmit={(e)=>{handleSubmit(e)}}>
-          <label htmlFor="name">Nom</label>
-          <input type="text" name="name" onChange={handleChange} required/>
-          <label htmlFor="description">Description</label>
-          <textarea name="description" onChange={handleChange} required/>
-          <label htmlFor="price">Prix</label>
-          <input type="text" name="price" onChange={handleChange} required/>
-          <label htmlFor="photo">Photo</label>
-          <input type="file" ref={fileInput} onChange={handleChange} name="photo"/>
-          <label htmlFor="quantity">Quantité en stock</label>
-          <input type="text" name="quantity" onChange={handleChange} required/>
-          <label htmlFor="watering">Besoin en eau (de 0 à 5)</label>
-          <input type="text" name="watering" onChange={handleChange} required/>
-          <label htmlFor="brightness">Besoin en luminosité (de 0 à 5)</label>
-          <input type="text" name="brightness" onChange={handleChange} required/>
-          <label htmlFor="minTemperature">Température minimale</label>
-          <input type="text" name="minTemperature" onChange={handleChange} required/>
-          <label htmlFor="maxTemperature">Température maximale</label>
-          <input type="text" name="maxTemperature" onChange={handleChange} required/>
-          <button type="submit">Valider</button>
-      </form>
+        <form onSubmit={(e)=>{handleSubmit(e)}}>
+            <label htmlFor="name">Nom</label>
+            <input type="text" name="name" onChange={handleChange} required/>
+            <label htmlFor="description">Description</label>
+            <textarea name="description" onChange={handleChange} required/>
+            <label htmlFor="price">Prix</label>
+            <input type="text" name="price" onChange={handleChange} required/>
+            <label htmlFor="photo">Photo</label>
+            <input type="file" ref={fileInput} onChange={handleChange} name="photo"/>
+            <label htmlFor="quantity">Quantité en stock</label>
+            <input type="text" name="quantity" onChange={handleChange} required/>
+            <label htmlFor="watering">Besoin en eau (de 0 à 5)</label>
+            <input type="text" name="watering" onChange={handleChange} required/>
+            <label htmlFor="brightness">Besoin en luminosité (de 0 à 5)</label>
+            <input type="text" name="brightness" onChange={handleChange} required/>
+            <label htmlFor="minTemperature">Température minimale</label>
+            <input type="text" name="minTemperature" onChange={handleChange} required/>
+            <label htmlFor="maxTemperature">Température maximale</label>
+            <input type="text" name="maxTemperature" onChange={handleChange} required/>
+            <button type="submit">Valider</button>
+        </form>
 
-    </section>
-  )
+      </section>
+    )
+  }
 }
 
 export default AddPlant

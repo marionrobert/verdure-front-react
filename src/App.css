@@ -331,17 +331,15 @@ button.btn-discover-all-plants:hover{
 }
 
 
-
-
-/* CARD PLANT */
-.all-plants {
-  margin: 3rem 0;
+/* home - overview */
+section.overview {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  margin-top: 3rem;
 }
 
-.all-plants h2, .all-plants h1 {
+section.overview h2 {
   width: 100%;
   margin-bottom: 1rem;
   font-size: 3em;
@@ -349,6 +347,27 @@ button.btn-discover-all-plants:hover{
   font-family: 'Dancing Script', cursive;
 }
 
+
+/* all plants section */
+.all-plants {
+  margin: 6rem 0 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.all-plants h1, .all-plants h2 {
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 3em;
+  line-height: 1.1;
+  font-family: 'Dancing Script', cursive;
+}
+
+
+
+
+/* CARD PLANT */
 .plant-card{
   margin: 1rem 0 ;
   overflow: hidden;

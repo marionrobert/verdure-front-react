@@ -25,7 +25,7 @@ const Home = () => {
         <button className="banner-btn"><Link to="/plants" >Découvrir</Link></button>
 
       </div>
-      { allPlants.plants.length > 0 && <section className="all-plants">
+      { allPlants.plants.length > 0 && <section className="overview">
         <h2 className="new-plants">Les nouveautés</h2>
         {allPlants.plants.slice(0, 8).map(plant => {
           return <ArticleProduct key={plant.id} product={plant}/>
