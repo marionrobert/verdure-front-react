@@ -44,6 +44,7 @@ const Header = () => {
   // {console.log(nbItems)}
 
 
+
   return (
     <header>
       <nav id="nav-menu">
@@ -118,7 +119,7 @@ const Header = () => {
       <div className='menu-user' onMouseLeave={closeUserMenu}>
         {user.isLogged && user.infos.role === "user" && <Link onClick={closeUserMenu} to='/myaccount'>Mon compte</Link>}
         {user.isLogged && user.infos.role === "admin" && <Link  onClick={closeUserMenu} to='/admin'>Admin</Link>}
-        <Link to='/logout'> Déconnexion</Link>
+        <Link to='/logout'>Déconnexion</Link>
       </div>
     </header>
   )

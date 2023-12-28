@@ -67,10 +67,10 @@ const Admin = () => {
   }
 
   return (
-    <div className="admin-dashboard">
-      <button className="logout"><Link to="/logout"><FontAwesomeIcon icon={faRightFromBracket}/> Déconnexion</Link></button>
+    <section className="admin-dashboard">
+      <Link to="/logout" className="button"><FontAwesomeIcon icon={faRightFromBracket}/> Déconnexion</Link>
       <h1>Administration</h1>
-        <section className="manage-all-plants">
+        <article className="manage-all-plants">
           <h2>Gérer les produits</h2>
           {successPlant !== null && <p style={{color: "green"}}>{successPlant}</p>}
           {plants.plants && plants.plants.length > 0 &&
@@ -97,10 +97,10 @@ const Admin = () => {
               </tbody>
             </table>
           }
-          <button className="create-product"><Link to="/plant/add">Créer un nouveau produit</Link></button>
-        </section>
+          <Link to="/plant/add" className="button create-product">Créer un nouveau produit</Link>
+        </article>
 
-        {orders && orders.length > 0 && <section className="manage-all-plants">
+        {orders && orders.length > 0 && <article className="manage-all-plants">
           <h2>Gérer les commandes</h2>
           <table>
             <thead>
@@ -119,7 +119,26 @@ const Admin = () => {
                     <td>{moment(order.creationTimestamp).locale("fr").format("DD/MM/YYYY")}</td>
                     <td>
                       <select name="status" onChange={(e)=>{handleChange(e, order.id)}}>
-                          <option>{order.status}</option>
+                          <option value={order.status}>
+                            {(() => {
+                              switch (order.status) {
+                                case 'shipped':
+                                  return 'Expédiée';
+                                case 'in_delivery':
+                                  return 'En livraison';
+                                case 'delivered':
+                                  return 'Livrée';
+                                case 'finished':
+                                  return 'Terminée';
+                                case 'payed':
+                                  return 'Payée';
+                                case 'not_payed':
+                                  return 'Non payée';
+                                default:
+                                  return order.status;
+                              }
+                            })()}
+                          </option>
                           <option value="shipped" >Expédiée</option>
                           <option value="in_delivery">En livraison</option>
                           <option value="delivered">Livrée</option>
@@ -132,10 +151,10 @@ const Admin = () => {
               })}
             </tbody>
           </table>
-        </section>
+        </article>
         }
 
-    </div>
+    </section>
   )
 }
 

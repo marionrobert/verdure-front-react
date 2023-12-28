@@ -5,15 +5,22 @@ import axios from 'axios'
 import { config } from "../../../config";
 import { Navigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import {useDispatch} from "react-redux"
+import { getAllPlants } from "../../../slices/plantSlice";
+import { loadPlants } from "../../../api/plant";
+
 
 
 const EditPlant = () => {
   const params = useParams()
+  const dispatch = useDispatch()
+
   const [plant, setPlant] = useState(null)
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [price, setPrice] = useState("")
   const [photo, setPhoto] = useState(null)
+  const [newPhoto, setNewPhoto] = useState(null)
   const [quantity, setQuantity] = useState("")
   const [watering, setWatering] = useState("")
   const [brightness, setBrightness] = useState("")
@@ -37,6 +44,7 @@ const EditPlant = () => {
       setBrightness(res.results.brightness)
       setMinTemperature(res.results.minTemperature)
       setMaxTemperature(res.results.maxTemperature)
+      setPhoto(res.results.photo)
     })
     .catch((err)=>{
       console.log(err)
@@ -49,13 +57,15 @@ const EditPlant = () => {
     e.preventDefault()
     setErrorForm(null)
 
-    if (photo === null){
-      console.log("pas de photo ")
+    console.log("newphoto -->", newPhoto)
+
+    if (newPhoto === null){
+      console.log("pas de nouvelle photo ")
       let data = {
         "name": name,
         "description": description,
         "price": price,
-        "photo": "no-pict.jpg",
+        "photo": photo,
         "quantity": quantity,
         "watering": watering,
         "brightness": brightness,
@@ -68,6 +78,13 @@ const EditPlant = () => {
       .then((res)=>{
         console.log("retour update method après quand photo est nulle",res)
         if (res.status === 200){
+          loadPlants()
+          .then((response) => {
+            if (response.status === 200) {
+              dispatch(getAllPlants(response.results))
+            }
+          })
+          .catch(mistake => console.log(mistake))
           setRedirect(true)
         } else {
           setErrorForm(res.msg)
@@ -78,10 +95,9 @@ const EditPlant = () => {
       })
 
 
-    } else { //une photo a été chargée
-      console.log("photo")
+    } else { //une nouvelle photo a été chargée
       const formData = new FormData()
-      formData.append("image", photo)
+      formData.append("image", newPhoto)
 
       //requète axios d'envoi d'une image vers l'api
       axios.post(`${config.api_url}/api/v1/plant/pict`, formData, {headers: {"Content-Type":"multipart/form-data", "x-access-token": token}})
@@ -100,12 +116,19 @@ const EditPlant = () => {
             "maxTemperature": maxTemperature
           }
 
-          console.log("newdata", newData)
+          // console.log("newdata", newData)
 
           updateOnePlant(newData, params.id)
           .then((res)=>{
             // console.log("retour update method quand photo n'est pas nulle", res)
             if (res.status === 200){
+              loadPlants()
+              .then((response) => {
+                if (response.status === 200) {
+                  dispatch(getAllPlants(response.results))
+                }
+              })
+              .catch(mistake => console.log(mistake))
               setRedirect(true)
             } else {
               setErrorForm(res.msg)
@@ -135,8 +158,8 @@ const EditPlant = () => {
       case "price":
         setPrice(e.currentTarget.value)
         break;
-      case "photo":
-        setPhoto(fileInput.current.files[0])
+      case "newPhoto":
+        setNewPhoto(fileInput.current.files[0])
         break;
       case "quantity":
         setQuantity(e.currentTarget.value)
@@ -161,7 +184,7 @@ const EditPlant = () => {
   }
 
   return (
-    <>
+    <section className="forms">
       <h1>Modifier les informations d'une plante</h1>
       {errorForm !== null && <p style={{color:"red"}}>{errorForm}</p>}
 
@@ -170,11 +193,11 @@ const EditPlant = () => {
           <label htmlFor="name">Nom</label>
           <input type="text" name="name" onChange={handleChange} defaultValue={name} required/>
           <label htmlFor="description">Description</label>
-          <input type="text" name="description" onChange={handleChange} defaultValue={description} required/>
+          <textarea name="description" rows="5" cols="50" onChange={handleChange} defaultValue={description} required/>
           <label htmlFor="price">Prix</label>
           <input type="text" name="price" onChange={handleChange} defaultValue={price} required/>
           <label htmlFor="photo">Photo</label>
-          <input type="file" ref={fileInput} onChange={handleChange} name="photo"/>
+          <input type="file" ref={fileInput} onChange={handleChange} name="newPhoto"/>
           <label htmlFor="quantity">Quantité en stock</label>
           <input type="text" name="quantity" onChange={handleChange} defaultValue={quantity} required/>
           <label htmlFor="watering">Besoin en eau (de 0 à 5)</label>
@@ -188,10 +211,7 @@ const EditPlant = () => {
           <button type="submit">Valider</button>
       </form>
       }
-
-
-
-    </>
+    </section>
   )
 }
 

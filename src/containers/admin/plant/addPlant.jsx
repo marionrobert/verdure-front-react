@@ -4,8 +4,12 @@ import { addOnePlant } from "../../../api/plant";
 import axios from 'axios'
 import { config } from "../../../config";
 import { Navigate } from "react-router-dom";
+import {useDispatch} from "react-redux"
+import { getAllPlants } from "../../../slices/plantSlice";
+import { loadPlants } from "../../../api/plant";
 
 const AddPlant = () => {
+  const dispatch = useDispatch()
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [price, setPrice] = useState("")
@@ -41,6 +45,14 @@ const AddPlant = () => {
       addOnePlant(data)
       .then((res)=>{
         if (res.status === 200){
+          loadPlants()
+          .then((answer)=>{
+            console.log("answer.status", answer.status)
+            if (answer.status === 200){
+              dispatch(getAllPlants(answer.results))
+            }
+          })
+          .catch(mistake => console.log(mistake))
           setIdNewPlant(res.plant.insertId)
           setRedirect(true)
         } else {
@@ -76,6 +88,14 @@ const AddPlant = () => {
           addOnePlant(newData)
           .then((res)=>{
             if (res.status === 200){
+              loadPlants()
+              .then((answer)=>{
+                console.log("answer.status", answer.status)
+                if (answer.status === 200){
+                  dispatch(getAllPlants(answer.results))
+                }
+              })
+              .catch(mistake => console.log(mistake))
               setIdNewPlant(res.plant.insertId)
               setRedirect(true)
             } else {
@@ -132,7 +152,7 @@ const AddPlant = () => {
   }
 
   return (
-    <>
+    <section className="forms">
       <h1>Ajouter une nouvelle plante</h1>
 
       {errorForm !== null && <p style={{color:"red"}}>{errorForm}</p>}
@@ -141,7 +161,7 @@ const AddPlant = () => {
           <label htmlFor="name">Nom</label>
           <input type="text" name="name" onChange={handleChange} required/>
           <label htmlFor="description">Description</label>
-          <input type="text" name="description" onChange={handleChange} required/>
+          <textarea name="description" onChange={handleChange} required/>
           <label htmlFor="price">Prix</label>
           <input type="text" name="price" onChange={handleChange} required/>
           <label htmlFor="photo">Photo</label>
@@ -159,7 +179,7 @@ const AddPlant = () => {
           <button type="submit">Valider</button>
       </form>
 
-    </>
+    </section>
   )
 }
 
