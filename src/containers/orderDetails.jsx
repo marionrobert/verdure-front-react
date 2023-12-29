@@ -60,24 +60,21 @@ const OrderDetails = () => {
       }
     }, [order]);
 
-
-  if (order !== null){
-    console.log("orderDetails -->", orderDetails)
+  if (order !== null && (user.infos.id === order.user_id || user.infos.role === "admin")){
     return (
       <section className="details-order">
         <h1>Commande n° {order.id}</h1>
 
         <div className="general-infos">
           { user.infos.role === "admin" && <article>
-            <h2>Identité du client : </h2>
-            <p>{userData.firstName} {userData.lastName}</p>
+            <h2>Identité du client : {userData.firstName} {userData.lastName} </h2>
           </article>
           }
 
           <h2><span><FontAwesomeIcon icon={faLocationDot}/> Adresse de livraison : </span>{userData.address} {userData.zip} {userData.city}</h2>
 
-          <h2>Passée le {moment(order.creationTimestamp).local("fr").format("DD/MM/YYYY")}</h2>
-          <h2>Statut : {status}</h2>
+          <h2>Commande passée le {moment(order.creationTimestamp).local("fr").format("DD/MM/YYYY")}</h2>
+          <h2>Statut de la commande : {status}</h2>
 
           <h2>Montant total de la commande : {order.totalAmount} €</h2>
         </div>

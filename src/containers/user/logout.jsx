@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { logoutUser } from "../../slices/userSlice"
 import { useEffect } from "react"
+import { cleanBasket } from "../../slices/basketSlice"
 
 
 const Logout = () => {
@@ -10,9 +11,10 @@ const Logout = () => {
   useEffect(()=>{
     window.localStorage.removeItem('verdure-token')
     dispatch(logoutUser())
+    dispatch(cleanBasket())
   }, [])
 
-  return <Navigate to="http://localhost:5173/"/>
+  return <Navigate to="/home"/>
 }
 
 

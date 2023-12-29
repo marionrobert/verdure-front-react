@@ -33,7 +33,7 @@ const Profile = () => {
 
     getAllOrdersByUser(parseInt(user.infos.id))
     .then((res) => {
-      console.log("res -->", res)
+      // console.log("res -->", res)
       if (res.status === 200){
         setOrders(res.orders)
       } else {

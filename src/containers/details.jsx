@@ -2,14 +2,19 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { loadOnePlant } from "../api/plant";
 import {config} from "../config";
+import { Link } from "react-router-dom";
+
 
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import { faDroplet, faSun, faTemperatureHigh, faCartPlus, faSquarePlus, faSquareMinus } from "@fortawesome/free-solid-svg-icons"
+import { faDroplet, faSun, faTemperatureHigh, faCartPlus, faSquarePlus, faSquareMinus, faArrowRotateLeft } from "@fortawesome/free-solid-svg-icons"
+
+//on importer nos fonction pour lire ou modifier nos states globales présentes dans le store de redux
+import { useSelector, useDispatch } from 'react-redux';
 
 //import des states globales product et basket et de leurs actions (ajout au panier, chargement des produits)
 import { selectBasket, updateBasket  } from '../slices/basketSlice';
-//on importer nos fonction pour lire ou modifier nos states globales présentes dans le store de redux
-import { useSelector, useDispatch } from 'react-redux';
+import { selectUser } from "../slices/userSlice";
+
 
 const Details = () => {
   const params = useParams()
@@ -17,6 +22,7 @@ const Details = () => {
   const [chosenQuantity, setChosenQuantity] = useState(1)
   const currentBasket = useSelector(selectBasket)
   const dispatch = useDispatch()
+  const user = useSelector(selectUser)
 
   useEffect(()=>{
     loadOnePlant(params.id)
@@ -68,6 +74,12 @@ const Details = () => {
     <>
       { plant !== null &&
       <section className="details-plant">
+        <div id="link-to-plants">
+          <Link to="/plants" className="button"><FontAwesomeIcon icon={faArrowRotateLeft}/> Retour vers toutes les plantes</Link>
+        </div>
+        {/* <div id="link-to-plants">
+          <Link to="/plants" className="button"><FontAwesomeIcon icon={faArrowRotateLeft}/> Retour vers toutes les plantes</Link>
+        </div> */}
         <img src={`${config.pict_url}/${plant.photo}`}/>
         <div className="details-plant-infos">
           <h1>{plant.name}</h1>
@@ -102,10 +114,13 @@ const Details = () => {
 
           </ul>
         </div>
+
+        { user.infos.role !== "admin" &&
         <form onSubmit={(e)=>{addToBasket(e, currentBasket.basket, plant)}}>
           <input name="quantity" id="quantity" placeholder="1" defaultValue={chosenQuantity} onChange={(e)=>{handleChange(e)}}/>
           <button>Ajouter au panier <FontAwesomeIcon icon={faCartPlus}/></button>
         </form>
+        }
       </section>
       }
     </>

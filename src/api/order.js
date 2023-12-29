@@ -86,7 +86,7 @@ export function updateOrderStatusByAdmin(id, data){
 
 // chargement des commandes pour un utilisateur
 export function getAllOrdersByUser(userId){
-  console.log("userId in getAllOrdersByUser -->", userId)
+  // console.log("userId in getAllOrdersByUser -->", userId)
   const token = window.localStorage.getItem('verdure-token')
   return axios.get(`${config.api_url}/api/v1/orders/user/${userId}`, {headers: {"x-access-token": token}})
   .then((res)=>{
