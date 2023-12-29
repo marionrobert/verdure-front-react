@@ -16,6 +16,8 @@ const Admin = () => {
   const dispatch = useDispatch()
   const [successPlant, setSuccessPlant] = useState(null)
   const [errorPlant, setErrorPlant] = useState(null)
+  const [successOrder, setSuccessOrder] = useState(null)
+  const [errorOrder, setErrorOrder] = useState(null)
 
   useEffect(()=> {
     getAllOrders()
@@ -38,8 +40,6 @@ const Admin = () => {
         .then((response)=>{
           if(response.status === 200){
             dispatch(getAllPlants(response.results))
-          } else {
-            console.log("erreur chargement des plantes")
           }
         })
         .catch((error)=>{
@@ -49,9 +49,9 @@ const Admin = () => {
         setErrorPlant("La plante n'a pas pu être supprimée")
       }
     })
-    .catch((err)=>{
+    .catch(()=>{
       setErrorPlant("La plante n'a pas pu être supprimée")
-      console.log(err)
+      // console.log(err)
     })
   }
 
@@ -59,7 +59,8 @@ const Admin = () => {
     console.log(e.currentTarget.value)
     updateOrderStatusByAdmin(id, {"status": e.currentTarget.value})
     .then((res)=>{
-      console.log(res)
+      // console.log(res)
+      
     })
     .catch((err)=>{
       console.log(err)
@@ -72,6 +73,7 @@ const Admin = () => {
       <section className="admin-dashboard">
         <Link to="/logout" className="button"><FontAwesomeIcon icon={faRightFromBracket}/> Déconnexion</Link>
         <h1>Administration</h1>
+
           <article className="manage-all-plants">
             <h2>Gérer les produits</h2>
             {successPlant !== null && <p style={{color: "green"}}>{successPlant}</p>}
@@ -103,11 +105,16 @@ const Admin = () => {
             <Link to="/plant/add" className="button create-product">Créer un nouveau produit</Link>
           </article>
 
-          {orders && orders.length > 0 && <article className="manage-all-plants">
+          {orders && orders.length > 0 &&
+
+          <article className="manage-all-plants">
             <h2>Gérer les commandes</h2>
+            {successOrder !== null && <p className="success">{successOrder}</p>}
+            {errorOrder !== null && <p className="error">{successOrder}</p>}
             <table>
               <thead>
                 <tr>
+                  <td>N°</td>
                   <td>Montant</td>
                   <td>Date</td>
                   <td>Mette à jour le statut</td>
@@ -118,6 +125,7 @@ const Admin = () => {
                 {orders.map((order) => {
                   return (
                     <tr key={order.id}>
+                      <td>{order.id}</td>
                       <td>{order.totalAmount} €</td>
                       <td>{moment(order.creationTimestamp).locale("fr").format("DD/MM/YYYY")}</td>
                       <td>
@@ -155,6 +163,7 @@ const Admin = () => {
               </tbody>
             </table>
           </article>
+
           }
 
       </section>

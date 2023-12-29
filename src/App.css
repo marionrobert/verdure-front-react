@@ -97,6 +97,7 @@ main {
 }
 
 
+
 /* HEADER */
 header {
   background-color: rgba(2, 46, 35, 0.975);
@@ -770,14 +771,17 @@ section.payement form button {
 /* ADMIN */
 section.admin-dashboard {
   text-align: right;
-  margin-bottom: 2rem;;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .admin-dashboard h1 {
   margin-top: 2rem;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-family: 'Dancing Script', cursive;
   text-align: center;
+  width: 100%;
 }
 
 article.manage-all-plants{
@@ -787,7 +791,7 @@ article.manage-all-plants{
 
 .admin-dashboard h2 {
   margin: 2.5rem 0.5rem 1.5rem;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
 }
 
@@ -817,10 +821,11 @@ article.manage-all-plants{
 }
 
 .admin-dashboard table {
-  width: 95%;
+  width: 90%;
   margin-top: 1rem;
   margin-right: auto;
   margin-left: auto;
+  font-size: 0.92rem;
 }
 
 .admin-dashboard table thead {
@@ -828,7 +833,7 @@ article.manage-all-plants{
 }
 
 .admin-dashboard table, tr, td {
-  border: 1px solid black;
+  border: 1px solid rgba(2, 46, 35, 0.5);
   padding: 0.5rem;
   text-align: center;
 }
@@ -1196,6 +1201,11 @@ footer a svg:hover {
   /* payement - checkout form*/
   article.checkoutForm {
     width: 45%;
+  }
+
+  /* ADMIN */
+  article.manage-all-plants{
+    width: 50%;
   }
 
 
