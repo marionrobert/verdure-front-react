@@ -840,6 +840,8 @@ article.manage-all-plants{
 
 .admin-dashboard table .svg-inline--fa {
   padding: 0 0.2rem;
+  cursor: pointer;
+  color:rgba(2, 46, 35, 0.7);
 }
 
 
@@ -1207,8 +1209,5 @@ footer a svg:hover {
   article.manage-all-plants{
     width: 50%;
   }
-
-
-
 
 }

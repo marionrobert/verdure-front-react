@@ -164,7 +164,7 @@ const AddPlant = () => {
             <label htmlFor="name">Nom</label>
             <input type="text" name="name" onChange={handleChange} required/>
             <label htmlFor="description">Description</label>
-            <textarea name="description" onChange={handleChange} required/>
+            <textarea name="description" rows="5" cols="50" onChange={handleChange} required/>
             <label htmlFor="price">Prix</label>
             <input type="text" name="price" onChange={handleChange} required/>
             <label htmlFor="photo">Photo</label>
