@@ -45,7 +45,7 @@ Voici la list des packages et eur leur verion utilisés dans ce projet :
 2. Assurez-vous d'avoir les bonnes versions de la stack technologique installées.
 3. Créez un fichier **.env** dans lequel vous y mettrez les variables d'environnement `STRIPE_SECRET_KEY` et `STRIPE_PUBLIC_KEY` pour interragir avec l'api stripe. Vous obtiendrez ces clés en vous créant un compte stripe.
 4. Exécutez la commande `npm install` pour installer les dépendances.
-5. Suivez les étapes d'installation et de configuration du backend, puis lancez le serveur de l'API backend avec la commande `npm run dev`. Toutes les instructions sont disponibles sur le dépôt du backend de l'application [ici](https://github.com/marionrobert/finalProjet-api-back).
+5. Suivez les étapes d'installation et de configuration du backend, puis lancez le serveur de l'API backend avec la commande `npm run dev`. Toutes les instructions sont disponibles sur le dépôt du backend de l'application [ici](https://github.com/marionrobert/verdure-api-back).
 6. Ensuite, lancez le serveur de l'interface utilisateur avec la commande `npm run dev`.
 
 <br/>
