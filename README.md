@@ -99,18 +99,16 @@ L’utilisateur qui a un compte peut :
 - Consulter toutes les plantes disponibles à l'achat
 - Consulter une page de détails d'une plante
 - Mettre des plantes dans le panier
-- Consulter la page récapitulative de la commande et confirmer sa commande
+- Consulter et modifier le contenu de son panier et confirmer sa commande
 - Procéder au paiement de sa commande
 - Depuis son dashboard:
-  - consulter son profile et modifier ses informations personnelles
+  - consulter son profil et modifier ses informations personnelles
   - consulter la liste de ses commandes et se rendre sur le page de détails de chaque commande passée
 
 <br/>
 
 **Utilisateur avec le rôle d’administrateur:**
-L'administrateur peut : 
-- créer, modifier, supprimer une plante
-- depuis son dashboard, modifier le statut d'une commande (expédiée > en livraison > livrée > terminée)
+L'administrateur peut créer, modifier, supprimer une plante
 
 
 <br/>
@@ -160,4 +158,4 @@ L'administrateur peut :
 
 
 ## Dossier lié 🔗
-La partie backend de l'application est accessible [ici](https://github.com/marionrobert/finalProjet-api-back)
+La partie backend de l'application est accessible [ici](https://github.com/marionrobert/verdure-api-back).
