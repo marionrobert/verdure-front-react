@@ -1,12 +1,15 @@
 # Bienvenue sur *Verdure* : Découvrez un large choix de plantes pour habiller votre intérieur 🌻🪴
+<img src="/public/screenshots/banner.png" alt="bannière de l'applciation web">
 Verdure est une application web de vente en ligne de plantes d'intérieur. L'application est disponible uniquement en français. Ce dépôt est consacré à la partie frontend de ce projet.
 
 
+<br/>
 <br/>
 
 ## Contexte de développement 💻
 Il s'agit d'un projet éducatif développé en tant que projet final de la formation "Développeur web FullStack Javascript" à la 3w Academy.
 
+<br/>
 <br/>
 
 ## Installation et Configuration ⚙️🛠️
@@ -49,6 +52,7 @@ Voici la list des packages et eur leur verion utilisés dans ce projet :
 6. Ensuite, lancez le serveur de l'interface utilisateur avec la commande `npm run dev`.
 
 <br/>
+<br/>
 
 ## Contenu des fichiers 📁🗃️
 
@@ -74,16 +78,21 @@ A la racine du projet, il existe également:
 - un fichier **vite.config.js** quiconfigure Vite pour prendre en charge React en utilisant le plugin @vitejs/plugin-react. Il exporte une configuration par défaut qui spécifie l'utilisation du plugin React.
 
 <br/>
+<br/>
 
 ## Responsive design et méthode "mobile first"
 Le responsive design consiste à créer des sites Web et des applications qui s'adaptent automatiquement à différentes tailles d'écran et types d'appareils, offrant ainsi une expérience utilisateur optimale sur ordinateurs de bureau, tablettes et smartphones. La méthode mobile first est une approche de conception qui commence par concevoir pour les appareils mobiles, puis étend progressivement la mise en page et les fonctionnalités pour les écrans plus grands, ce qui permet de prioriser l'expérience utilisateur sur les appareils mobiles et de simplifier la conception.
 
-### Exemple de responsive design sur la page de présentation d'une activité
+### Exemple de responsive design sur la page de visionnage des détails d'une plante
 <br/>
 <div style="display: flex; justify-content: center;">
-<img src="/public/screenshots/activityDetails.png" alt="présentation d'une activité en format mobile" width="300">
-<img src="/public/screenshots/activityDetailsTabletAndComputer.png" alt="présentation d'une activité en format tablette et ordinateur" width="700">
+<img src="/public/screenshots/plantDetails1.png" alt="présentation d'une plante en format mobile 1-2" width="300">
+<img src="/public/screenshots/plantDetails2.png" alt="présentation d'une plante en format mobile 2-2" width="300">
+<img src="/public/screenshots/plantDetailsTablet.png" alt="présentation d'une plante en format tablette" width="500">
+<img src="/public/screenshots/plantDetailsPC.png" alt="présentation d'une activité en format ordinateur" width="800">
 </div>
+
+<br/>
 <br/>
 
 ## Fonctionnalités et parcours utilisateur
@@ -116,46 +125,45 @@ L'administrateur peut créer, modifier, supprimer une plante
 
 ## Un apperçu de l'interface
 
+### Page d'accueil
+<img src="/public/screenshots/homePage.png" alt="page d'accueil" width="800">
+
+<br/>
+
 ### Dashboard de l'utilisateur
-<img src="/public/screenshots/dashboard.png" alt="dashboard de l'utilisateur" width="800">
+<img src="/public/screenshots/dashboardUser.png" alt="dashboard de l'utilisateur" width="800">
 
 <br/>
 
-### Visionnage et filtre des activités
-<img src="/public/screenshots/filter-activities.png" alt="visionnage et filtre des activités" width="800">
+### Visionnage des plantes
+<img src="/public/screenshots/allPlants.png" alt="visionnage des plantes" width="800">
 
 <br/>
 
-<br/>
-
-### Accepter, Confirmer et Commenter une réservation
+### Visualiser, modifier et valider le panier - Payer la commande
 <div style="display: flex; justify-content: center;">
-    <img src="/public/screenshots/bookingCompleted.png" alt="visualiser une réservation terminée" width="500">
-    <img src="/public/screenshots/acceptBooking.png" alt="accepter une réservation" width="300">
-    <img src="/public/screenshots/confirmCompletion.png" alt="confirmer la réalisation de l'activité" width="300">
-    <img src="/public/screenshots/commentBooking.png" alt="commenter une réservation terminée" width="500">
-
+    <img src="/public/screenshots/basktetPage.png" alt="visualiser le panier" width="500">
+    <img src="/public/screenshots/paymentPage.png" alt="payer la commande" width="500">
 </div>
 <br/>
+
+### Visualier une commande passée
+<img src="/public/screenshots/bookingDetailsPage.png" alt="visualiser le panier" width="800">
 
 ### Dashboard de l'administrateur
 <img src="/public/screenshots/dashboardAdmin.png" alt="dahsboard administrateur" width="800">
 
 <br/>
 
-### Modération des activités et commentaires par l'administrateur
+
+### Gréation et modification des plantes par l'administrateur
 <div style="display: flex; justify-content: center;">
-    <img src="/public/screenshots/moderateActivity.png" alt="modération de l'activité par l'administateur" width="600">
-    <img src="/public/screenshots/moderateComment.png" alt="modération du commentaire par l'administateur" width="300">
+    <img src="/public/screenshots/createPlant.png" alt="création d'une plante par l'administrateur" width="500">
+    <img src="/public/screenshots/editPlant.png" alt="modification d'une plante par l'administateur" width="500">
 </div>
-<br/>
-
-
-
-## Notifications par email
 
 <br/>
-
+<br/>
 
 ## Dossier lié 🔗
 La partie backend de l'application est accessible [ici](https://github.com/marionrobert/verdure-api-back).
