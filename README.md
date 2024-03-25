@@ -71,6 +71,7 @@ Le projet est organisé en plusieurs dossiers et fihciers présents dans le doss
 - fichier **config.js** : contient un objet config qui stocke les informations nécessaires à l'application, telles que les URL de l'API et les URL des images. Actuellement, il est configuré pour utiliser des URL locales (http://localhost:9000), mais il existe également une configuration en commentaire pour une utilisation avec un environnement de développement IDE (http://marionrobert.ide.3wa.io:9000).
 - fichier **main.jsx** : c'est le point d'entrée de l'application React. Il importe les modules nécessaires, tels que React, ReactDOM, et les composants App, BrowserRouter, Provider, et store. Ensuite, il rend l'application en encapsulant le composant App dans un contexte de Redux fourni par Provider et un routeur fourni par BrowserRouter, le tout enveloppé dans un mode strict de React.
 
+<br/>
 
 A la racine du projet, il existe également:
 - un dossier **public** qui contient uniquement l'image servant de favicon ainsi que les screenshots de l'applciation web utilisées dans ce fichier README.
@@ -86,9 +87,9 @@ Le responsive design consiste à créer des sites Web et des applications qui s'
 ### Exemple de responsive design sur la page de visionnage des détails d'une plante
 <br/>
 <div style="display: flex; justify-content: center;">
-<img src="/public/screenshots/plantDetails1.png" alt="présentation d'une plante en format mobile 1-2" width="300">
-<img src="/public/screenshots/plantDetails2.png" alt="présentation d'une plante en format mobile 2-2" width="300">
-<img src="/public/screenshots/plantDetailsTablet.png" alt="présentation d'une plante en format tablette" width="500">
+<img src="/public/screenshots/plantDetails1.png" alt="présentation d'une plante en format mobile 1-2" width="250">
+<img src="/public/screenshots/plantDetails2.png" alt="présentation d'une plante en format mobile 2-2" width="250">
+<img src="/public/screenshots/plantDetailsTablet.png" alt="présentation d'une plante en format tablette" width="450">
 <img src="/public/screenshots/plantDetailsPC.png" alt="présentation d'une activité en format ordinateur" width="800">
 </div>
 
