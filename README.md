@@ -156,7 +156,7 @@ L'administrateur peut créer, modifier, supprimer une plante
 <br/>
 
 
-### Gréation et modification des plantes par l'administrateur
+### Création et modification des plantes par l'administrateur
 <div style="display: flex; justify-content: center;">
     <img src="/public/screenshots/createPlant.png" alt="création d'une plante par l'administrateur" width="500">
     <img src="/public/screenshots/editPlant.png" alt="modification d'une plante par l'administateur" width="500">
