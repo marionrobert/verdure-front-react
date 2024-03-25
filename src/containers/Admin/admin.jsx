@@ -20,8 +20,10 @@ const Admin = () => {
   const [errorOrder, setErrorOrder] = useState(null)
 
   useEffect(()=> {
+    console.log("coucou")
     getAllOrders()
     .then((res)=>{
+      console.log("res orders -->", res)
       setOrders(res.results)
     })
     .catch((err)=>{
@@ -60,7 +62,6 @@ const Admin = () => {
     updateOrderStatusByAdmin(id, {"status": e.currentTarget.value})
     .then((res)=>{
       // console.log(res)
-      
     })
     .catch((err)=>{
       console.log(err)

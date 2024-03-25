@@ -1,24 +1,24 @@
 import './App.css'
 
-import Header from "./components/header"
-import Footer from "./components/footer"
+import Header from "./components/Header"
+import Footer from "./components/Footer"
 
-import Home from "./containers/home"
-import Products from "./containers/products"
-import Details from "./containers/details"
-import Basket from './containers/basket'
-import Payment from './containers/payment'
-import Success from "./containers/success"
-import OrderDetails from './containers/orderDetails'
+import Home from "./containers/Home"
+import Products from "./containers/Plants/AllPlants"
+import Details from "./containers/Plants/PlantDetails"
+import Basket from './containers/Basket'
+import Payment from './containers/Payment'
+import Success from "./containers/Success"
+import OrderDetails from './containers/OrderDetails'
 
-import Login from "./containers/user/login"
-import Register from './containers/user/register'
-import Profile from "./containers/user/profile"
-import Logout from './containers/user/logout'
+import Login from "./containers/User/login"
+import Register from './containers/User/register'
+import Profile from "./containers/User/profile"
+import Logout from './containers/User/logout'
 
-import Admin from './containers/admin/admin'
-import AddPlant from './containers/admin/plant/addPlant'
-import EditPlant from './containers/admin/plant/editPlant'
+import Admin from './containers/Admin/admin'
+import AddPlant from './containers/Admin/Plant/addPlant'
+import EditPlant from './containers/Admin/Plant/editPlant'
 
 
 

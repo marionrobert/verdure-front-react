@@ -33,6 +33,7 @@ export function checkPayment(data){
 //chargement de toutes les commandes
 export function getAllOrders() {
   const token = window.localStorage.getItem('verdure-token')
+  console.log("token in getAllOrders", token)
   return axios.get(`${config.api_url}/api/v1/orders`, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data
