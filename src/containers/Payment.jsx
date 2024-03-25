@@ -1,5 +1,5 @@
 import {loadStripe} from "@stripe/stripe-js"
-import CheckoutForm from "../components/checkout-form"
+import CheckoutForm from "./CheckoutForm"
 import {Elements} from "@stripe/react-stripe-js"
 import { useEffect, useState } from "react"
 import { getOneOrder } from "../api/order"

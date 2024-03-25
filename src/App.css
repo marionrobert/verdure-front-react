@@ -935,7 +935,9 @@ section.profile .user-orders table {
 
 
 section.success-order h1 {
+  margin: 2.5rem 0 1rem ;
   padding-top: 2rem;
+  font-size: 2rem;
   font-family: 'Dancing Script', cursive;;
 }
 

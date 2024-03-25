@@ -35,6 +35,7 @@ export function updateOneUser(data, id){
 
 export function checkMyToken(){
   const token = window.localStorage.getItem('verdure-token')
+  console.log('token in checkMyToken -->', token)
   return axios.get(`${config.api_url}/api/v1/user/checkToken`, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data

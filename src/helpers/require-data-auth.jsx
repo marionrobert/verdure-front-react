@@ -3,14 +3,11 @@ import {useSelector, useDispatch} from 'react-redux'
 //import des action qui chargera les plantes venant d'un back
 import {selectUser, connectUser} from '../slices/userSlice'
 import {selectPlants, getAllPlants} from '../slices/plantSlice'
-import {selectBasket, updateBasket, cleanBasket } from '../slices/basketSlice'
 
-import {Navigate, useParams, useLocation} from 'react-router-dom'
+import {Navigate, useParams} from 'react-router-dom'
 // import {checkMyToken} from '../api/user'
 import {loadPlants} from '../api/plant'
 
-import { config } from "../config";
-import axios from "axios";
 import { checkMyToken } from '../api/user'
 
 
@@ -54,7 +51,7 @@ const RequireDataAuth = (props) =>{
         // console.log("route protégée")
         // récupération du token dans le localStorage
         let token = window.localStorage.getItem("verdure-token")
-        // console.log("recup token from require auth-->", token)
+        console.log("recup token from require auth-->", token)
 
         if (token === null) { // l'utilisateur n'est pas connecté
           // console.log("l'utilisateur n'est pas connecté, on redirige vers le login")

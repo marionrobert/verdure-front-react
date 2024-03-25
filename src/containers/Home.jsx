@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ArticleProduct from "../components/article-product"
+import ArticleProduct from "../components/PlantCard"
 import { useEffect } from "react";
 
 //on importer nos fonction pour lire ou modifier nos states globales présentes dans le store de redux

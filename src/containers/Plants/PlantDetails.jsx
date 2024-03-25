@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { loadOnePlant } from "../api/plant";
-import {config} from "../config";
+import { loadOnePlant } from "../../api/plant";
+import {config} from "../../config";
 import { Link } from "react-router-dom";
 
 
@@ -12,8 +12,8 @@ import { faDroplet, faSun, faTemperatureHigh, faCartPlus, faSquarePlus, faSquare
 import { useSelector, useDispatch } from 'react-redux';
 
 //import des states globales product et basket et de leurs actions (ajout au panier, chargement des produits)
-import { selectBasket, updateBasket  } from '../slices/basketSlice';
-import { selectUser } from "../slices/userSlice";
+import { selectBasket, updateBasket  } from '../../slices/basketSlice';
+import { selectUser } from "../../slices/userSlice";
 
 
 const Details = () => {
