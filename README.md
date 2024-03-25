@@ -1,5 +1,5 @@
 # Bienvenue sur *Verdure* : Découvrez un large choix de plantes pour habiller votre intérieur 🌻🪴
-<img src="/public/screenshots/banner.png" alt="bannière de l'applciation web">
+<img src="/public/screenshots/banner.png" alt="bannière de l'application web">
 Verdure est une application web de vente en ligne de plantes d'intérieur. L'application est disponible uniquement en français. Ce dépôt est consacré à la partie frontend de ce projet.
 
 
