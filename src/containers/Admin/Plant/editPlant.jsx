@@ -34,7 +34,6 @@ const EditPlant = () => {
   const [redirect, setRedirect] = useState(null)
 
   useEffect(()=>{
-    console.log("je vais charger la plante et ses infos")
     loadOnePlant(params.id)
     .then((res)=>{
       setPlant(res.results)
@@ -59,10 +58,7 @@ const EditPlant = () => {
     e.preventDefault()
     setErrorForm(null)
 
-    console.log("newphoto -->", newPhoto)
-
     if (newPhoto === null){
-      console.log("pas de nouvelle photo ")
       let data = {
         "name": name,
         "description": description,
@@ -74,11 +70,9 @@ const EditPlant = () => {
         "minTemperature": minTemperature,
         "maxTemperature": maxTemperature
       }
-      console.log("data", data)
 
       updateOnePlant(data, params.id)
       .then((res)=>{
-        console.log("retour update method après quand photo est nulle",res)
         if (res.status === 200){
           loadPlants()
           .then((response) => {
@@ -105,7 +99,6 @@ const EditPlant = () => {
       axios.post(`${config.api_url}/api/v1/plant/pict`, formData, {headers: {"Content-Type":"multipart/form-data", "x-access-token": token}})
       .then((response) => {
         if (response.status === 200){
-          // console.log("image enregistrée", response.data.url)
           let newData = {
             "name": name,
             "description": description,
@@ -118,11 +111,8 @@ const EditPlant = () => {
             "maxTemperature": maxTemperature
           }
 
-          // console.log("newdata", newData)
-
           updateOnePlant(newData, params.id)
           .then((res)=>{
-            // console.log("retour update method quand photo n'est pas nulle", res)
             if (res.status === 200){
               loadPlants()
               .then((response) => {

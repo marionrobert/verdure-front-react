@@ -33,7 +33,6 @@ const Profile = () => {
 
     getAllOrdersByUser(parseInt(user.infos.id))
     .then((res) => {
-      // console.log("res -->", res)
       if (res.status === 200){
         setOrders(res.orders)
       } else {
@@ -144,6 +143,7 @@ const Profile = () => {
                         order.status === "in_delivery" ? "En cours de livraison" :
                         order.status === "delivered" ? "Livrée" :
                         order.status === "finished" ? "Terminée" :
+                        order.status === "not_payed" ? "En attente de paiement":
                         "Pas d'information"
                       }
                     </td>
