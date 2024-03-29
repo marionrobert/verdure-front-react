@@ -41,6 +41,10 @@ const Header = () => {
     connexionMenu.style.display = "none"
   }
 
+  // {console.log(nbItems)}
+
+
+
   return (
     <header>
       <nav id="nav-menu">

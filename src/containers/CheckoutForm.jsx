@@ -55,12 +55,14 @@ const CheckoutForm = (props) => {
           })
 
           //payment va renvoyer une réponse (succés ou echec de paiement)
+          // console.log("payment", payment)
           //gestion des erreurs
           if(payment.error){
               setError(payment.error.message)
           }else{
               //si le paiement est réussi
               if(payment.paymentIntent.status === "succeeded"){
+                  console.log("paiement effectué avec stripe")
                   let data = {
                       status: "payed"
                   }
@@ -73,7 +75,7 @@ const CheckoutForm = (props) => {
                       }
                   })
                   .catch((err)=>{
-                    // console.log(err)
+                    console.log(err)
                     setError("Une erreur est survenue.")
                   })
               } else {
