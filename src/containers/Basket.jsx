@@ -54,10 +54,8 @@ const Basket = () => {
 
   const removeOneQuantity = (oldBasket, product) => {
     if (product.quantityInCart === 1){
-      // console.log("alors je supprime le produit")
       removeProductFromBasket(oldBasket, product)
     } else {
-      // console.log("alors je peux faire - 1")
       let newBasket = JSON.parse(JSON.stringify(oldBasket));
       let index = newBasket.findIndex(item => item.id === product.id)
       newBasket[index].quantityInCart -= 1
@@ -70,7 +68,6 @@ const Basket = () => {
   }
 
   const handleValidation = () => {
-    console.log("in handle validation")
 
     if (user.isLogged) {
       // je crée l'objet data à envoyer à saveOneOrder
@@ -78,14 +75,11 @@ const Basket = () => {
         user_id: user.infos.id,
         basket: currentBasket.basket
       }
-      console.log("data to send to saveOneOrder", data)
 
       saveOneOrder(data)
       .then((res)=>{
-        console.log("res de saveOneOrder", res)
         if (res.status === 200 ){
           // je redirige vers une page de payement/:order_id
-          console.log("je vais rediriger vers page de payement")
           setOrderId(res.order_id)
           setRedirectToPayment(true)
         } else {
@@ -94,7 +88,7 @@ const Basket = () => {
         }
       })
       .catch((err)=>{
-        console.log(err)
+        // console.log(err)
         setError("Une erreur est survenue.")
       })
     } else {
