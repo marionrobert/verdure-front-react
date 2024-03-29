@@ -144,6 +144,7 @@ const Profile = () => {
                         order.status === "delivered" ? "Livrée" :
                         order.status === "finished" ? "Terminée" :
                         order.status === "not_payed" ? "En attente de paiement":
+                        order.status === "shipped" ? "Expédiée":
                         "Pas d'information"
                       }
                     </td>
