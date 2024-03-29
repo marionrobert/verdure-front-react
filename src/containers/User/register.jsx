@@ -41,6 +41,7 @@ const Register = () => {
         setSuccess("Félicitations, votre compte a bien été créé.")
         document.querySelector("#form-register").reset()
       } else {
+        console.log("je suis dans le else")
         setErrorForm(res.msg)
       }
     })

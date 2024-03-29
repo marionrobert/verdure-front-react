@@ -20,8 +20,10 @@ const Admin = () => {
   const [errorOrder, setErrorOrder] = useState(null)
 
   useEffect(()=> {
+    console.log("coucou")
     getAllOrders()
     .then((res)=>{
+      console.log("res orders -->", res)
       setOrders(res.results)
     })
     .catch((err)=>{
@@ -33,6 +35,7 @@ const Admin = () => {
     setSuccessPlant(null)
     deleteOnePlant(id)
     .then((res)=>{
+      // console.log(res)
       if (res.status === 200){
         setSuccessPlant("La plante a bien été supprimée")
         loadPlants()
@@ -55,6 +58,7 @@ const Admin = () => {
   }
 
   const handleChange = (e, id) => {
+    console.log(e.currentTarget.value)
     updateOrderStatusByAdmin(id, {"status": e.currentTarget.value})
     .then((res)=>{
       // console.log(res)

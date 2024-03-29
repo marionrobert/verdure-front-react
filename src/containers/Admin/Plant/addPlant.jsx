@@ -49,6 +49,7 @@ const AddPlant = () => {
         if (res.status === 200){
           loadPlants()
           .then((answer)=>{
+            console.log("answer.status", answer.status)
             if (answer.status === 200){
               dispatch(getAllPlants(answer.results))
             }
@@ -73,6 +74,7 @@ const AddPlant = () => {
       axios.post(`${config.api_url}/api/v1/plant/pict`, formData, {headers: {"Content-Type":"multipart/form-data", "x-access-token": token}})
       .then((response) => {
         if (response.status === 200){
+          // console.log("image enregistrée", response.data.url)
           let newData = {
             "name": name,
             "description": description,
@@ -90,6 +92,7 @@ const AddPlant = () => {
             if (res.status === 200){
               loadPlants()
               .then((answer)=>{
+                console.log("answer.status", answer.status)
                 if (answer.status === 200){
                   dispatch(getAllPlants(answer.results))
                 }

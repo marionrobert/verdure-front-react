@@ -1,16 +1,13 @@
 # Bienvenue sur *Verdure* : Découvrez un large choix de plantes pour habiller votre intérieur 🌻🪴
-<img src="/public/screenshots/banner.png" alt="bannière de l'application web">
+<img src="/public/screenshots/banner.png" alt="bannière de l'applciation web">
+Verdure est une application web de vente en ligne de plantes d'intérieur. L'application est disponible uniquement en français. Ce dépôt est consacré à la partie frontend de ce projet.
 
-Verdure est une application web de vente en ligne de plantes d'intérieur. L'application est disponible uniquement en français. Ce dépôt est consacré à la **partie frontend** de ce projet.
 
-
-<br/>
 <br/>
 
 ## Contexte de développement 💻
 Il s'agit d'un projet éducatif développé en tant que projet final de la formation "Développeur web FullStack Javascript" à la 3w Academy.
 
-<br/>
 <br/>
 
 ## Installation et Configuration ⚙️🛠️
@@ -53,7 +50,6 @@ Voici la list des packages et eur leur verion utilisés dans ce projet :
 6. Ensuite, lancez le serveur de l'interface utilisateur avec la commande `npm run dev`.
 
 <br/>
-<br/>
 
 ## Contenu des fichiers 📁🗃️
 
@@ -72,14 +68,12 @@ Le projet est organisé en plusieurs dossiers et fihciers présents dans le doss
 - fichier **config.js** : contient un objet config qui stocke les informations nécessaires à l'application, telles que les URL de l'API et les URL des images. Actuellement, il est configuré pour utiliser des URL locales (http://localhost:9000), mais il existe également une configuration en commentaire pour une utilisation avec un environnement de développement IDE (http://marionrobert.ide.3wa.io:9000).
 - fichier **main.jsx** : c'est le point d'entrée de l'application React. Il importe les modules nécessaires, tels que React, ReactDOM, et les composants App, BrowserRouter, Provider, et store. Ensuite, il rend l'application en encapsulant le composant App dans un contexte de Redux fourni par Provider et un routeur fourni par BrowserRouter, le tout enveloppé dans un mode strict de React.
 
-<br/>
 
 A la racine du projet, il existe également:
 - un dossier **public** qui contient uniquement l'image servant de favicon ainsi que les screenshots de l'applciation web utilisées dans ce fichier README.
 - un fichier **index.html** qui définit la structure de base de la page web de l'application React, incluant des métadonnées telles que le titre, la description, des liens vers des ressources externes comme des feuilles de style et des scripts, ainsi que le conteneur principal où l'application sera rendue.
 - un fichier **vite.config.js** quiconfigure Vite pour prendre en charge React en utilisant le plugin @vitejs/plugin-react. Il exporte une configuration par défaut qui spécifie l'utilisation du plugin React.
 
-<br/>
 <br/>
 
 ## Responsive design et méthode "mobile first"
@@ -88,13 +82,11 @@ Le responsive design consiste à créer des sites Web et des applications qui s'
 ### Exemple de responsive design sur la page de visionnage des détails d'une plante
 <br/>
 <div style="display: flex; justify-content: center;">
-<img src="/public/screenshots/plantDetails1.png" alt="présentation d'une plante en format mobile 1-2" width="250">
-<img src="/public/screenshots/plantDetails2.png" alt="présentation d'une plante en format mobile 2-2" width="250">
-<img src="/public/screenshots/plantDetailsTablet.png" alt="présentation d'une plante en format tablette" width="450">
+<img src="/public/screenshots/plantDetails1.png" alt="présentation d'une plante en format mobile 1-2" width="300">
+<img src="/public/screenshots/plantDetails2.png" alt="présentation d'une plante en format mobile 2-2" width="300">
+<img src="/public/screenshots/plantDetailsTablet.png" alt="présentation d'une plante en format tablette" width="500">
 <img src="/public/screenshots/plantDetailsPC.png" alt="présentation d'une activité en format ordinateur" width="800">
 </div>
-
-<br/>
 <br/>
 
 ## Fonctionnalités et parcours utilisateur
@@ -158,14 +150,14 @@ L'administrateur peut créer, modifier, supprimer une plante
 <br/>
 
 
-### Création et modification des plantes par l'administrateur
+### Gréation et modification des plantes par l'administrateur
 <div style="display: flex; justify-content: center;">
     <img src="/public/screenshots/createPlant.png" alt="création d'une plante par l'administrateur" width="500">
     <img src="/public/screenshots/editPlant.png" alt="modification d'une plante par l'administateur" width="500">
 </div>
+<br/>
 
-<br/>
-<br/>
+
 
 ## Dossier lié 🔗
 La partie backend de l'application est accessible [ici](https://github.com/marionrobert/verdure-api-back).

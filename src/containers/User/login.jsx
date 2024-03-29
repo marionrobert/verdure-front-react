@@ -25,10 +25,12 @@ const Login = () => {
       "email": email,
       "password": password
     }
-
+    // console.log("data for login -->", data)
     loginUser(data)
     .then((res)=>{
+      // console.log("res de loginUser -->", res)
       if (res.status === 200) {
+        // console.log("connexion réussie")
         window.localStorage.setItem("verdure-token", res.token)
         let myUser = res.user
         myUser.token = res.token
