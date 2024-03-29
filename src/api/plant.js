@@ -6,7 +6,6 @@ const token = window.localStorage.getItem('verdure-token')
 export function loadPlants(){
   return axios.get(`${config.api_url}/api/v1/plants`)
   .then((res)=>{
-    // console.log("res inside plant.jsx", res)
     return res.data
   })
   .catch((err)=>{
