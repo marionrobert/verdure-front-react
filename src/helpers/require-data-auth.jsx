@@ -33,8 +33,6 @@ const RequireDataAuth = (props) =>{
     useEffect(()=>{
       setRedirectToHome(false)
       setRedirectToLogin(false)
-      // console.log("redirect to home -->", redirectToHome)
-      // console.log("redirect to login -->", redirectToLogin)
 
       //si les plantes ne sont pas chargées dans redux, on les charge (action du store)
       if (plants.plants.length === 0){
@@ -48,29 +46,22 @@ const RequireDataAuth = (props) =>{
       }
 
       if (props.auth === true) { // si la route est protégée
-        // console.log("route protégée")
         // récupération du token dans le localStorage
         let token = window.localStorage.getItem("verdure-token")
-        console.log("recup token from require auth-->", token)
 
         if (token === null) { // l'utilisateur n'est pas connecté
-          // console.log("l'utilisateur n'est pas connecté, on redirige vers le login")
           setRedirectToLogin(true)
         } else { // l'utilisateur est connecté
           // vérification du format du token
-          // axios.get(`${config.api_url}/api/v1/user/checkToken`, {headers: {"x-access-token": token}})
           checkMyToken()
           .then((res) => {
             if (res.status !== 200){ // format invalide
               // redirection + suppression token
-              console.log("format invalide --> redirection + suppression token")
               setRedirectToLogin(true)
               window.localStorage.removeItem("verdure-token")
             } else { // l'utilisateur est connecté
-              // console.log("le token est au bon format --> j'enregistre le user dans la state user")
               // récupération des infos de l'utilisateur
               let currentUser = res.user
-              // console.log("currentUser -->", currentUser)
 
               // ajout du token à l'objet currentUser
               currentUser.token = token
@@ -79,13 +70,12 @@ const RequireDataAuth = (props) =>{
               dispatch(connectUser(currentUser))
 
               if (props.admin === true && res.user.role !== "admin"){ // l'utilisateur connecté n'est pas admin
-                // console.log("utilisateur connecté, mais pas admin alors que route admin --> redirection vers la home")
                 setRedirectToHome(true)
               }
             }
           })
           .catch((err) => {
-            console.log("err checkmytoken -->", err)
+            // console.log("err checkmytoken -->", err)
             setRedirectToLogin(true)
             window.localStorage.removeItem("verdure-token")
           })
@@ -95,10 +85,8 @@ const RequireDataAuth = (props) =>{
     }, [props])
 
     if(redirectToLogin){
-      // console.log("je vais rediriger vers login")
       return <Navigate to="/login"/>
     } else if (redirectToHome) {
-      // console.log("je vais rediriger vers home car route admin")
       return <Navigate to="/home"/>
     } else {
       return (<Child {...props} params={params}/>)

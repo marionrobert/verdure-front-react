@@ -42,16 +42,13 @@ const Details = () => {
 
   const addToBasket = (e, oldBasket, newProduct) => {
     e.preventDefault()
-    // console.log("addtobasket has been triggered", chosenQuantity, oldBasket, newProduct)
 
     //la state lorsqu'on la récup de redux est en mode read only (lecture seule)
     //je transforme l'objet en format json puis le retransforme en objet pour le stocker dans myBasket. Il est maintenant modifiable
     let newBasket = JSON.parse(JSON.stringify(oldBasket));
-    // console.log("newbasket", newBasket)
 
     //on check si le produit que l'on veut mettre dans le panier existe déjà (findIndex)
     const index = newBasket.findIndex(product => product.id === newProduct.id)
-    // console.log(index)
     if ( index === -1){
       // on ajoute la propriété quantityInCart à l'objet newproduct(plant)
       newProduct.quantityInCart = chosenQuantity
