@@ -8,7 +8,7 @@ Verdure est une application web de vente en ligne de plantes d'intérieur. L'app
 <br/>
 
 ## Contexte de développement 💻
-Il s'agit d'un projet éducatif développé en tant que projet final de la formation "Développeur web FullStack Javascript" à la 3w Academy.
+Il s'agit d'un projet éducatif développé lors de la formation "Développeur web FullStack Javascript" à la 3w Academy.
 
 <br/>
 <br/>
