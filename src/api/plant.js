@@ -1,6 +1,5 @@
 import axios from "axios"
 import {config} from "../config"
-const token = window.localStorage.getItem('verdure-token')
 
 //chargement de toutes les plantes
 export function loadPlants(){
@@ -27,6 +26,7 @@ export function loadOnePlant(id){
 
 // ajout d'une plante
 export function addOnePlant(data){
+  const token = window.localStorage.getItem('verdure-token')
   return axios.post(`${config.api_url}/api/v1/plant/save`, data, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data
@@ -39,6 +39,7 @@ export function addOnePlant(data){
 
 // modification d'une plante
 export function updateOnePlant(data, id){
+  const token = window.localStorage.getItem('verdure-token')
   return axios.put(`${config.api_url}/api/v1/plant/update/${id}`, data, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data
@@ -51,6 +52,7 @@ export function updateOnePlant(data, id){
 
 // suppresion d'une plante
 export function deleteOnePlant(id){
+  const token = window.localStorage.getItem('verdure-token')
   return axios.delete(`${config.api_url}/api/v1/plant/delete/${id}`, {headers: {"x-access-token": token}})
   .then((res)=>{
     return res.data

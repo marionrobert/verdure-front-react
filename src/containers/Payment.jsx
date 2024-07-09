@@ -26,20 +26,29 @@ const Payment = (props) => {
     })
   }, [props])
 
-  return (
-    <section className="payement">
-        <h1>Paiement</h1>
-        { error !== null && <p className="error">{error}</p>}
-        <p>Numéro de votre commande : {props.params.id}</p>
-        { order !== null && <p>Total de votre commande : {order.totalAmount} €</p> }
-        {/*On va brancher l'environnement des fonctionnalitées de react-stripe
-            qui va permettre d'effectuer les échanges avec l'api stripe de manière sécurisée
-        */}
-        <Elements stripe={stripePromise}>
-            <CheckoutForm orderId={props.params.id} />
-        </Elements>
-    </section>
-  )
+  if (order !== null) {
+    return (
+      <section className="payement">
+      <h1>Paiement</h1>
+      { error !== null && <p className="error">{error}</p>}
+      <p>Numéro de votre commande : {props.params.id}</p>
+      <p>Total de votre commande : {order.totalAmount} €</p>
+      {/*On va brancher l'environnement des fonctionnalitées de react-stripe
+          qui va permettre d'effectuer les échanges avec l'api stripe de manière sécurisée
+      */}
+      <Elements stripe={stripePromise}>
+          <CheckoutForm orderId={props.params.id} />
+      </Elements>
+      </section>
+    )
+  } else {
+    return (
+      <section className="payement">
+      <h1>Paiement</h1>
+      <p>Chargement de la session de paiement ...</p>
+      </section>
+    )
+  }
 }
 
 export default Payment
